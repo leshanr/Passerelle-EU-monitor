@@ -60,13 +60,14 @@
     },
     {
       "id": "eurlex-proposals",
+      "timeout": 90,
       "name": "EUR-Lex — Commission proposals and related documents",
       "url": "https://eur-lex.europa.eu/EN/display-feed.rss?rssId=161",
       "tier": 1,
       "verified": true,
       "newest_seen": "2026-08-17",
       "date_fallback": "channel",
-      "note": "Current at audit — one of only two EU feeds that were. Two quirks handled in code: titles arrive as 'CELEX:52026PC0435: Proposal for a ...' and the identifier is stripped before scoring; and items carry no individual dates, only a channel pubDate, so this source opts into date_fallback so its items are not silently discarded. Legislation before it is news."
+      "note": "TIMEOUT 27 Aug 2026 on runs #001-#003: the feed carries 100 full document records and is slow, so it now gets its own 90-second timeout instead of the 30-second default. Two quirks handled in code: titles arrive as 'CELEX:52026PC0435: Proposal for a ...' and the identifier is stripped before scoring; and items carry no individual dates, only a channel pubDate, so this source opts into date_fallback so its items are not silently discarded. Legislation before it is news."
     },
     {
       "id": "eurlex-caselaw",
