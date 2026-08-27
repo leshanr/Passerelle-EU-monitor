@@ -152,20 +152,32 @@
       "name": "Euractiv",
       "url": "https://www.euractiv.com/feed/",
       "tier": 2,
-      "enabled": false,
-      "verified": false,
-      "newest_seen": null,
-      "note": "Brussels trade press. Good early warning on files still in negotiation."
+      "enabled": true,
+      "verified": true,
+      "newest_seen": "2026-08-27",
+      "note": "ENABLED 27 Aug 2026. Checked live in a browser: 100 items, newest the same day. Brussels trade press, English, good early warning on files still in negotiation — and it keeps covering Europe through the institutional recess, which is when the official feeds go quiet. Tier 2 on purpose: this is someone else's editorial judgement, not a primary source, so it informs the digest rather than leading it."
+    },
+    {
+      "id": "politico-eu",
+      "name": "Politico Europe",
+      "url": "https://www.politico.eu/feed/",
+      "tier": 2,
+      "enabled": true,
+      "verified": true,
+      "newest_seen": "2026-08-27",
+      "score_multiplier": 0.8,
+      "note": "ADDED 27 Aug 2026, checked live in a browser: 10 items, newest the same day. Strong on the politics behind the file. One caveat found in the check — the feed mixes English, French and German items, and the scorer is English-only, so non-English items will score near zero and fall harmlessly into the detected tier. Weighted 0.8 because a short news feed refreshes constantly and would otherwise crowd the institutional sources."
     },
     {
       "id": "euobserver",
       "name": "EUobserver",
       "url": "https://euobserver.com/rss",
       "tier": 2,
-      "enabled": false,
+      "enabled": true,
       "verified": false,
       "newest_seen": null,
-      "note": "Independent, sharper on institutional politics and accountability than the wires."
+      "score_multiplier": 0.8,
+      "note": "ENABLED 27 Aug 2026 but NOT verified — the browser used for checking could not reach this domain, so the first run's health table is the real test. Independent, sharper on institutional politics and accountability than the wires. If it fails, drop it: Euractiv covers the same ground."
     },
     {
       "id": "ep-think-tank",

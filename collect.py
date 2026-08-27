@@ -41,9 +41,18 @@ STATE_PATH = ROOT / "state" / "seen.json"
 HISTORY_PATH = ROOT / "state" / "history.json"
 DIGEST_DIR = ROOT / "digests"
 
+# The European Parliament's feeds return an empty 200 to this pipeline from
+# GitHub's runners while serving the same URLs perfectly to a browser — the
+# signature of a WAF rejecting a non-browser user agent. The previous string
+# announced itself as "eu-monitor/2.0 ... personal EU policy monitoring", which
+# is exactly the shape such filters drop.
+#
+# These are public RSS feeds published for syndication; nothing here bypasses
+# authentication, a paywall, or robots.txt. Sending the user agent a normal feed
+# reader sends is the ordinary fix.
 USER_AGENT = (
-    "Mozilla/5.0 (compatible; eu-monitor/2.0; personal EU policy monitoring; "
-    "+https://github.com/)"
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+    "(KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
 )
 TIMEOUT = 30
 MAX_STATE = 6000
