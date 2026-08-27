@@ -1,0 +1,14 @@
+{
+ "runs": [
+  {
+   "date": "2026-08-27",
+   "window": 14,
+   "detected": 71,
+   "significant": 31,
+   "investigate": 10,
+   "sources_ok": 11,
+   "sources_total": 15,
+   "sources_stale": 1
+  }
+ ]
+}
