@@ -181,6 +181,45 @@ headline must reach the top tier.
 
 ---
 
+## 2026-08-27 — runs #002 to #004, sources
+
+**Regression I caused.** The "does this start with `<`" guard added after run
+#001 rejected a **UTF-8 byte-order mark**, which four Council feeds send. Three
+working sources went to FAILED and the count dropped 11 → 8. Fixed with
+`utf-8-sig` decoding plus a regression test. The improved diagnostic is what
+caught it — the failure line printed the actual bytes, `\ufeff<?xml version=`,
+which made the cause obvious immediately. Worth remembering: the better error
+message paid for itself within one run.
+
+**Fixed.** EUR-Lex Commission proposals was timing out on a 30-second default;
+the feed carries 100 full document records. Given its own `timeout: 90`. Now ok.
+
+**Added, both verified live and working from CI:** Politico Europe (10 items,
+current) and EUobserver (20 items, current). Both tier 2 at
+`score_multiplier: 0.8` — a short news feed refreshes constantly and would
+otherwise crowd the institutional sources. Both are somebody else's editorial
+judgement rather than a primary source, so they inform the digest rather than
+lead it.
+
+**Blocked, not fixable from here.** The three European Parliament feeds return
+an empty 200 to CI while serving 20 current items to a browser. Euractiv returns
+403 to CI while serving 100 current items to a browser. Changing the user agent
+to a normal browser string fixed neither, which rules out the simple
+explanation and points at IP-range filtering. `ep-press` kept enabled as a
+canary; the rest disabled. See `SOURCE-AUDIT.md`.
+
+**Also:** `daily news` and `midday express` added to the noise list — the
+Commission's roundup bulletins are an index of the day's announcements, not a
+development, and six of them were scoring 22–36. Enforcement verbs (`enforc*`,
+`takes effect`, `applies from`, `comes into force`) added to the `decided`
+signal after "Commission starts enforcing AI Act rules" scored 18 and sat in the
+detected tier.
+
+**CI:** `actions/checkout` v4 → v5 and `actions/setup-python` v5 → v6, clearing
+the Node 20 deprecation warning.
+
+---
+
 ## Template for future entries
 
 ```

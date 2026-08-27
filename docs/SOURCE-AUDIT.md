@@ -75,6 +75,51 @@ table reports them separately as `scheduled`.
 
 ---
 
+## What the browser check settled (27 August 2026)
+
+Every failing source was loaded directly in a browser and compared against what
+CI sees. That comparison is the whole diagnosis.
+
+| Source | In a browser | From GitHub's runners |
+|---|---|---|
+| EP press releases | 20 items, newest 23 Jul | empty 200, 0 bytes |
+| EP committees | works | empty 200, 0 bytes |
+| EP texts adopted | works | empty 200, 0 bytes |
+| Euractiv | 100 items, newest today | HTTP 403 Forbidden |
+| EUR-Lex proposals | works | was timing out — **fixed**, 90s timeout |
+| Politico Europe | 10 items, newest today | **works**, now enabled |
+| EUobserver | (domain unreachable from the test browser) | **works**, now enabled |
+
+**The Parliament block is on the IP range, not the request.** Swapping the user
+agent for a normal browser string changed nothing, which rules out the simplest
+explanation. Same for Euractiv's 403. Nothing in this repo can fix either; the
+only real remedies are running the collector from somewhere other than GitHub's
+hosted runners, or covering Parliament through outlets that report on it.
+
+**What was done about it:**
+
+- `ep-press` stays enabled as a **canary**. One FAIL line in the health table is
+  the cheapest possible way to learn the day the block lifts. The other two EP
+  feeds are disabled so the table is not cluttered by three lines saying the
+  same thing — re-enable all three together.
+- Euractiv disabled. Politico Europe and EUobserver cover the same ground and
+  both work from CI.
+- Politico Europe carries `score_multiplier: 0.8` and mixes English, French and
+  German. The scorer is English-only, so non-English items score near zero and
+  fall harmlessly into the detected tier.
+
+**What this costs.** Parliament is where the plain-English version of an EU
+story usually appears first — committee deals on passenger rights, social media
+safety, the digital euro. Losing it is the single biggest gap in the source
+list, and it is now covered second-hand rather than first-hand.
+
+**Rejected as a workaround:** a Google News RSS bridge on
+`site:europarl.europa.eu`. It returns 100 items whose newest is October 2025,
+and the titles are multimedia pages and a PDF calendar. Google indexes the
+Parliament's site poorly enough to be useless here.
+
+---
+
 ## Rejected sources
 
 - **European Parliament "top stories"** — newest item November 2023. Evergreen
