@@ -39,7 +39,7 @@ FIXTURE_SOURCES = [
 ]
 
 
-def fake_fetch(url: str, attempts: int = 3) -> bytes:
+def fake_fetch(url: str, attempts: int = 3, timeout: int = 30) -> bytes:
     name = url.split(":", 1)[1]
     path = FIX / name
     if not path.exists():

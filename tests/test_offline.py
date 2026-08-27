@@ -175,6 +175,106 @@ check("investigate requires one of the required signals",
       all(set(RULES["flag_tiers"]["investigate"]["requires_any"]) & set(s)
           for s in [age["signals"], air["signals"]]))
 
+# ── length bias ─────────────────────────────────────────────────────────────
+# Regression against the real first live run (27 Aug 2026), where the digest
+# came back ranked almost perfectly by title length: all ten top-tier flags
+# were EUR-Lex, and the one item actually on brief sat at number thirteen.
+# Both items below are the genuine strings those two flags carried.
+CELEX_TITLE = (
+    "Notice concerning the date of entry into force of the Agreement in the form "
+    "of an exchange of letters between the European Union and the People’s "
+    "Republic of China pursuant to Article XXVIII of the General Agreement on "
+    "Tariffs and Trade (GATT) 1994 relating to the modification of concessions on "
+    "all the tariff rate quotas included in the EU Schedule CLXXV as a consequence "
+    "of the United Kingdom’s withdrawal from the European Union [2026/1952]")
+REAL_HEADLINE = ("Cost of living and young people priorities for the PM during "
+                 "first visit to Northern Ireland")
+REAL_SUMMARY = ("Prime Minister Andy Burnham has arrived in Northern Ireland as "
+                "part of his summer tour of the United Kingdom.")
+
+# EUR-Lex carries score_multiplier 0.6 in sources.json; gov.uk carries none.
+celex = collect.score_item({"title": CELEX_TITLE, "summary": "", "tier": 1,
+                            "score_multiplier": 0.6}, RULES)
+headline = collect.score_item({"title": REAL_HEADLINE, "summary": REAL_SUMMARY,
+                               "tier": 1}, RULES)
+
+check("a long title gets a smaller per-match title boost than a short one",
+      collect.title_boost(CELEX_TITLE, RULES) < collect.title_boost(REAL_HEADLINE, RULES),
+      f"{collect.title_boost(CELEX_TITLE, RULES)} vs {collect.title_boost(REAL_HEADLINE, RULES)}")
+check("title boost never falls below parity with body text",
+      collect.title_boost("x" * 5000, RULES) >= 1.0)
+check("the real on-brief headline outranks the real 444-char CELEX notice",
+      headline["score"] > celex["score"],
+      f"headline {headline['score']} vs celex {celex['score']}")
+check("the real on-brief headline reaches the top tier",
+      collect.classify(headline, RULES) == "investigate",
+      f"{collect.classify(headline, RULES)} at score {headline['score']}")
+check("the real CELEX notice does not reach the top tier",
+      collect.classify(celex, RULES) != "investigate",
+      f"{collect.classify(celex, RULES)} at score {celex['score']}")
+
+# ── match and signal caps ───────────────────────────────────────────────────
+check("match_cap keeps only the strongest matches per keyword set",
+      RULES["match_cap"]["beat"] > 0 and RULES["match_cap"]["signal"] > 0)
+many = collect.score_item({
+    "title": "Commission adopts binding mandatory rules on students, rent, TikTok, "
+             "roaming, Erasmus and minimum wage from 2027 with fines",
+    "summary": "Unprecedented first-ever agreement criticised by campaigners in the "
+               "United Kingdom, Russia and China worth billions.",
+    "tier": 1}, RULES)
+check("every signal that fired is still reported, not just the counted ones",
+      len(many["signals"]) >= len(many["counted_signals"]))
+check("only signal_count_cap signals contribute to the score",
+      len(many["counted_signals"]) <= RULES.get("signal_count_cap", 4))
+check("reported signals are a superset of counted signals",
+      set(many["counted_signals"]) <= set(many["signals"]))
+
+# ── per-source weighting ────────────────────────────────────────────────────
+base = {"title": "Council adopts new sanctions package targeting shadow fleet",
+        "summary": "Adopted today, binding from 2027.", "tier": 1}
+full = collect.score_item(dict(base), RULES)
+half = collect.score_item(dict(base, score_multiplier=0.5), RULES)
+check("a source score_multiplier scales the total",
+      half["score"] < full["score"], f"{half['score']} vs {full['score']}")
+
+# ── the court docket no longer swallows the digest ──────────────────────────
+euipo = collect.score_item({
+    "title": "Case T-615/25: Judgment of the General Court of 1 July 2026 - "
+             "Veikkaus v EUIPO (FOR BETTER GAMING)",
+    "summary": "Action for annulment.", "tier": 1}, RULES)
+check("EUIPO trade-mark docket is killed by the noise list", euipo is None)
+court = collect.score_item({
+    "title": "Case T-105/24: Judgment of the General Court of 1 July 2026 - "
+             "Airbus Defence and Space v Commission",
+    "summary": "The Court ruled today. Binding from 2027, with fines of millions.",
+    "tier": 1}, RULES)
+if court:
+    beat = collect.beat_def("rights-and-courts", RULES)
+    check("rights-and-courts declares an investigate gate",
+          bool(beat.get("investigate_requires_any")))
+    if court["beat"] == "rights-and-courts" and not (
+            set(court["signals"]) & set(beat.get("investigate_requires_any", []))):
+        check("a court item with no non-court reason cannot reach the top tier",
+              collect.classify(court, RULES) != "investigate")
+    else:
+        check("a court item with no non-court reason cannot reach the top tier", True)
+check("the top tier is capped per beat", RULES["caps"].get("investigate_per_beat", 0) > 0)
+
+# ── future-dated items ──────────────────────────────────────────────────────
+check("a future tolerance is configured", RULES.get("future_tolerance_days") is not None)
+future = NOW + dt.timedelta(days=90)
+check("a scheduled meeting date is beyond the tolerance",
+      future > NOW + dt.timedelta(days=RULES["future_tolerance_days"]))
+
+# ── fetch diagnostics ───────────────────────────────────────────────────────
+for payload, want in ((b"", "empty response"), (b"Forbidden", "non-XML")):
+    try:
+        collect.parse_feed(payload, SRC_RSS)
+        got = ""
+    except RuntimeError as e:
+        got = str(e)
+    check(f"an unusable response says so plainly ({want})", want in got, got)
+
 # ── config integrity ───────────────────────────────────────────────────────
 sources = json.loads((ROOT / "sources.json").read_text())["sources"]
 ids = [s["id"] for s in sources]
