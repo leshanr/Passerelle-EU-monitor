@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+<channel>
+  <title>Sample routine institutional output</title>
+  <pubDate>Tue, 25 Aug 2026 08:00:00 +0000</pubDate>
+  <item>
+    <title>Commission approves 149 million euro Swedish State aid for agricultural companies facing increased fuel prices</title>
+    <link>https://example.eu/state-aid-se</link>
+    <description>The Commission approved under EU State aid rules a Swedish scheme to support companies in the agricultural sector.</description>
+    <pubDate>Mon, 24 Aug 2026 22:00:00 +0000</pubDate>
+  </item>
+  <item>
+    <title>Commission greenlights Belgium fifth payment request under NextGenerationEU</title>
+    <link>https://example.eu/ngeu-be</link>
+    <description>The Commission endorsed a positive preliminary assessment of Belgium's fifth payment request for 225 million euro under the Recovery and Resilience Facility.</description>
+    <pubDate>Sun, 23 Aug 2026 09:20:00 +0000</pubDate>
+  </item>
+  <item>
+    <title>Eurostat: euro area annual inflation up to 2.4 percent</title>
+    <link>https://example.eu/inflation</link>
+    <description>Euro area annual inflation was 2.4 percent in July 2026, up from 2.1 percent in June. Housing and energy prices contributed most.</description>
+    <pubDate>Sat, 22 Aug 2026 10:00:00 +0000</pubDate>
+  </item>
+  <item>
+    <title>Commission seeks feedback on proposed amendments to regional State aid guidelines</title>
+    <link>https://example.eu/consultation</link>
+    <description>The Commission opened a consultation inviting stakeholders to comment on targeted amendments.</description>
+    <pubDate>Fri, 21 Aug 2026 22:00:00 +0000</pubDate>
+  </item>
+  <item>
+    <title>Court of Justice rules national rent caps compatible with EU free movement of capital</title>
+    <link>https://example.eu/cjeu-rent</link>
+    <description>In a judgment delivered today the Court of Justice ruled that national housing rent caps do not breach EU law. The ruling ends a long dispute and is binding on all member states. Landlord associations criticised the decision; tenant campaigners called it historic.</description>
+    <pubDate>Thu, 20 Aug 2026 09:00:00 +0000</pubDate>
+  </item>
+  <item>
+    <title>Statement by Commissioner on the situation in the Western Balkans</title>
+    <link>https://example.eu/balkans-statement</link>
+    <description>The Commissioner reiterated the European Union's support for the enlargement process and accession negotiations with candidate countries.</description>
+    <pubDate>Wed, 19 Aug 2026 15:00:00 +0000</pubDate>
+  </item>
+  <item>
+    <title>Erasmus+ budget cut by 12 percent in draft MFF, universities warn</title>
+    <link>https://example.eu/erasmus-cut</link>
+    <description>Draft multiannual financial framework figures show the Erasmus+ student mobility programme facing a 12 percent reduction. University associations warned it would price out students from lower-income households. The proposal is contested and MEPs have threatened to reject it.</description>
+    <pubDate>Tue, 18 Aug 2026 11:00:00 +0000</pubDate>
+  </item>
+  <item>
+    <title>Publication of the list of designated standards under the machinery regulation</title>
+    <link>https://example.eu/standards</link>
+    <description>Technical notice.</description>
+    <pubDate>Mon, 17 Aug 2026 11:00:00 +0000</pubDate>
+  </item>
+</channel>
+</rss>

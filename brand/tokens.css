@@ -1,0 +1,75 @@
+/* ==========================================================================
+   EU MONITOR — design tokens
+   "Ink & Signal"
+
+   One background, one text colour, one accent used sparingly, and a set of
+   beat colours that are always accompanied by a text label — never colour
+   alone. Every categorical value below was validated with the data-viz
+   palette validator against a dark surface: lightness band, chroma floor,
+   colour-vision-deficiency separation, and contrast.
+   ========================================================================== */
+
+:root {
+  /* ---- core ------------------------------------------------------------ */
+  --ink:        #0C0D10;   /* the ground. Near-black, very slightly blue.    */
+  --ink-raised: #14161B;   /* cards, panels, code blocks                     */
+  --ink-sunken: #08090B;   /* the darkest step — full-bleed hero panels      */
+  --paper:      #F2F1ED;   /* primary text. Warm off-white, never pure #fff. */
+  --paper-dim:  #C6C6C1;   /* secondary text                                 */
+  --muted:      #8A8F98;   /* labels, metadata, captions        5.98:1 on ink*/
+  --rule:       #22242B;   /* hairlines and dividers                         */
+  --rule-lit:   #363A44;   /* a rule that needs to be seen                   */
+
+  /* ---- the signal ------------------------------------------------------ */
+  /* Used for ONE thing per view. If two things are blue, neither is.       */
+  --signal:      #4F86FF;  /* 5.72:1 on ink                                  */
+  --signal-dim:  #2F5AB8;
+  --signal-wash: #12203F;  /* tinted panel behind signal content             */
+
+  /* ---- flag tiers ------------------------------------------------------ */
+  --tier-investigate: #4F86FF;
+  --tier-significant: #8A8F98;
+  --tier-detected:    #4A4F59;
+  --stale:            #F0603C;  /* a stale source is a warning, not decor    */
+
+  /* ---- beats ----------------------------------------------------------- */
+  /* Eight tags. Adjacent-pair CVD validated. ALWAYS shown with the beat
+     name in text — these are identifiers, not the only encoding.           */
+  --beat-power:    #F0603C;   /* Power and democracy       */
+  --beat-war:      #EE4F89;   /* War and security          */
+  --beat-tech:     #4F86FF;   /* Tech and online life      */
+  --beat-climate:  #1FA870;   /* Climate and energy        */
+  --beat-borders:  #BC8813;   /* Borders and moving around */
+  --beat-money:    #A06FF0;   /* Money and work            */
+  --beat-rights:   #1F9DB0;   /* Rights and courts         */
+  --beat-uk:       #8A981F;   /* The UK and Europe         */
+
+  /* ---- chart series ---------------------------------------------------- */
+  /* Fixed order, never cycled. Slots 1–3 are validated for use together in
+     the same chart (all-pairs). Beyond three series: facet, or fold the
+     remainder into "Other". Never generate a ninth hue.                    */
+  --series-1: #4F86FF;
+  --series-2: #F0603C;
+  --series-3: #1FA870;
+  --series-4: #BC8813;   /* adjacent-pair only — needs direct labels        */
+  --series-5: #A06FF0;
+  --series-6: #EE4F89;
+
+  /* ---- type ------------------------------------------------------------ */
+  /* Real stack, all free and all available in Canva and Google Fonts.      */
+  --font-display: "Space Grotesk", "Archivo", "TeX Gyre Heros Cn", Helvetica, Arial, sans-serif;
+  --font-body:    "Inter", "TeX Gyre Heros", Helvetica, Arial, sans-serif;
+  --font-mono:    "JetBrains Mono", "DejaVu Sans Mono", ui-monospace, monospace;
+
+  /* Display type is set tight and large. Body is set generously. The
+     contrast between them is most of the identity.                         */
+  --tracking-display: -0.03em;
+  --tracking-label:    0.18em;   /* mono labels are always letterspaced      */
+  --leading-display:   0.94;
+  --leading-body:      1.55;
+
+  /* ---- spacing --------------------------------------------------------- */
+  --gap-1: 4px;  --gap-2: 8px;  --gap-3: 16px;
+  --gap-4: 24px; --gap-5: 40px; --gap-6: 64px;
+  --bar: 4px;    /* the standard rule weight — thick, deliberate            */
+}

@@ -1,0 +1,147 @@
+{
+ "edition": "001",
+ "created": "2026-08-27",
+ "digest": "2026-08-27",
+ "selected": [
+  1,
+  2,
+  4,
+  5,
+  6
+ ],
+ "detected": 12,
+ "items": [
+  {
+   "n": 1,
+   "tier": "investigate",
+   "title": "Court of Justice rules national rent caps compatible with EU free movement of capital",
+   "link": "https://example.eu/cjeu-rent",
+   "source": "Council of the EU \u2014 press releases (demo)",
+   "date": "2026-08-20",
+   "summary": "In a judgment delivered today the Court of Justice ruled that national housing rent caps do not breach EU law. The ruling ends a long dispute and is binding on all member states. Landlord associations criticised the decision; tenant campaigners called it historic.",
+   "beat": "rights-and-courts",
+   "beat_name": "Rights and courts",
+   "score": 103,
+   "signals": [
+    "decided",
+    "unusual",
+    "contested",
+    "consequential",
+    "youth",
+    "social"
+   ],
+   "signal_names": [
+    "Decision taken",
+    "Unusual or unexpected",
+    "Likely to generate debate",
+    "Consequential",
+    "Relevant to young Europeans",
+    "Socially relevant"
+   ]
+  },
+  {
+   "n": 2,
+   "tier": "investigate",
+   "title": "UK and EU agree youth mobility scheme in principle",
+   "link": "https://example.gov.uk/youth-mobility",
+   "source": "gov.uk \u2014 news and communications (demo)",
+   "date": "2026-08-24",
+   "summary": "The United Kingdom and the European Union have reached a political agreement on a youth experience scheme allowing under-30s to live and work across borders. Ministers said it was unprecedented since Brexit. The agreement is binding from 2027.",
+   "beat": "uk-and-europe",
+   "beat_name": "The UK and Europe",
+   "score": 98,
+   "signals": [
+    "decided",
+    "unusual",
+    "consequential",
+    "youth",
+    "uk"
+   ],
+   "signal_names": [
+    "Decision taken",
+    "Unusual or unexpected",
+    "Consequential",
+    "Relevant to young Europeans",
+    "UK\u2013EU relevance"
+   ]
+  },
+  {
+   "n": 4,
+   "tier": "investigate",
+   "title": "Deal on air passenger rights: MEPs secure improved traveller protection",
+   "link": "https://example.eu/air-passenger-rights",
+   "source": "European Commission \u2014 press corner (demo)",
+   "date": "2026-08-22",
+   "summary": "Negotiators reached a provisional agreement on new rules that will be binding from 2027. Students and young travellers using budget airlines will see compensation thresholds change. The deal was criticised by consumer campaigners as watered down.",
+   "beat": "borders-and-moving",
+   "beat_name": "Borders and moving around",
+   "score": 84,
+   "signals": [
+    "new",
+    "decided",
+    "contested",
+    "consequential",
+    "youth",
+    "economic"
+   ],
+   "signal_names": [
+    "Genuinely new",
+    "Decision taken",
+    "Likely to generate debate",
+    "Consequential",
+    "Relevant to young Europeans",
+    "Economically significant"
+   ]
+  },
+  {
+   "n": 5,
+   "tier": "investigate",
+   "title": "Commission proposes first-ever EU rules on age verification for social media",
+   "link": "https://example.eu/age-verification",
+   "source": "European Commission \u2014 press corner (demo)",
+   "date": "2026-08-21",
+   "summary": "The Commission unveiled a proposal that would require very large online platforms to verify the age of users. The mandatory scheme would apply to TikTok and Instagram and carry fines of up to 6 percent of global turnover. Digital rights campaigners warned it amounts to surveillance.",
+   "beat": "tech-and-online-life",
+   "beat_name": "Tech and online life",
+   "score": 82,
+   "signals": [
+    "new",
+    "unusual",
+    "contested",
+    "consequential",
+    "youth",
+    "tech"
+   ],
+   "signal_names": [
+    "Genuinely new",
+    "Unusual or unexpected",
+    "Likely to generate debate",
+    "Consequential",
+    "Relevant to young Europeans",
+    "Technologically significant"
+   ]
+  },
+  {
+   "n": 6,
+   "tier": "investigate",
+   "title": "Erasmus+ budget cut by 12 percent in draft MFF, universities warn",
+   "link": "https://example.eu/erasmus-cut",
+   "source": "Council of the EU \u2014 press releases (demo)",
+   "date": "2026-08-18",
+   "summary": "Draft multiannual financial framework figures show the Erasmus+ student mobility programme facing a 12 percent reduction. University associations warned it would price out students from lower-income households. The proposal is contested and MEPs have threatened to reject it.",
+   "beat": "borders-and-moving",
+   "beat_name": "Borders and moving around",
+   "score": 73,
+   "signals": [
+    "unusual",
+    "youth",
+    "economic"
+   ],
+   "signal_names": [
+    "Unusual or unexpected",
+    "Relevant to young Europeans",
+    "Economically significant"
+   ]
+  }
+ ]
+}

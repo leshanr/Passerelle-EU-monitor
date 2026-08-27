@@ -1,0 +1,178 @@
+{
+  "_comment": "Each source carries: id, name, url, tier, verified, newest_seen. Tier 1 = primary institutional source (legislation, official press, court output). Tier 2 = supporting or national. 'verified' means the endpoint was fetched by hand and returned a parseable feed. 'newest_seen' is the date of the newest item it held at that moment — because a feed can parse perfectly and still be dead.",
+
+  "_audit": "27 August 2026. Every endpoint below was fetched and read by hand. Headline finding: the EU institutional feeds are far less current than they look. The Commission press corner had published nothing for 30 days, the European Parliament press feed for 76, the Council press feed for 73. All three parse cleanly and report items. Only the ECB and the EUR-Lex document feeds were current. Part of that is the August recess; part of it is that these feeds are not maintained as carefully as their web pages. The practical answer is redundancy — several feeds per institution, from different systems — plus the staleness detector in collect.py. Read the source health table before concluding it was a quiet fortnight.",
+
+  "sources": [
+    {
+      "id": "ec-presscorner",
+      "name": "European Commission — press corner",
+      "url": "https://ec.europa.eu/commission/presscorner/api/rss?language=en&pagesize=60",
+      "tier": 1,
+      "verified": true,
+      "newest_seen": "2026-07-28",
+      "note": "The single most important feed here and the one that carries daily-news roundups, State aid decisions, infringement rounds and every DG's announcements. Was 30 days stale at audit. pagesize is a real parameter — raise it before dropping the source."
+    },
+    {
+      "id": "ep-press",
+      "name": "European Parliament — press releases (all)",
+      "url": "https://www.europarl.europa.eu/rss/doc/press-releases/en.xml",
+      "tier": 1,
+      "verified": true,
+      "newest_seen": "2026-06-12",
+      "note": "76 days stale at audit. Kept because when it does publish it is the best plain-English source in the EU system. Paired with the committee feed below so a failure of one is visible."
+    },
+    {
+      "id": "ep-committees",
+      "name": "European Parliament — committee press releases",
+      "url": "https://www.europarl.europa.eu/rss/doc/press-releases-committees/en.xml",
+      "tier": 1,
+      "verified": true,
+      "newest_seen": "2026-06-16",
+      "note": "Better signal-to-noise than the general press feed: committee deals are where legislation is actually settled, and they are announced here first. 'Deal on air passenger rights: MEPs secure improved traveller protection' is exactly the kind of item this publication exists for."
+    },
+    {
+      "id": "ep-texts-adopted",
+      "name": "European Parliament — texts adopted",
+      "url": "https://www.europarl.europa.eu/rss/doc/texts-adopted/en.xml",
+      "tier": 1,
+      "verified": true,
+      "newest_seen": "2026-06-18",
+      "note": "The Parliament's actual legislative output rather than its press office's account of it. Feeds the 'decided' signal directly."
+    },
+    {
+      "id": "council-eu",
+      "name": "Council of the EU — press releases",
+      "url": "https://www.consilium.europa.eu/en/rss/pressreleases.ashx",
+      "tier": 1,
+      "verified": true,
+      "newest_seen": "2026-06-15",
+      "note": "Carries sanctions packages, Council conclusions and summit outcomes. Serves RSS but puts its timestamp in an Atom-namespaced <a10:updated> tag rather than <pubDate> — collect.py reads both. Also heavy on media advisories, which the noise list kills. 73 days stale at audit."
+    },
+    {
+      "id": "european-council",
+      "name": "European Council — meetings and summits",
+      "url": "https://www.consilium.europa.eu/en/rss/meetings.ashx?cat=euco",
+      "tier": 1,
+      "verified": false,
+      "newest_seen": null,
+      "note": "ADDED 27 Aug 2026, not yet fetched by hand. Summit-level output — where enlargement, Ukraine funding and treaty questions actually get decided. Check the first run's health table; the ?cat= parameter takes any Council configuration (jha, epsco, eycs, envi, tte...)."
+    },
+    {
+      "id": "eurlex-proposals",
+      "name": "EUR-Lex — Commission proposals and related documents",
+      "url": "https://eur-lex.europa.eu/EN/display-feed.rss?rssId=161",
+      "tier": 1,
+      "verified": true,
+      "newest_seen": "2026-08-17",
+      "date_fallback": "channel",
+      "note": "Current at audit — one of only two EU feeds that were. Two quirks handled in code: titles arrive as 'CELEX:52026PC0435: Proposal for a ...' and the identifier is stripped before scoring; and items carry no individual dates, only a channel pubDate, so this source opts into date_fallback so its items are not silently discarded. Legislation before it is news."
+    },
+    {
+      "id": "eurlex-caselaw",
+      "name": "EUR-Lex — Court of Justice case-law",
+      "url": "https://eur-lex.europa.eu/EN/display-feed.rss?rssId=163",
+      "tier": 1,
+      "verified": true,
+      "newest_seen": "2026-06-12",
+      "note": "Court rulings are the most under-covered high-consequence events in European politics, which makes them a competitive advantage for a small publication. Titles are CELEX identifiers plus a case name; the parties are usually enough to spot the interesting ones."
+    },
+    {
+      "id": "eurlex-oj-l",
+      "name": "EUR-Lex — Official Journal L (acts in force)",
+      "url": "https://eur-lex.europa.eu/EN/display-feed.rss?rssId=222",
+      "tier": 1,
+      "verified": true,
+      "newest_seen": "2026-07-20",
+      "date_fallback": "channel",
+      "note": "The moment a rule becomes law. Low readability, high authority — use it to confirm that something reported as agreed has actually entered into force. Other predefined feeds at https://eur-lex.europa.eu/predefined-rss.html"
+    },
+    {
+      "id": "ecb-press",
+      "name": "European Central Bank — press and speeches",
+      "url": "https://www.ecb.europa.eu/rss/press.html",
+      "tier": 1,
+      "verified": true,
+      "newest_seen": "2026-08-26",
+      "note": "The most current EU feed in the set — one day old at audit, while the political institutions were weeks behind. Interest rates, the digital euro, and the closest thing the EU has to a running commentary on the European economy."
+    },
+    {
+      "id": "council-acts",
+      "name": "Council of the EU — document register (summary of acts)",
+      "url": "https://www.consilium.europa.eu/en/register/rss/ACT.xml",
+      "tier": 2,
+      "verified": true,
+      "newest_seen": "2026-07-22",
+      "note": "500 items, mostly document references. Low value on its own; useful as a backstop when the press feeds go quiet, which they do. The noise list kills the monthly-summary boilerplate."
+    },
+    {
+      "id": "govuk-news",
+      "name": "gov.uk — news and communications",
+      "url": "https://www.gov.uk/search/news-and-communications.atom",
+      "tier": 1,
+      "verified": true,
+      "newest_seen": "2026-08-27",
+      "note": "Live and very high volume — all of Whitehall. The workhorse of the UK-and-Europe beat. Add &keywords=term to narrow at source; the local filter does the real work."
+    },
+    {
+      "id": "govuk-fcdo",
+      "name": "gov.uk — Foreign, Commonwealth and Development Office",
+      "url": "https://www.gov.uk/government/organisations/foreign-commonwealth-development-office.atom",
+      "tier": 2,
+      "verified": true,
+      "newest_seen": "2026-08-26",
+      "note": "Live, but roughly nine in ten items are travel advice and consular guidance. The noise list kills those; without it this feed alone would dominate the digest."
+    },
+    {
+      "id": "govuk-dbt",
+      "name": "gov.uk — Department for Business and Trade",
+      "url": "https://www.gov.uk/government/organisations/department-for-business-and-trade.atom",
+      "tier": 2,
+      "verified": true,
+      "newest_seen": "2026-08-21",
+      "note": "The best UK-side divergence source in the set — UKCA/CE guidance, trade remedies notices, market access."
+    },
+    {
+      "id": "ukparl-bills",
+      "name": "UK Parliament — all bills",
+      "url": "https://bills.parliament.uk/rss/allbills.rss",
+      "tier": 2,
+      "verified": true,
+      "newest_seen": "2026-08-26",
+      "note": "Live. Dates live in <a10:updated>, not <pubDate>. Expect the whole live bill list on the first run, then only movements."
+    },
+
+    {
+      "_disabled_block": "Everything below is off by default. These are credible European political and policy outlets rather than institutional sources, and they change the character of the digest: more stories, faster, but you are now monitoring other people's editorial judgement as well as the institutions' output. Turn one on at a time and watch what it does to the flag count before adding another. None has been verified from here — check the first run's health table.",
+
+      "id": "euractiv",
+      "name": "Euractiv",
+      "url": "https://www.euractiv.com/feed/",
+      "tier": 2,
+      "enabled": false,
+      "verified": false,
+      "newest_seen": null,
+      "note": "Brussels trade press. Good early warning on files still in negotiation."
+    },
+    {
+      "id": "euobserver",
+      "name": "EUobserver",
+      "url": "https://euobserver.com/rss",
+      "tier": 2,
+      "enabled": false,
+      "verified": false,
+      "newest_seen": null,
+      "note": "Independent, sharper on institutional politics and accountability than the wires."
+    },
+    {
+      "id": "ep-think-tank",
+      "name": "European Parliament Research Service — briefings",
+      "url": "https://www.europarl.europa.eu/thinktank/en/feed.rss",
+      "tier": 2,
+      "enabled": false,
+      "verified": false,
+      "newest_seen": null,
+      "note": "Not news, but the best free explainers in the EU system. Turn on when you want background for a deep-dive rather than flags."
+    }
+  ]
+}

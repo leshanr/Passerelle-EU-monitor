@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Sample UK department feed</title>
+  <updated>2026-08-25T10:00:00Z</updated>
+  <entry>
+    <title>UK and EU agree youth mobility scheme in principle</title>
+    <link rel="alternate" href="https://example.gov.uk/youth-mobility"/>
+    <summary>The United Kingdom and the European Union have reached a political agreement on a youth experience scheme allowing under-30s to live and work across borders. Ministers said it was unprecedented since Brexit. The agreement is binding from 2027.</summary>
+    <published>2026-08-24T11:00:00Z</published>
+  </entry>
+  <entry>
+    <title>Travel advice: updated guidance for British nationals</title>
+    <link rel="alternate" href="https://example.gov.uk/travel"/>
+    <summary>Consular information.</summary>
+    <published>2026-08-23T11:00:00Z</published>
+  </entry>
+</feed>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:a10="http://www.w3.org/2005/Atom">
+<channel>
+  <title>Sample institutional press feed</title>
+  <pubDate>Mon, 24 Aug 2026 08:00:00 +0000</pubDate>
+  <item>
+    <title>Deal on air passenger rights: MEPs secure improved traveller protection</title>
+    <link>https://example.eu/air-passenger-rights</link>
+    <description>Negotiators reached a provisional agreement on new rules that will be binding from 2027. Students and young travellers using budget airlines will see compensation thresholds change. The deal was criticised by consumer campaigners as watered down.</description>
+    <pubDate>Sat, 22 Aug 2026 12:00:00 +0000</pubDate>
+  </item>
+  <item>
+    <title>Commission proposes first-ever EU rules on age verification for social media</title>
+    <link>https://example.eu/age-verification</link>
+    <description>The Commission unveiled a proposal that would require very large online platforms to verify the age of users. The mandatory scheme would apply to TikTok and Instagram and carry fines of up to 6 percent of global turnover. Digital rights campaigners warned it amounts to surveillance.</description>
+    <pubDate>Fri, 21 Aug 2026 09:30:00 +0000</pubDate>
+  </item>
+  <item>
+    <title>Media advisory - General Affairs Council of 16 September 2026</title>
+    <link>https://example.eu/advisory</link>
+    <description>Practical information for journalists.</description>
+    <pubDate>Thu, 20 Aug 2026 09:00:00 +0000</pubDate>
+  </item>
+  <item>
+    <title>Council adopts new sanctions package targeting shadow fleet</title>
+    <link>https://example.eu/sanctions-19</link>
+    <description>The Council today adopted a package that freezes assets and bans port access. It enters into force tomorrow. Hungary had vetoed an earlier draft.</description>
+    <a10:updated>2026-08-19T13:30:00Z</a10:updated>
+  </item>
+  <item>
+    <title>Weekly schedule of President von der Leyen</title>
+    <link>https://example.eu/schedule</link>
+    <description>Diary.</description>
+    <pubDate>Mon, 18 Aug 2026 07:00:00 +0000</pubDate>
+  </item>
+  <item>
+    <title>Something that happened a very long time ago</title>
+    <link>https://example.eu/old</link>
+    <description>An adopted binding regulation affecting students and young people, but out of window.</description>
+    <pubDate>Wed, 15 Jan 2025 07:00:00 +0000</pubDate>
+  </item>
+</channel>
+</rss>

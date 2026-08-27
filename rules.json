@@ -1,0 +1,404 @@
+{
+  "_comment": "The editorial intelligence of EU Monitor. Two independent axes. BEATS decide what a development is about and therefore where it sits in the digest. SIGNALS decide why it might matter and are printed next to every flag as the reason it surfaced. Tune this file, never collect.py — that separation is the whole point.",
+  "_tuning_note": "Starting values, calibrated against a first source audit on 27 August 2026 and nothing else. Expect two or three cycles of adjustment before the signal is right. Every adjustment goes in docs/TUNING-LOG.md, because the tuning process is itself publishable material.",
+
+  "window_days": 14,
+  "stale_after_days": 21,
+  "tier1_bonus": 2,
+  "beat_cap": 30,
+
+  "flag_tiers": {
+    "significant": {
+      "min_score": 25,
+      "min_signals": 2,
+      "_why": "Two independent reasons to care, and enough topical weight to not be a routine administrative notice."
+    },
+    "investigate": {
+      "min_score": 55,
+      "min_signals": 3,
+      "requires_any": ["youth", "unusual", "decided", "consequential", "uk"],
+      "_why": "The top tier must clear the score bar AND carry at least one signal that makes it worth a young reader's ten minutes. A development can be geopolitically enormous and still be the fourth Ukraine statement that fortnight — that is what requires_any filters out."
+    }
+  },
+
+  "caps": {
+    "investigate": 10,
+    "significant": 25,
+    "detected": 40,
+    "_why": "A review list you do not finish is worth nothing. Ten items at the top is one evening's work."
+  },
+
+  "beats": [
+    {
+      "id": "power-and-democracy",
+      "name": "Power and democracy",
+      "_scope": "Who is in charge in Europe, how they got there, and what they are doing to each other. Elections, coalitions, rule-of-law fights, enlargement, institutional power struggles.",
+      "keywords": {
+        "european election": 4, "european elections": 4, "election*": 2,
+        "rule of law": 4, "article 7": 4, "infringement*": 3,
+        "enlargement": 4, "accession*": 3, "candidate country": 3,
+        "western balkans": 3, "moldova": 2, "ukraine accession": 4,
+        "coalition": 2, "no-confidence": 4, "censure motion": 4,
+        "commission president": 3, "von der leyen": 2, "costa": 1,
+        "european parliament": 2, "meps": 2, "plenary": 1,
+        "council conclusions": 2, "qualified majority": 3, "unanimity": 3,
+        "veto*": 4, "treaty change": 4, "far right": 3, "populist*": 2,
+        "disinformation": 3, "foreign interference": 4, "corruption": 3,
+        "resign*": 3, "reshuffle": 3, "referendum": 3,
+        "european citizens' initiative": 3, "transparency register": 2,
+        "hungary": 2, "poland": 2, "slovakia": 2
+      }
+    },
+    {
+      "id": "war-and-security",
+      "name": "War and security",
+      "_scope": "Ukraine, Russia, defence spending, sanctions, NATO, hybrid threats. The beat most likely to be over-covered elsewhere, so the bar for including it is higher.",
+      "keywords": {
+        "ukraine": 3, "russia": 3, "belarus": 2, "kremlin": 2,
+        "sanction*": 3, "sanctions package": 4, "asset freeze": 4,
+        "frozen assets": 4, "immobilised assets": 4, "reparations loan": 4,
+        "shadow fleet": 4, "circumvention": 3, "export control": 3,
+        "dual-use": 3, "secondary sanctions": 4, "price cap": 3,
+        "defence": 2, "defence spending": 4, "rearm*": 4, "readiness 2030": 4,
+        "european defence industry": 4, "safe programme": 3, "safe loans": 3,
+        "ammunition": 3, "drone*": 3, "drone incursion": 4, "airspace": 3,
+        "nato": 3, "article 5": 4, "hybrid": 3, "sabotage": 4,
+        "cyberattack": 4, "conscription": 3, "military mobility": 3,
+        "peacekeeping": 3, "ceasefire": 4, "peace plan": 4,
+        "arms": 2, "security guarantees": 4, "middle east": 2, "gaza": 2
+      }
+    },
+    {
+      "id": "tech-and-online-life",
+      "name": "Tech and online life",
+      "_scope": "The beat with the shortest distance between a Brussels regulation and something on a reader's phone. Highest natural youth relevance of any beat here.",
+      "keywords": {
+        "artificial intelligence": 3, "ai act": 4, "general-purpose ai": 4,
+        "digital services act": 4, "dsa": 3, "digital markets act": 4, "dma": 3,
+        "gatekeeper": 3, "very large online platform": 4, "vlop": 3,
+        "content moderation": 4, "recommender system": 4, "algorithm": 3,
+        "age verification": 4, "minor protection": 3, "social media ban": 4,
+        "tiktok": 3, "meta": 2, "x corp": 3, "apple": 2, "google": 2,
+        "amazon": 2, "microsoft": 2, "openai": 3,
+        "gdpr": 3, "data protection": 3, "privacy": 3, "surveillance": 3,
+        "chat control": 4, "encryption": 3, "csam regulation": 4,
+        "digital identity": 3, "digital euro": 3, "data act": 3,
+        "cyber resilience": 3, "nis2": 3, "chips act": 4, "semiconductor": 3,
+        "cloud sovereignty": 4, "digital sovereignty": 4, "digital omnibus": 4,
+        "interoperability": 2, "spyware": 4, "deepfake": 4, "online safety": 3
+      }
+    },
+    {
+      "id": "climate-and-energy",
+      "name": "Climate and energy",
+      "_scope": "Targets, money, and the fights about who pays. Cut the routine reporting cycle; keep the moments where a target moves or someone refuses to pay for one.",
+      "keywords": {
+        "climate target": 4, "2040 target": 4, "green deal": 3,
+        "net zero": 3, "emissions trading": 3, "ets2": 4, "carbon price": 4,
+        "cbam": 4, "carbon border": 4, "fit for 55": 3,
+        "renewable*": 2, "solar": 2, "wind power": 3, "offshore wind": 3,
+        "nuclear": 3, "energy price": 3, "energy bill": 3, "gas": 2,
+        "lng": 2, "russian gas": 4, "energy security": 3, "grid": 2,
+        "combustion engine": 4, "2035 ban": 4, "electric vehicle": 3,
+        "battery": 2, "critical raw materials": 3,
+        "deforestation": 3, "eudr": 3, "csrd": 3, "omnibus": 2,
+        "due diligence": 2, "greenwashing": 3, "green claims": 3,
+        "heatwave": 3, "wildfire*": 3, "flood*": 3, "adaptation": 2,
+        "just transition": 3, "farmer protest": 4, "cap reform": 3
+      }
+    },
+    {
+      "id": "borders-and-moving",
+      "name": "Borders and moving around",
+      "_scope": "Anything that changes whether, and how easily, a person crosses a European border. The most directly felt beat for an 18-30 reader and the one mainstream EU coverage handles worst.",
+      "keywords": {
+        "schengen": 4, "border control": 3, "entry/exit system": 4,
+        "entry exit system": 4, "ees": 2, "etias": 4, "visa": 3,
+        "visa-free": 4, "visa waiver": 4, "biometric": 3,
+        "erasmus": 4, "erasmus+": 4, "student mobility": 4,
+        "youth mobility": 4, "youth experience scheme": 4,
+        "free movement": 4, "posted worker": 3, "residence permit": 3,
+        "blue card": 3, "talent pool": 3, "migration pact": 4,
+        "asylum": 3, "return regulation": 4, "returns hub": 4,
+        "safe third country": 4, "frontex": 3, "relocation": 3,
+        "solidarity mechanism": 3, "irregular arrivals": 3,
+        "roaming": 4, "air passenger rights": 4, "flight compensation": 4,
+        "rail": 2, "interrail": 4, "travel": 1, "passport": 2,
+        "driving licence": 3, "recognition of qualifications": 3
+      }
+    },
+    {
+      "id": "money-and-work",
+      "name": "Money and work",
+      "_scope": "The single market, the budget, and what any of it does to a starting salary or a rent payment. Where an EU story becomes a personal-finance story.",
+      "keywords": {
+        "minimum wage": 4, "wage": 2, "pay transparency": 4,
+        "platform work": 4, "gig economy": 4, "bogus self-employment": 4,
+        "working time": 3, "right to disconnect": 4, "traineeship": 4,
+        "unpaid internship": 4, "youth unemployment": 4, "job": 1,
+        "housing": 4, "rent": 3, "housing crisis": 4, "affordable housing": 4,
+        "cost of living": 4, "inflation": 3, "interest rate": 3,
+        "european central bank": 3, "euro area": 2, "eurozone": 2,
+        "mff": 4, "multiannual financial framework": 4, "eu budget": 4,
+        "cohesion": 2, "recovery fund": 3, "nextgenerationeu": 3,
+        "state aid": 3, "single market": 3, "capital markets union": 3,
+        "savings and investments union": 4, "competitiveness": 3,
+        "draghi report": 4, "tariff*": 3, "trade deal": 3, "mercosur": 4,
+        "anti-dumping": 3, "trade defence": 3, "foreign subsidies": 3,
+        "consumer price": 2, "shrinkflation": 4, "banking": 2,
+        "pension": 3, "student loan": 4, "tuition": 4
+      }
+    },
+    {
+      "id": "rights-and-courts",
+      "name": "Rights and courts",
+      "_scope": "Where a European institution tells a government or a company it is wrong. Court rulings are the most under-covered high-consequence events in European politics.",
+      "keywords": {
+        "court of justice": 4, "cjeu": 4, "general court": 3,
+        "advocate general": 3, "preliminary ruling": 4, "judgment": 3,
+        "ruling": 3, "european court of human rights": 4, "echr": 3,
+        "fundamental rights": 3, "charter of fundamental rights": 4,
+        "press freedom": 4, "media freedom act": 4, "journalist*": 3,
+        "protest*": 3, "assembly": 2, "lgbt": 3, "discrimination": 3,
+        "gender equality": 3, "violence against women": 3,
+        "consumer rights": 4, "consumer protection": 3, "right to repair": 4,
+        "product liability": 3, "class action": 3, "collective redress": 3,
+        "data subject": 3, "right to be forgotten": 4,
+        "whistleblower": 3, "ombudsman": 2, "maladministration": 3,
+        "fine": 2, "penalty": 2, "sanctions decision": 2,
+        "annulment": 3, "infringement procedure": 4, "reasoned opinion": 3
+      }
+    },
+    {
+      "id": "uk-and-europe",
+      "name": "The UK and Europe",
+      "_scope": "The beat almost nobody covers systematically from a young-reader angle, and the one with a built-in British audience. Leads whenever it has anything real.",
+      "keywords": {
+        "uk-eu": 4, "eu-uk": 4, "united kingdom": 3, "britain": 2,
+        "uk government": 2, "westminster": 2,
+        "reset": 2, "uk-eu reset": 4, "trade and cooperation agreement": 4,
+        "tca": 2, "windsor framework": 4, "northern ireland protocol": 4,
+        "sps agreement": 4, "veterinary agreement": 4, "dynamic alignment": 4,
+        "regulatory divergence": 4, "divergence": 3, "retained eu law": 4,
+        "mutual recognition": 3, "conformity assessment": 3,
+        "ukca": 4, "ce mark": 3, "designated standard": 3,
+        "youth mobility scheme": 4, "erasmus association": 4,
+        "horizon europe": 3, "third country": 2, "equivalence": 3,
+        "brexit": 3, "rejoin": 3, "customs union": 3, "single market access": 4,
+        "fisheries": 2, "gibraltar": 3, "defence pact": 4,
+        "security and defence partnership": 4
+      }
+    }
+  ],
+
+  "signals": [
+    {
+      "id": "new",
+      "name": "Genuinely new",
+      "weight": 2,
+      "min_score": 2,
+      "_why": "Distinguishes a first move from the eighth procedural step of something announced in March.",
+      "keywords": {
+        "proposes": 3, "proposal for": 3, "launches": 3, "unveils": 4,
+        "presents": 2, "new rules": 4, "new strategy": 3, "sets out": 2,
+        "opens consultation": 3, "call for evidence": 3, "tables": 3,
+        "announces": 2, "introduces": 2, "first-ever": 4, "pilot": 2
+      }
+    },
+    {
+      "id": "decided",
+      "name": "Decision taken",
+      "weight": 3,
+      "min_score": 2,
+      "_why": "A vote, a deal, a ruling or an entry into force. The difference between something that might happen and something that has.",
+      "keywords": {
+        "adopted": 4, "adopts": 4, "agreement reached": 4, "deal on": 4,
+        "provisional agreement": 4, "political agreement": 4,
+        "enters into force": 4, "entry into force": 4, "in force": 3,
+        "signed": 3, "ratified": 4, "approved": 3, "vote": 2, "voted": 3,
+        "endorsed": 3, "judgment": 4, "ruled": 4, "ruling": 3,
+        "final": 2, "concluded": 3, "greenlights": 3, "cleared": 2
+      }
+    },
+    {
+      "id": "unusual",
+      "name": "Unusual or unexpected",
+      "weight": 3,
+      "min_score": 2,
+      "_why": "The single best predictor that something is worth a reader's attention. Institutions write in a flat register; the words below are what they use when something has actually gone wrong or broken precedent.",
+      "keywords": {
+        "first time": 4, "for the first time": 4, "first-ever": 4,
+        "first ever": 4, "unprecedented": 4,
+        "historic": 3, "record": 3, "emergency": 4, "urgent": 3,
+        "suspend*": 4, "suspended": 4, "withdraw*": 3, "withdrawn": 3,
+        "reject*": 3, "rejected": 4, "blocked": 4, "veto*": 4, "vetoed": 4,
+        "collapse*": 4, "failed": 3, "breakdown": 4, "resign*": 4,
+        "unexpected": 4, "surprise": 3, "u-turn": 4, "reverses": 4,
+        "scrapped": 4, "abandoned": 4, "delay*": 3, "postponed": 3,
+        "snap": 3, "exceptional": 3, "unanimously": 2
+      }
+    },
+    {
+      "id": "contested",
+      "name": "Likely to generate debate",
+      "weight": 2,
+      "min_score": 2,
+      "_why": "A development everyone agrees on rarely makes a good explainer. Disagreement is what gives a piece a second half.",
+      "keywords": {
+        "criticis*": 3, "opposes": 3, "opposition": 2, "dispute": 3,
+        "row": 3, "clash": 3, "split": 3, "divided": 3, "deadlock": 4,
+        "protest*": 3, "backlash": 4, "objection*": 3, "challenge": 2,
+        "legal challenge": 4, "complaint": 2, "infringement*": 3,
+        "warns": 2, "concerns": 2, "controversial": 4, "pushback": 4,
+        "watered down": 4, "lobbying": 3, "campaigner*": 3, "ngo": 2
+      }
+    },
+    {
+      "id": "consequential",
+      "name": "Consequential",
+      "weight": 3,
+      "min_score": 2,
+      "_why": "Something changes for somebody, with a date or a number attached. Filters out the announcement of an intention to consider a framework.",
+      "keywords": {
+        "binding": 4, "obligation": 3, "must": 1, "requirement": 2,
+        "deadline": 3, "from 2026": 3, "from 2027": 3, "from 2028": 3,
+        "by 2030": 2, "transition period": 3, "phase-out": 3, "phase out": 3,
+        "ban": 4, "banned": 4, "prohibit*": 3, "mandatory": 4,
+        "fine*": 3, "fines": 3, "penalt*": 3, "penalties": 3,
+        "billion": 3, "million": 1, "quota": 3, "cap": 2, "tariff*": 3,
+        "applies to": 2, "directly applicable": 4, "member states must": 4
+      }
+    },
+    {
+      "id": "youth",
+      "name": "Relevant to young Europeans",
+      "weight": 4,
+      "min_score": 2,
+      "cap": 6,
+      "_why": "The highest-weighted signal in the file, and the reason this publication exists rather than being one more Brussels newsletter. If an item scores here it goes near the top of the review list almost regardless of what else it does.",
+      "keywords": {
+        "young people": 4, "youth": 3, "student*": 4, "students": 4,
+        "university": 3, "graduate*": 4, "school": 2, "education": 3,
+        "erasmus": 4, "study abroad": 4, "exchange programme": 3,
+        "traineeship": 4, "internship": 4, "apprenticeship": 3,
+        "first job": 4, "entry-level": 4, "youth unemployment": 4,
+        "minimum wage": 3, "gig": 4, "platform work": 3,
+        "rent": 3, "housing": 3, "cost of living": 3, "tuition": 4,
+        "social media": 4, "smartphone": 3, "gaming": 4, "influencer": 4,
+        "streaming": 3, "tiktok": 4, "instagram": 3, "online": 1,
+        "roaming": 4, "interrail": 4, "budget airline": 3, "travel": 2,
+        "climate": 2, "mental health": 2, "military service": 3,
+        "conscription": 3, "voting age": 4, "16-year-old": 4,
+        "generation": 3, "under-30": 4, "young farmer": 3
+      }
+    },
+    {
+      "id": "uk",
+      "name": "UK–EU relevance",
+      "weight": 3,
+      "min_score": 2,
+      "_why": "The publication is written from Britain for a partly British readership. Anything that moves the UK–EU relationship is worth a look even when it is small.",
+      "keywords": {
+        "united kingdom": 4, "uk": 2, "britain": 3, "british": 3,
+        "london": 2, "westminster": 3, "whitehall": 3,
+        "brexit": 4, "uk-eu": 4, "eu-uk": 4, "reset": 2,
+        "northern ireland": 3, "ireland": 2, "gibraltar": 3,
+        "third country": 2, "youth mobility": 4
+      }
+    },
+    {
+      "id": "geopolitical",
+      "name": "Geopolitically important",
+      "weight": 3,
+      "min_score": 2,
+      "_why": "Europe acting as a bloc towards someone outside it, or being acted upon.",
+      "keywords": {
+        "russia": 3, "ukraine": 3, "china": 4, "united states": 3,
+        "washington": 3, "trump": 3, "nato": 3, "turkey": 3,
+        "india": 2, "africa": 2, "indo-pacific": 3, "taiwan": 4,
+        "enlargement": 3, "accession*": 3, "western balkans": 3,
+        "serbia": 2, "georgia": 3, "moldova": 3, "belarus": 3,
+        "sanctions": 2, "tariff*": 3, "trade war": 4, "decoupling": 4,
+        "de-risking": 4, "strategic autonomy": 4, "sovereignty": 3,
+        "summit": 2, "g7": 3, "united nations": 2, "middle east": 3
+      }
+    },
+    {
+      "id": "economic",
+      "name": "Economically significant",
+      "weight": 2,
+      "min_score": 2,
+      "_why": "Money attached, or a rule that moves money.",
+      "keywords": {
+        "billion": 4, "trillion": 4, "million": 1, "budget": 3,
+        "funding": 2, "investment": 2, "subsid*": 3, "state aid": 3,
+        "tariff*": 3, "trade": 2, "gdp": 3, "inflation": 3,
+        "interest rate": 3, "growth": 2, "recession": 4,
+        "competitiveness": 3, "productivity": 3, "market": 1,
+        "merger": 3, "antitrust": 4, "fine": 2, "levy": 3, "tax": 3
+      }
+    },
+    {
+      "id": "tech",
+      "name": "Technologically significant",
+      "weight": 2,
+      "min_score": 2,
+      "_why": "Overlaps the tech beat deliberately — a tech signal on a non-tech beat is often the most interesting kind of story.",
+      "keywords": {
+        "artificial intelligence": 3, "ai": 1, "algorithm": 3,
+        "platform": 2, "digital": 2, "data": 2, "cyber": 3,
+        "semiconductor": 3, "chip": 2, "quantum": 4, "cloud": 2,
+        "encryption": 3, "biometric": 3, "automation": 3, "robot": 3,
+        "satellite": 3, "space": 2, "5g": 3, "6g": 3, "open source": 2
+      }
+    },
+    {
+      "id": "social",
+      "name": "Socially relevant",
+      "weight": 2,
+      "min_score": 2,
+      "_why": "Stories about how people live rather than how institutions work. Historically the hardest category for an institutional feed to surface, which is exactly why it gets its own signal.",
+      "keywords": {
+        "housing": 3, "homeless": 3, "poverty": 3, "inequality": 3,
+        "wage": 2, "worker*": 2, "trade union": 3, "strike*": 4,
+        "gender": 3, "women": 2, "disability": 3, "ageing": 2,
+        "birth rate": 3, "demographic": 3, "loneliness": 3,
+        "health": 2, "public health": 3, "alcohol": 2, "tobacco": 2,
+        "vaping": 4, "food price": 3, "supermarket": 3,
+        "culture": 2, "sport": 2, "football": 3, "music": 2,
+        "language": 2, "religion": 2, "civil society": 3
+      }
+    }
+  ],
+
+  "noise": [
+    "weekly schedule of",
+    "annual round of visits",
+    "photo of the day",
+    "audiovisual",
+    "media advisory",
+    "press briefing",
+    "doorstep",
+    "vacancy",
+    "call for applications",
+    "call for expression of interest",
+    "correction:",
+    "travel advice",
+    "medical facilities",
+    "healthcare and medical services",
+    "opening remarks by",
+    "closing remarks by",
+    "speech by president",
+    "keynote speech",
+    "agenda of the",
+    "draft agenda",
+    "minutes of the",
+    "monthly summary of council acts",
+    "list of a items",
+    "corrigendum",
+    "notice for the attention of",
+    "interview with",
+    "appointment of",
+    "obituary"
+  ]
+}
