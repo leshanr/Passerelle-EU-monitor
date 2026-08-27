@@ -145,7 +145,11 @@ def parse_feed(raw: bytes, source: dict) -> list[dict]:
       the items. Sources can opt into `date_fallback: "channel"` so those items
       inherit the channel date instead of being silently discarded.
     """
-    text = raw.decode("utf-8", errors="replace").lstrip()
+    # A UTF-8 byte-order mark is legal at the head of an XML document and four
+    # of the Council's feeds send one. Stripping it has to happen before any
+    # check that looks at the first character — the "does this start with <"
+    # guard added below rejected all four on sight until it did.
+    text = raw.decode("utf-8-sig", errors="replace").lstrip("\ufeff \t\r\n")
 
     # Say what actually came back. "no element found: line 1, column 0" is what
     # an empty 200 looks like after it reaches the XML parser, and it tells you

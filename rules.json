@@ -231,6 +231,8 @@
         "enters into force": 4, "entry into force": 4, "in force": 3,
         "signed": 3, "ratified": 4, "approved": 3, "vote": 2, "voted": 3,
         "endorsed": 3, "judgment": 4, "ruled": 4, "ruling": 3,
+        "enforc*": 3, "takes effect": 4, "applies from": 4,
+        "comes into force": 4, "begins applying": 4, "now applies": 4,
         "final": 2, "concluded": 3, "greenlights": 3, "cleared": 2
       }
     },
@@ -414,6 +416,8 @@
     "interview with",
     "appointment of",
     "obituary",
+    "daily news",
+    "midday express",
     "euipo",
     "trade mark",
     "trademark",
