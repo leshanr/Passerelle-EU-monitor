@@ -266,6 +266,18 @@ future = NOW + dt.timedelta(days=90)
 check("a scheduled meeting date is beyond the tolerance",
       future > NOW + dt.timedelta(days=RULES["future_tolerance_days"]))
 
+# ── byte-order marks (regression: the non-XML guard rejected four live feeds) ──
+BOM_FEED = ('\ufeff<?xml version="1.0" encoding="utf-8"?><rss version="2.0">'
+            '<channel><title>t</title><item><title>Council adopts sanctions</title>'
+            '<pubDate>Mon, 24 Aug 2026 08:00:00 +0000</pubDate></item>'
+            '</channel></rss>')
+try:
+    bom_items = collect.parse_feed(BOM_FEED.encode("utf-8"), SRC_RSS)
+    bom_ok = len(bom_items) == 1
+except Exception as e:  # noqa: BLE001
+    bom_ok = False
+check("a feed with a UTF-8 byte-order mark still parses", bom_ok)
+
 # ── fetch diagnostics ───────────────────────────────────────────────────────
 for payload, want in ((b"", "empty response"), (b"Forbidden", "non-XML")):
     try:
