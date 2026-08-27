@@ -1,0 +1,97 @@
+name: EU Monitor
+
+# Two schedules, one workflow.
+#
+#   1st and 15th   the real fortnightly collection — this is what produces the
+#                  digest you sit down with on day 11 of the cycle.
+#   every Monday   a health check only. It writes nothing. Its whole job is to
+#                  tell you that a source has quietly died three weeks before
+#                  you would otherwise notice, because a rotted source list and
+#                  a quiet fortnight in Brussels look identical from the digest.
+on:
+  schedule:
+    - cron: "0 7 1,15 * *"
+    - cron: "0 7 * * 1"
+  workflow_dispatch:
+    inputs:
+      days:
+        description: "Lookback window in days"
+        required: false
+        default: "14"
+      check_only:
+        description: "Source health only, write nothing"
+        type: boolean
+        required: false
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: eu-monitor
+  cancel-in-progress: false
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      # The pipeline is verified before it is trusted. If the parser or the
+      # scoring rules are broken, the run stops here rather than committing a
+      # digest that quietly lost half the feeds.
+      - name: Verify the pipeline offline
+        run: python3 tests/test_offline.py
+
+      - name: Decide what this run is
+        id: mode
+        run: |
+          if [ "${{ github.event.inputs.check_only }}" = "true" ] \
+             || [ "${{ github.event.schedule }}" = "0 7 * * 1" ]; then
+            echo "check_only=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "check_only=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Source health check
+        if: steps.mode.outputs.check_only == 'true'
+        run: |
+          {
+            echo "## EU Monitor — source health"
+            echo ""
+            echo '```'
+            python3 collect.py --check 2>&1 || true
+            echo '```'
+            echo ""
+            echo "_A source that reports \`ok\` and \`STALE\` parses fine and has"
+            echo "published nothing in weeks. Fix the URL before the next collection."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Collect and flag
+        if: steps.mode.outputs.check_only == 'false'
+        run: python3 collect.py --days "${{ github.event.inputs.days || '14' }}"
+
+      - name: Put the digest in the run summary
+        if: steps.mode.outputs.check_only == 'false'
+        run: |
+          latest=$(ls -1 digests/*.md | tail -n 1)
+          echo "Latest digest: \`$latest\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          cat "$latest" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Commit the digest
+        if: steps.mode.outputs.check_only == 'false'
+        run: |
+          git config user.name "eu-monitor"
+          git config user.email "actions@github.com"
+          git add digests state
+          if git diff --staged --quiet; then
+            echo "Nothing new this cycle — worth checking the source health table."
+          else
+            git commit -m "digest: $(date -u +%Y-%m-%d)"
+            git push
+          fi
