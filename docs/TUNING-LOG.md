@@ -70,6 +70,117 @@ to move them after the first two real runs. Log it here when you do.
 
 ---
 
+## 2026-08-27 — run #001, the first live run
+
+The first run against the real feeds. 71 detected, 31 significant, 10 worth
+investigating — and the top tier was useless. **All ten were EUR-Lex.** Seven
+were General Court judgments about trade marks. The single item genuinely on
+brief — *"Cost of living and young people priorities for the PM"* — scored 49
+and sat at number thirteen.
+
+Diagnosis, in one line: **the digest was ranked by title length.**
+
+### What the system missed
+
+*"Cost of living and young people priorities for the PM during first visit to
+Northern Ireland"* (92 characters) should have led. It scored 49 against 82 for
+a CELEX notice about GATT tariff-rate quotas.
+
+Cause: a title match was worth a flat double a body match. EUR-Lex titles run
+400–800 characters and list every party, instrument and recital; a gov.uk
+headline runs 30–100. The long ones accumulated matches by length, not
+relevance. Worse, they tripped *six* signals apiece without meaning any of
+them — "entry into force" read as **decided**, "for the first time" as
+**unusual**, a tariff figure as **economic**, and the words *United Kingdom* and
+*China* as **uk** and **geopolitical**. Six incidental signals beat two
+deliberate ones.
+
+Four beats — tech-and-online-life, climate-and-energy, borders-and-moving,
+power-and-democracy — returned **nothing at all**, while the Commission press
+corner had returned 60 items dated that day. Those items were not missed. They
+were outranked.
+
+### Fixes
+
+**1. Title boost damped by length** (`title_boost_ref_chars: 110`). A title at
+or under the reference length keeps the full ×2; longer titles decay towards
+×1, so they still count for more than body text but stop winning on word count.
+
+**2. `match_cap: {beat: 4, signal: 3}`.** Only the strongest distinct matches in
+each keyword set count. Four strong matches and twelve are not different kinds
+of evidence.
+
+**3. `signal_count_cap: 4`.** Breadth of reasons should beat repetition of one
+reason — but breadth has a ceiling. Only the four strongest signals contribute
+to the score. *Every* signal that fired is still reported on the review screen:
+capping the score is right, hiding the reasons would make the digest lie about
+why something surfaced.
+
+**4. `score_multiplier: 0.6` on the two EUR-Lex feeds.** EUR-Lex is authoritative
+about what a rule says and silent about why anyone should care. It is how you
+*verify* a story, not how you *find* one. Weighted down rather than dropped —
+its links are still what every claim in a published brief points at.
+
+**5. `investigate_requires_any` on `rights-and-courts`** = youth / uk /
+contested / unusual / social. The case-law feed returns a hundred judgments a
+fortnight. Being a ruling is not by itself a reason to read something; a court
+item now needs a second reason that is not simply that a court decided it.
+Landmark rulings clear this easily — the docket does not.
+
+**6. `caps.investigate_per_beat: 3`.** No single beat can take more than three
+of the ten top slots. Anything demoted lands in the tier below, where it is
+still read.
+
+**7. Noise list +8 terms** for the trade-mark docket: `euipo`, `trade mark`,
+`trademark`, `figurative mark`, `word mark`, `opposition division`, `board of
+appeal`, `order of the president`. These killed five items outright on the
+re-score. An EUIPO dispute is never this publication's story.
+
+**8. Thresholds 55/3 → 36/2 (investigate), 25/2 → 22/2 (significant).** Capping
+breadth and damping length compressed the whole score scale. Requiring three
+signals was excluding exactly the items this publication exists for: a real
+headline trips two signals on purpose where a legal notice tripped six by
+accident.
+
+### Effect, measured on the real run-001 items
+
+Re-scoring the 31 flagged items from run #1 against the new rules:
+
+| | before | after |
+|---|---|---|
+| "Cost of living and young people…" | #13, significant | **#1, investigate** |
+| CELEX GATT notice | #1, investigate | #4, significant |
+| EUIPO trade-mark cases | 5 in the flag list | killed by noise |
+| Top-tier beats | 2 (courts, money) | spread, capped at 3 each |
+
+**This calibration set is biased** — it contains only what the *old* scorer
+flagged, which is to say the long items. The next live run is the real test,
+because it will surface items the old rules buried.
+
+### Source health
+
+- **Three European Parliament feeds failed** from GitHub's runners with
+  `no element found: line 1, column 0` — an empty body reaching the XML parser.
+  Likely a UA or geo block on Azure IP ranges. Not reproducible from a
+  developer machine, which is why `parse_feed` now reports *what* came back
+  (empty / HTML / non-XML with a snippet) rather than letting the parser's
+  error stand in for a diagnosis.
+- **EUR-Lex Commission proposals** timed out. Sources can now set their own
+  `timeout`.
+- **European Council meetings** reported a *negative* age (−112d) because it
+  carries scheduled future dates. Added `future_tolerance_days: 2`: items dated
+  further ahead are diary entries, not developments, and are excluded from both
+  the digest and the staleness calculation.
+
+### Regression tests added
+
+Fifteen, taking the suite from 54 to 72. The important ones use the **real
+strings from run #1** rather than invented fixtures: the actual 444-character
+CELEX notice must not outrank the actual 92-character headline, and the
+headline must reach the top tier.
+
+---
+
 ## Template for future entries
 
 ```
