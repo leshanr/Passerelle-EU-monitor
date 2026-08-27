@@ -70,6 +70,7 @@
     },
     {
       "id": "eurlex-caselaw",
+      "score_multiplier": 0.6,
       "name": "EUR-Lex — Court of Justice case-law",
       "url": "https://eur-lex.europa.eu/EN/display-feed.rss?rssId=163",
       "tier": 1,
@@ -79,6 +80,7 @@
     },
     {
       "id": "eurlex-oj-l",
+      "score_multiplier": 0.6,
       "name": "EUR-Lex — Official Journal L (acts in force)",
       "url": "https://eur-lex.europa.eu/EN/display-feed.rss?rssId=222",
       "tier": 1,

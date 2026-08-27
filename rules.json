@@ -7,25 +7,37 @@
   "tier1_bonus": 2,
   "beat_cap": 30,
 
+  "_length_note": "Added 27 Aug 2026 after the first live run. A title match used to be worth a flat double a body match, which handed the whole digest to EUR-Lex: its titles run 400-800 characters against 30-100 for a real headline, so they accumulated matches by length rather than relevance. A title at or under title_boost_ref_chars still gets the full double; longer ones decay towards parity. match_cap then keeps only the N strongest distinct matches per keyword set, because four strong matches and twelve are not different kinds of evidence.",
+  "title_boost_ref_chars": 110,
+  "match_cap": { "beat": 4, "signal": 3 },
+
+  "_signal_count_note": "Breadth of reasons should beat repetition of one reason - but breadth has a ceiling. A long legal title trips six signals incidentally (entry into force reads as decided, for the first time as unusual, a tariff number as economic) and outscored a headline that tripped two on purpose. Only the strongest few count.",
+  "signal_count_cap": 4,
+
+  "_future_note": "A meetings feed carries scheduled dates. Items more than this many days ahead are diary entries, not developments that have happened.",
+  "future_tolerance_days": 2,
+
   "flag_tiers": {
     "significant": {
-      "min_score": 25,
+      "min_score": 22,
       "min_signals": 2,
       "_why": "Two independent reasons to care, and enough topical weight to not be a routine administrative notice."
     },
     "investigate": {
-      "min_score": 55,
-      "min_signals": 3,
+      "min_score": 36,
+      "min_signals": 2,
       "requires_any": ["youth", "unusual", "decided", "consequential", "uk"],
-      "_why": "The top tier must clear the score bar AND carry at least one signal that makes it worth a young reader's ten minutes. A development can be geopolitically enormous and still be the fourth Ukraine statement that fortnight — that is what requires_any filters out."
+      "_why": "The top tier must clear the score bar AND carry at least one signal that makes it worth a young reader's ten minutes. A development can be geopolitically enormous and still be the fourth Ukraine statement that fortnight — that is what requires_any filters out. Thresholds dropped from 55/3 to 36/2 on 27 Aug 2026: capping signal breadth and damping long titles compressed the whole score scale, and a real headline trips two signals deliberately where a legal notice tripped six by accident. Requiring three signals was excluding exactly the items this publication exists for."
     }
   },
 
   "caps": {
     "investigate": 10,
+    "investigate_per_beat": 3,
     "significant": 25,
     "detected": 40,
-    "_why": "A review list you do not finish is worth nothing. Ten items at the top is one evening's work."
+    "_why": "A review list you do not finish is worth nothing. Ten items at the top is one evening's work.",
+    "_per_beat_why": "Added 27 Aug 2026. On the first live run one beat took 20 of 31 flags and four beats returned nothing, while fresh Commission items sat below a court docket. Three per beat forces the shortlist to span the fortnight rather than one prolific feed. Anything demoted lands in the tier below, where it is still read."
   },
 
   "beats": [
@@ -152,7 +164,9 @@
     {
       "id": "rights-and-courts",
       "name": "Rights and courts",
-      "_scope": "Where a European institution tells a government or a company it is wrong. Court rulings are the most under-covered high-consequence events in European politics.",
+      "_scope": "Where a European institution tells a government or a company it is wrong. Landmark court rulings are the most under-covered high-consequence events in European politics — the daily docket is not.",
+      "investigate_requires_any": ["youth", "uk", "contested", "unusual", "social"],
+      "_gate_why": "Added 27 Aug 2026. The case-law feed returns a hundred judgments a fortnight and this beat took 20 of 31 flags on the first live run, almost all trademark and State-aid docket. Being a ruling is not by itself a reason to read something: to reach the top tier a court item now needs a second reason that is not simply that a court decided it.",
       "keywords": {
         "court of justice": 4, "cjeu": 4, "general court": 3,
         "advocate general": 3, "preliminary ruling": 4, "judgment": 3,
@@ -399,6 +413,14 @@
     "notice for the attention of",
     "interview with",
     "appointment of",
-    "obituary"
+    "obituary",
+    "euipo",
+    "trade mark",
+    "trademark",
+    "figurative mark",
+    "word mark",
+    "opposition division",
+    "board of appeal",
+    "order of the president"
   ]
 }

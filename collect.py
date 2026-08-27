@@ -61,7 +61,7 @@ CELEX_RE = re.compile(r"^CELEX:\s*[0-9A-Z()_]+\s*:\s*", re.I)
 # fetching
 # ---------------------------------------------------------------------------
 
-def fetch(url: str, attempts: int = 3) -> bytes:
+def fetch(url: str, attempts: int = 3, timeout: int = TIMEOUT) -> bytes:
     last: Exception | None = None
     for _ in range(attempts):
         try:
@@ -73,10 +73,11 @@ def fetch(url: str, attempts: int = 3) -> bytes:
                         "application/rss+xml, application/atom+xml, "
                         "application/xml;q=0.9, */*;q=0.8"
                     ),
+                    "Accept-Language": "en-GB,en;q=0.9",
                     "Accept-Encoding": "gzip",
                 },
             )
-            with urllib.request.urlopen(req, timeout=TIMEOUT) as r:
+            with urllib.request.urlopen(req, timeout=timeout) as r:
                 raw = r.read()
                 if r.headers.get("Content-Encoding") == "gzip":
                     raw = gzip.decompress(raw)
@@ -145,9 +146,19 @@ def parse_feed(raw: bytes, source: dict) -> list[dict]:
       inherit the channel date instead of being silently discarded.
     """
     text = raw.decode("utf-8", errors="replace").lstrip()
+
+    # Say what actually came back. "no element found: line 1, column 0" is what
+    # an empty 200 looks like after it reaches the XML parser, and it tells you
+    # nothing about the cause — which cost a whole cycle of guessing when three
+    # European Parliament feeds started returning empty bodies from CI.
+    if not text:
+        raise RuntimeError(f"returned an empty response ({len(raw)} bytes)")
     head = text[:300].lower()
     if head.startswith("<!doctype html") or "<html" in head:
         raise RuntimeError("returned HTML, not a feed")
+    if not text.startswith("<"):
+        snippet = re.sub(r"\s+", " ", text[:80])
+        raise RuntimeError(f"returned non-XML ({len(raw)} bytes): {snippet!r}")
     root = ET.fromstring(text)
 
     channel_date = parse_date(
@@ -205,6 +216,7 @@ def parse_feed(raw: bytes, source: dict) -> list[dict]:
             "source": source["name"],
             "source_id": source["id"],
             "tier": source.get("tier", 2),
+            "score_multiplier": source.get("score_multiplier", 1.0),
             "inherited_date": date is not None and use_channel_date,
         })
     return items
@@ -241,19 +253,47 @@ def keyword_pattern(kw: str) -> "re.Pattern[str]":
     return pat
 
 
-def _match(keywords: dict, title: str, body: str) -> tuple[int, list[str]]:
-    """Title matches count double. Returns (score, matched keywords)."""
-    score = 0
-    hits: list[str] = []
+def title_boost(title: str, rules: dict) -> float:
+    """How much more a title match is worth than a body match.
+
+    Originally a flat ×2, which was wrong in a way the first live run made
+    obvious. EUR-Lex titles run 400–800 characters ("Case T-538/24: Judgment of
+    the General Court of 8 July 2026 – Ryanair v Commission (State aid — Aid
+    scheme — …)") while a real headline runs 30–100 ("Cost of living and young
+    people priorities for the PM"). At a flat ×2, the long title accumulates
+    matches by sheer length and outranks the short one every time — which is
+    exactly what happened: all ten top-tier flags were EUR-Lex, and the one
+    item actually on brief sat at number thirteen.
+
+    Length is not relevance. A title at or below the reference length keeps the
+    full ×2; longer titles decay towards ×1, so they still count for more than
+    body text but stop winning on word count alone.
+    """
+    ref = rules.get("title_boost_ref_chars", 110)
+    return 1.0 + min(1.0, ref / max(len(title), ref))
+
+
+def _match(keywords: dict, title: str, body: str,
+           boost: float = 2.0, cap: int = 0) -> tuple[float, list[str], int]:
+    """Score one keyword set against an item.
+
+    `cap` keeps only the N highest-scoring distinct matches. Without it a long
+    enough title trawls a dozen keywords out of one list and the total says more
+    about the document's verbosity than its significance. Four strong matches
+    and twelve are not meaningfully different kinds of evidence.
+
+    Returns (score, kept keywords, total distinct matches).
+    """
+    hits: list[tuple[float, str]] = []
     for kw, weight in keywords.items():
         p = keyword_pattern(kw)
         if p.search(title):
-            score += weight * 2
-            hits.append(kw)
+            hits.append((weight * boost, kw))
         elif p.search(body):
-            score += weight
-            hits.append(kw)
-    return score, hits
+            hits.append((float(weight), kw))
+    hits.sort(key=lambda x: -x[0])
+    kept = hits[:cap] if cap else hits
+    return sum(w for w, _ in kept), [k for _, k in kept], len(hits)
 
 
 def score_item(item: dict, rules: dict) -> dict | None:
@@ -265,13 +305,17 @@ def score_item(item: dict, rules: dict) -> dict | None:
         if keyword_pattern(n).search(title):
             return None
 
+    boost = title_boost(item["title"], rules)
+    caps = rules.get("match_cap", {})
+    beat_cap, sig_cap = caps.get("beat", 4), caps.get("signal", 3)
+
     # --- axis 1: beat -------------------------------------------------------
-    beat_scores: dict[str, int] = {}
+    beat_scores: dict[str, float] = {}
     beat_hits: dict[str, list[str]] = {}
     for beat in rules["beats"]:
-        s, h = _match(beat["keywords"], title, body)
-        if s:
-            beat_scores[beat["id"]] = s
+        sc, h, _ = _match(beat["keywords"], title, body, boost, beat_cap)
+        if sc:
+            beat_scores[beat["id"]] = sc
             beat_hits[beat["id"]] = h
 
     if not beat_scores:
@@ -281,38 +325,68 @@ def score_item(item: dict, rules: dict) -> dict | None:
     beat_total = sum(beat_scores.values())
 
     # --- axis 2: significance signals --------------------------------------
-    signals: list[str] = []
-    signal_total = 0
-    signal_hits: dict[str, list[str]] = {}
+    fired: list[tuple[float, str, list[str]]] = []
     for sig in rules["signals"]:
-        s, h = _match(sig["keywords"], title, body)
+        s, h, _ = _match(sig["keywords"], title, body, boost, sig_cap)
         if s >= sig.get("min_score", 2):
-            signals.append(sig["id"])
-            # Each signal contributes its weight times a CAPPED intensity. The
-            # cap matters: without it a summary that happens to use six words
-            # from one signal's list outscores an item that trips four
-            # different signals, which is exactly backwards. Breadth of
-            # reasons should beat repetition of one reason.
-            signal_total += sig.get("weight", 1) * min(s, sig.get("cap", 4))
-            signal_hits[sig["id"]] = h[:4]
+            # Each signal contributes its weight times a CAPPED intensity, so
+            # breadth of reasons beats repetition of one reason.
+            fired.append((sig.get("weight", 1) * min(s, sig.get("cap", 4)),
+                          sig["id"], h[:4]))
+
+    # ...but breadth has a ceiling too. A 444-character legal notice trips six
+    # signals without meaning any of them: "entry into force" reads as decided,
+    # "for the first time" as unusual, a tariff number as economic, and the
+    # words United Kingdom and China as uk and geopolitical. Six incidental
+    # signals outscored a headline that tripped two on purpose. Only the
+    # strongest few now count.
+    fired.sort(key=lambda x: -x[0])
+    counted = fired[: rules.get("signal_count_cap", 4)]
+    signal_total = sum(w for w, _, _ in counted)
+
+    # Every signal that fired is still reported — the reasons an item surfaced
+    # are the most useful thing on the review screen, and hiding the weaker
+    # ones would make the digest lie about why something is there. Only the
+    # SCORE is capped.
+    signals = [sid for _, sid, _ in fired]
+    signal_hits = {sid: h for _, sid, h in fired}
+    counted_ids = [sid for _, sid, _ in counted]
 
     # A tier-1 primary institutional source gets a small edge over commentary.
     tier_bonus = rules.get("tier1_bonus", 2) if item.get("tier") == 1 else 0
 
+    # Not every source is a discovery source. EUR-Lex tells you that a rule
+    # exists and is authoritative about it; it never tells you why anyone
+    # should care, and its house style — 400 to 800 character titles listing
+    # every party and instrument — games any keyword scorer. It is how you
+    # verify a story, not how you find one. Sources can be weighted down in
+    # sources.json to reflect that without being dropped.
+    mult = item.get("score_multiplier", 1.0)
+
     # The beat is capped too, for the same reason — a long summary about one
     # subject should not outrank a short one about something that matters.
-    total = min(beat_total, rules.get("beat_cap", 30)) + signal_total + tier_bonus
+    total = (min(beat_total, rules.get("beat_cap", 30))
+             + signal_total + tier_bonus) * mult
 
     return {
-        "score": total,
-        "beat_score": beat_total,
-        "signal_score": signal_total,
+        "score": round(total),
+        "beat_score": round(beat_total),
+        "signal_score": round(signal_total),
+        "title_boost": round(boost, 2),
         "beat": primary,
         "beats": sorted(beat_scores, key=lambda k: -beat_scores[k]),
         "signals": signals,
+        "counted_signals": counted_ids,
         "signal_hits": signal_hits,
         "hits": sorted(set(beat_hits.get(primary, [])))[:6],
     }
+
+
+def beat_def(bid: str, rules: dict) -> dict:
+    for b in rules["beats"]:
+        if b["id"] == bid:
+            return b
+    return {}
 
 
 def classify(scored: dict, rules: dict) -> str:
@@ -321,12 +395,27 @@ def classify(scored: dict, rules: dict) -> str:
     inv = tiers["investigate"]
     sig = tiers["significant"]
 
-    n_sig = len(scored["signals"])
-    has_required = bool(set(scored["signals"]) & set(inv.get("requires_any", [])))
+    got = set(scored["signals"])
+    n_sig = len(got)
+
+    # Global gate: the top tier must carry at least one signal that makes an
+    # item worth a young reader's ten minutes.
+    need = set(inv.get("requires_any", []))
+    if need and not (got & need):
+        pass_global = False
+    else:
+        pass_global = True
+
+    # Per-beat gate. Some beats are structurally noisy: a court case-law feed
+    # returns a hundred judgments a fortnight and almost all of them are
+    # trademark and State-aid docket. Being a ruling is not by itself a reason
+    # to read something, so those beats can demand a second, non-court reason.
+    beat_need = set(beat_def(scored["beat"], rules).get("investigate_requires_any", []))
+    pass_beat = bool(got & beat_need) if beat_need else True
 
     if (scored["score"] >= inv["min_score"]
             and n_sig >= inv["min_signals"]
-            and (has_required or not inv.get("requires_any"))):
+            and pass_global and pass_beat):
         return "investigate"
     if scored["score"] >= sig["min_score"] and n_sig >= sig["min_signals"]:
         return "significant"
@@ -506,13 +595,26 @@ def render(buckets: dict, health: list, rules: dict, window: int,
             out.append(f"| {h['name']} | {h['tier']} | FAILED — {h['error']} | 0 | — | — |")
             continue
         status = "**STALE**" if h.get("stale") else "ok"
-        newest = fmt_date(h["newest"]) if h.get("newest") else "no dated items"
+        newest = fmt_date(h["newest"]) if h.get("newest") else "no past-dated items"
         age = "—" if h.get("age") is None else f"{h['age']}d"
-        und = f" ({h['undated']} undated)" if h.get("undated") else ""
+        notes = []
+        if h.get("undated"):
+            notes.append(f"{h['undated']} undated")
+        if h.get("future"):
+            notes.append(f"{h['future']} scheduled")
+        note = f" ({', '.join(notes)})" if notes else ""
         out.append(
-            f"| {h['name']} | {h['tier']} | {status} | {h['count']}{und} | {newest} | {age} |"
+            f"| {h['name']} | {h['tier']} | {status} | {h['count']}{note} | {newest} | {age} |"
         )
     out += [""]
+    if stats.get("future_dropped"):
+        out += [
+            f"*{stats['future_dropped']} item(s) were dated in the future and skipped — "
+            "scheduled meetings and diary entries rather than developments that have "
+            "happened. A feed showing a large number here is a meetings feed, and its "
+            "newest-item age is measured from its newest **past** item.*",
+            "",
+        ]
     if stats.get("undated_dropped"):
         out += [
             f"*{stats['undated_dropped']} item(s) carried no readable date and were "
@@ -569,14 +671,22 @@ def main() -> int:
 
     for src in sources:
         try:
-            items = parse_feed(fetch(src["url"]), src)
-            dates = [i["date"] for i in items if i["date"]]
+            items = parse_feed(
+                fetch(src["url"], timeout=src.get("timeout", TIMEOUT)), src)
+            # A meetings feed carries scheduled future dates. Those are not
+            # developments that have happened, and left in they produce a
+            # negative "age" in the health table and leak diary entries into
+            # the digest.
+            future_edge = now + dt.timedelta(days=rules.get("future_tolerance_days", 2))
+            n_future = sum(1 for i in items if i["date"] and i["date"] > future_edge)
+            dates = [i["date"] for i in items if i["date"] and i["date"] <= future_edge]
             newest = max(dates) if dates else None
             age = (now - newest).days if newest else None
             health.append({
                 "name": src["name"], "tier": src.get("tier", 2), "ok": True,
                 "count": len(items), "error": "", "newest": newest, "age": age,
                 "undated": sum(1 for i in items if not i["date"]),
+                "future": n_future,
                 "stale": age is not None and age > stale_after,
             })
             all_items.extend(items)
@@ -587,7 +697,7 @@ def main() -> int:
             health.append({
                 "name": src["name"], "tier": src.get("tier", 2), "ok": False,
                 "count": 0, "error": str(e)[:110], "newest": None, "age": None,
-                "undated": 0, "stale": False,
+                "undated": 0, "future": 0, "stale": False,
             })
             print(f"  FAIL {src['id']}: {e}", file=sys.stderr)
 
@@ -603,9 +713,14 @@ def main() -> int:
             if not h["ok"]:
                 print(f"  FAIL   {h['name']:<52} {h['error']}")
                 continue
-            age = "no dated items" if h["age"] is None else f"newest {h['age']:>3}d old"
+            age = "no past-dated items" if h["age"] is None else f"newest {h['age']:>3}d old"
             mark = "STALE" if h["stale"] else "ok   "
-            und = f"  ({h['undated']} undated)" if h["undated"] else ""
+            extra = []
+            if h["undated"]:
+                extra.append(f"{h['undated']} undated")
+            if h.get("future"):
+                extra.append(f"{h['future']} scheduled")
+            und = f"  ({', '.join(extra)})" if extra else ""
             print(f"  {mark}  {h['name']:<52} {h['count']:>3} items, {age}{und}")
         return 0 if working else 1
 
@@ -614,6 +729,8 @@ def main() -> int:
 
     fresh: list[dict] = []
     undated_dropped = 0
+    future_dropped = 0
+    future_edge = now + dt.timedelta(days=rules.get("future_tolerance_days", 2))
     for it in all_items:
         # An undated item used to skip the window check and always qualify as
         # fresh, which let an entire static feed in on every run. Undated now
@@ -621,6 +738,9 @@ def main() -> int:
         # opt into date_fallback instead.
         if it["date"] is None:
             undated_dropped += 1
+            continue
+        if it["date"] > future_edge:
+            future_dropped += 1
             continue
         if it["date"] < cutoff:
             continue
@@ -651,6 +771,26 @@ def main() -> int:
         buckets[k].sort(key=lambda x: -x["scored"]["score"])
 
     caps = rules.get("caps", {})
+
+    # Diversity cap. One prolific feed should not be able to fill the shortlist
+    # with a single beat — on the first live run, rights-and-courts took 20 of
+    # 31 flags and four beats returned nothing at all, while fresh Commission
+    # items sat below them. Anything demoted here lands in the tier below,
+    # where it is still read.
+    per_beat = caps.get("investigate_per_beat", 0)
+    if per_beat:
+        kept, seen_beats, demoted = [], {}, []
+        for it in buckets["investigate"]:
+            b = it["scored"]["beat"]
+            if seen_beats.get(b, 0) < per_beat:
+                seen_beats[b] = seen_beats.get(b, 0) + 1
+                kept.append(it)
+            else:
+                demoted.append(it)
+        buckets["investigate"] = kept
+        buckets["significant"] = sorted(
+            buckets["significant"] + demoted, key=lambda x: -x["scored"]["score"])
+
     buckets["investigate"] = buckets["investigate"][: caps.get("investigate", 10)]
     buckets["significant"] = buckets["significant"][: caps.get("significant", 25)]
     buckets["detected"] = buckets["detected"][: caps.get("detected", 40)]
@@ -664,6 +804,7 @@ def main() -> int:
         "sources_total": len(health),
         "sources_stale": sum(1 for h in health if h["stale"]),
         "undated_dropped": undated_dropped,
+        "future_dropped": future_dropped,
     }
 
     digest = render(buckets, health, rules, window, now, stats)
