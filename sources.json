@@ -15,30 +15,32 @@
     },
     {
       "id": "ep-press",
-      "name": "European Parliament — press releases (all)",
+      "name": "European Parliament — press releases (all)  [known blocked, kept as canary]",
       "url": "https://www.europarl.europa.eu/rss/doc/press-releases/en.xml",
       "tier": 1,
       "verified": true,
-      "newest_seen": "2026-06-12",
-      "note": "76 days stale at audit. Kept because when it does publish it is the best plain-English source in the EU system. Paired with the committee feed below so a failure of one is visible."
+      "newest_seen": "2026-07-23",
+      "note": "BLOCKED FROM CI, KEPT ON PURPOSE. Loaded in a browser on 27 Aug 2026 it returns 20 items, newest 23 July, and the content is the best plain-English material in the EU system — committee deals on air passenger rights, social media safety for young people, the digital euro. From GitHub's runners the same URL returns an empty 200. Changing the user agent to a normal browser string did not fix it, so the block is on the source IP range, not on how the request identifies itself. This one feed stays enabled as a canary: one FAIL line in the health table tells you the day the block lifts. The other two EP feeds are disabled so the table is not cluttered by three lines saying the same thing."
     },
     {
       "id": "ep-committees",
+      "enabled": false,
       "name": "European Parliament — committee press releases",
       "url": "https://www.europarl.europa.eu/rss/doc/press-releases-committees/en.xml",
       "tier": 1,
       "verified": true,
       "newest_seen": "2026-06-16",
-      "note": "Better signal-to-noise than the general press feed: committee deals are where legislation is actually settled, and they are announced here first. 'Deal on air passenger rights: MEPs secure improved traveller protection' is exactly the kind of item this publication exists for."
+      "note": "DISABLED 27 Aug 2026 — blocked from CI exactly like ep-press; see that entry. Re-enable together with it. Better signal-to-noise than the general press feed: committee deals are where legislation is actually settled, and they are announced here first. 'Deal on air passenger rights: MEPs secure improved traveller protection' is exactly the kind of item this publication exists for."
     },
     {
       "id": "ep-texts-adopted",
+      "enabled": false,
       "name": "European Parliament — texts adopted",
       "url": "https://www.europarl.europa.eu/rss/doc/texts-adopted/en.xml",
       "tier": 1,
       "verified": true,
       "newest_seen": "2026-06-18",
-      "note": "The Parliament's actual legislative output rather than its press office's account of it. Feeds the 'decided' signal directly."
+      "note": "DISABLED 27 Aug 2026 — blocked from CI exactly like ep-press; see that entry. The Parliament's actual legislative output rather than its press office's account of it. Feeds the 'decided' signal directly."
     },
     {
       "id": "council-eu",
@@ -152,10 +154,10 @@
       "name": "Euractiv",
       "url": "https://www.euractiv.com/feed/",
       "tier": 2,
-      "enabled": true,
+      "enabled": false,
       "verified": true,
       "newest_seen": "2026-08-27",
-      "note": "ENABLED 27 Aug 2026. Checked live in a browser: 100 items, newest the same day. Brussels trade press, English, good early warning on files still in negotiation — and it keeps covering Europe through the institutional recess, which is when the official feeds go quiet. Tier 2 on purpose: this is someone else's editorial judgement, not a primary source, so it informs the digest rather than leading it."
+      "note": "DISABLED 27 Aug 2026 — same day it was enabled. It serves 100 current items to a browser and returns HTTP 403 to GitHub's runners, which is a block on where the request comes from, not on what it asks for. Nothing to fix from this end. Politico Europe and EUobserver cover the same ground and both work from CI, so this stays off. Worth retrying if either of those dies."
     },
     {
       "id": "politico-eu",
