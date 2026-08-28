@@ -1,4 +1,4 @@
-# EU MONITOR — brand guide
+# PASSERELLE — brand guide
 
 **"Ink & Signal"**
 
@@ -16,7 +16,7 @@ infographic with twelve stars and a circle of holding hands.
 ## 1. The name
 
 ```
-EU MONITOR
+PASSERELLE
 ```
 
 Always two words, always capitals in the logotype. Set in the display face,
@@ -30,7 +30,7 @@ it is what makes a slide recognisable at thumbnail size.
 Edition numbering is part of the mark, set in mono:
 
 ```
-EU MONITOR
+PASSERELLE
 ▔▔▔▔▔▔▔▔▔▔
 EDITION 07 · 27 AUG 2026
 ```
@@ -45,7 +45,7 @@ member states.
 
 Three marks, one idea.
 
-**Primary — the wordmark.** `EU MONITOR` + the rule. Used everywhere there is
+**Primary — the wordmark.** `PASSERELLE` + the rule. Used everywhere there is
 room.
 
 **Secondary — the monogram.** `EU` in the display face with the rule beneath it,
@@ -178,7 +178,7 @@ rule, the slide counter and the source line.
 
 ```
 ┌──────────────────────────────────┐
-│  EU MONITOR              03/07   │  ← mono, muted
+│  PASSERELLE              03/07   │  ← mono, muted
 │                                  │
 │  WHAT CHANGED                    │  ← mono label, signal blue
 │                                  │
@@ -219,8 +219,8 @@ the item, in mono.
 
 **Footer, every issue, unchanged:**
 
-> EU Monitor is written by a person and found by a machine. The code that
-> monitors EU sources is public: github.com/USERNAME/eu-monitor
+> Passerelle is written by a person and found by a machine. The code that
+> monitors EU sources is public: github.com/leshanr/Passerelle-EU-monitor
 
 ---
 
