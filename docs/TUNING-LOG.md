@@ -304,6 +304,20 @@ in Wales"* (34) and an EUobserver piece (35) — which is the brief.
 items skipped, not the −112d of run #001: the future-date fix holds. 29 undated
 items dropped, all from the case-law feed, as before.
 
+**A second defect, found by looking at the run summary rather than the digest.**
+Every collection run since #001 has printed `digests/README.md` into the GitHub
+run summary instead of the digest — no flags, no counts, no source health table,
+just this folder's own documentation. Cause: `ls -1 digests/*.md | tail -n 1`.
+Digest filenames are ISO dates so a lexical sort is a chronological one, but
+`README.md` sorts after every digit and `tail` took it. The glob is now
+`digests/[0-9]*.md`, which cannot match it, with a guard for the no-digest case
+and a one-line failed/stale warning above the digest so a dead feed does not
+require scrolling to the bottom of a 260-line summary to notice.
+
+Worth recording for the same reason as the BOM bug: the pipeline was correct the
+whole time and the *reporting* was not, which is the harder failure to see. The
+digests on disk always had the flags and the health table in them.
+
 ---
 
 ## Template for future entries
