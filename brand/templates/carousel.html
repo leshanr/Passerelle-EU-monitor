@@ -1,8 +1,8 @@
 <!doctype html>
 <meta charset="utf-8">
-<title>EU Monitor — carousel builder</title>
+<title>Passerelle — carousel builder</title>
 <!--
-  EU MONITOR — Instagram carousel builder
+  PASSERELLE — Instagram carousel builder
   ═══════════════════════════════════════════════════════════════════════
   Edit the SLIDES array below, open this file in a browser, and screenshot
   each slide — or run `node export.js` in this folder to write PNGs at
@@ -64,7 +64,7 @@ const SLIDES = [
              ["Late 2027", "Council position, then trilogue", false]],
     cta: "Five developments, ten minutes, every fortnight.",
     ctaLink: "eumonitor.substack.com",
-    source: "EU Monitor · edition " + EDITION },
+    source: "Passerelle · edition " + EDITION },
 ];
 </script>
 
@@ -122,7 +122,7 @@ p{font-size:38px;line-height:1.4;color:var(--dim)}
 window.addEventListener("DOMContentLoaded", () => {
   const esc = s => String(s).replace(/[&<>]/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;" }[c]));
   const chrome = (i, s) => `
-    <div><div class="hdr"><span>EU Monitor</span><span>${String(i+1).padStart(2,"0")}/${String(SLIDES.length).padStart(2,"0")}</span></div>
+    <div><div class="hdr"><span>Passerelle</span><span>${String(i+1).padStart(2,"0")}/${String(SLIDES.length).padStart(2,"0")}</span></div>
     ${s.label ? `<div class="kicker">${esc(s.label)}</div>` : ""}</div>`;
   const foot = s => `<div><div class="src">${esc(s.source || "")}</div><div class="bar"></div></div>`;
 
