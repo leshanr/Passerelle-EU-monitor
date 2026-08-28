@@ -78,10 +78,30 @@ jobs:
       - name: Put the digest in the run summary
         if: steps.mode.outputs.check_only == 'false'
         run: |
-          latest=$(ls -1 digests/*.md | tail -n 1)
-          echo "Latest digest: \`$latest\`" >> "$GITHUB_STEP_SUMMARY"
-          echo "" >> "$GITHUB_STEP_SUMMARY"
-          cat "$latest" >> "$GITHUB_STEP_SUMMARY"
+          # Digests are named YYYY-MM-DD.md, so a lexical sort is a chronological
+          # one — but only once README.md is excluded, and it was not. "R" sorts
+          # after a digit, so `ls digests/*.md | tail -n 1` picked the README on
+          # every run from #001 to #006 and the summary showed this folder's own
+          # documentation instead of the digest. The glob below cannot match it.
+          latest=$(ls -1 digests/[0-9]*.md 2>/dev/null | tail -n 1)
+          if [ -z "$latest" ]; then
+            echo "No digest was written this run — check the collection step above." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          # The health table lives at the bottom of the digest, which is the right
+          # place to read it and the wrong place to be warned by it. This line is
+          # the warning; the table is still where it belongs.
+          failed=$(grep -c 'FAILED' "$latest" || true)
+          stale=$(grep -c '\*\*STALE\*\*' "$latest" || true)
+          {
+            echo "**Latest digest:** \`$latest\`"
+            echo ""
+            if [ "$failed" != "0" ] || [ "$stale" != "0" ]; then
+              echo "> **$failed source(s) failed, $stale stale.** The table is under _Source health_ below. A thin flag list and a broken source list look identical from the digest."
+              echo ""
+            fi
+            cat "$latest"
+          } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Commit the digest
         if: steps.mode.outputs.check_only == 'false'
