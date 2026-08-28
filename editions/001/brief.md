@@ -1,4 +1,8 @@
-# EU MONITOR #001
+> ⚠️ **WORKED EXAMPLE — FIXTURE DATA, NOT REPORTING.** Every development below
+> is invented and every link points at `example.eu`. This file exists to show the
+> shape of a brief. Do not publish, quote or cite any of it.
+
+# PASSERELLE #000 — worked example
 
 ### The last two weeks in European politics, without the Brussels-induced headache.
 
@@ -252,9 +256,9 @@ TK
 
 ---
 
-*EU Monitor is written by Leshan and built on an automated monitoring
+*Passerelle is written by Leshan and built on an automated monitoring
 pipeline that watches EU institutional sources continuously. The code is
-open: github.com/USERNAME/eu-monitor*
+open: github.com/leshanr/Passerelle-EU-monitor*
 
 *This issue was selected from 12 developments the
 system detected over 14 days, of which
