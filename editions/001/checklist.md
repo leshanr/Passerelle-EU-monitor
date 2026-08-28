@@ -1,4 +1,4 @@
-# EDITION #001 — production checklist
+# EDITION #000 — production checklist (worked example, fixture data)
 
 Digest: `digests/2026-08-27.md`  ·  Selected 5 of 12 detected  ·  Target publish: Sunday 30 August
 
