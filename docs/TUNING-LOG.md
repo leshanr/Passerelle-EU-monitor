@@ -220,6 +220,47 @@ the Node 20 deprecation warning.
 
 ---
 
+## 2026-08-27 — run #005, the first readable digest
+
+**Counts.** 14 of 15 sources ok · 19 detected · 8 potentially significant · 2
+worth investigating. Five beats represented instead of two. No CELEX, no
+trade-mark docket, no daily bulletins — the run-001 failure mode is gone.
+
+The top tier was finally worth the time it takes to read:
+
+- First fully-autonomous drone kill in Ukraine heralds a "dystopian" era
+- Poland asks EU to fine Meta 250 million euro over scam ads
+- Turkey is defying Europe's human-rights court
+- EU budget must bankroll Europe's independence, von der Leyen
+- Dutch think-tank pushes EU for tougher tariffs
+
+**What the system over-flagged.** Nothing. That is the first run this can be
+said of, and it is the reason the thresholds are being left alone this cycle.
+
+**The caveat, and it is the one to watch.** All eight flags came from EUobserver
+and Politico. Two contributing artefacts: the institutional items were already
+in `state/seen.json` from runs #001–#004, and the institutions are in August
+recess while news feeds refresh continuously. But the risk is real — two fast
+news sources can crowd out thirteen institutional ones simply by publishing more
+often. `score_multiplier: 0.8` on both is the brake already in place.
+
+**Decision rule for the next scheduled run (1 September).** If the top tier is
+again entirely EUobserver and Politico *on fresh institutional items* — that is,
+with the Commission and Council out of recess and publishing — lower both
+multipliers to 0.6 before day 11 rather than after. The test is not "is the
+digest good", it is "did anything institutional survive the ranking".
+
+**Known oddity, unresolved.** `eurlex-proposals` now parses without timing out
+but returned 0 items on this run. Intermittent; it has returned items before and
+since. Watch it in the Monday health check — a source that reports `ok` with a
+count of 0 is not the same as one that fails, and only the health table shows
+the difference.
+
+**No rules.json changes this run.** Recorded because a tuning log with no
+no-change entries is a log that only gets written when something is wrong.
+
+---
+
 ## Template for future entries
 
 ```
