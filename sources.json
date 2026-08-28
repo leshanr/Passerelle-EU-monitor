@@ -63,6 +63,7 @@
     {
       "id": "eurlex-proposals",
       "timeout": 90,
+      "score_multiplier": 0.6,
       "name": "EUR-Lex — Commission proposals and related documents",
       "url": "https://eur-lex.europa.eu/EN/display-feed.rss?rssId=161",
       "tier": 1,
