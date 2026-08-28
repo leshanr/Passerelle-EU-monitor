@@ -20,9 +20,17 @@ Each edition folder holds:
 | `selection.json` | What you chose out of what — so the ratio stays recoverable. |
 | `assets/` | Exported graphics. Ignored by git; the real files live in `../workspace/`. |
 
-`000-worked-example/` was produced by the fixture demo run. **Everything in it is
-invented** — the Court of Justice rent-cap ruling, the UK–EU youth mobility
-agreement and the 12 percent Erasmus+ cut did not happen, and their links point
-at `example.eu`. It is kept because it is the clearest demonstration of the
-format, and it is numbered `000` so that the first real edition can take `001`
-and the archive never opens on fabricated rulings.
+`001/` is the fixture demo run, not an edition. **Everything in it is invented** —
+the Court of Justice rent-cap ruling, the UK–EU youth mobility agreement and the
+12 percent Erasmus+ cut did not happen, and their links point at `example.eu`.
+Its `brief.md` carries a banner saying so at the top.
+
+It is worth keeping — it is the clearest demonstration of the format — but it is
+sitting on the number the first real edition wants, and `--new-edition 1` will
+refuse to overwrite it. Retire it in one command the next time the repo is
+checked out locally:
+
+```bash
+git mv editions/001 editions/000-worked-example
+git commit -m "editions: retire the demo to 000-worked-example"
+```
