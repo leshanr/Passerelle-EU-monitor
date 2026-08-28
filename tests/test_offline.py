@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Offline verification of the EU Monitor pipeline.
+Offline verification of the Passerelle pipeline.
 
 No network. Every feed is a fixture in tests/fixtures/. The point is that a
 scheduled run should never be the first time you find out the parser broke —
@@ -44,7 +44,7 @@ def load(fixture: str, src: dict) -> list[dict]:
     return collect.parse_feed((FIX / fixture).read_bytes(), src)
 
 
-print("\nEU MONITOR — offline pipeline check\n" + "─" * 60)
+print("\nPASSERELLE — offline pipeline check\n" + "─" * 60)
 
 # ── parsing ────────────────────────────────────────────────────────────────
 rss = load("sample_rss.xml", SRC_RSS)
@@ -331,7 +331,7 @@ stats = {"detected": len(items), "significant": len(buckets["investigate"]) + le
          "sources_total": 3, "sources_stale": 1, "undated_dropped": 0}
 out = collect.render(buckets, health, RULES, 14, NOW, stats)
 
-check("digest renders the dashboard banner", "EU MONITOR — 14 DAYS" in out)
+check("digest renders the dashboard banner", "PASSERELLE — 14 DAYS" in out)
 check("digest renders all three flag tiers",
       all(x in out for x in ("Worth investigating", "Potentially significant",
                              "Also detected")))
