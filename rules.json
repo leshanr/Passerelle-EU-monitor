@@ -1,5 +1,5 @@
 {
-  "_comment": "The editorial intelligence of EU Monitor. Two independent axes. BEATS decide what a development is about and therefore where it sits in the digest. SIGNALS decide why it might matter and are printed next to every flag as the reason it surfaced. Tune this file, never collect.py — that separation is the whole point.",
+  "_comment": "The editorial intelligence of Passerelle. Two independent axes. BEATS decide what a development is about and therefore where it sits in the digest. SIGNALS decide why it might matter and are printed next to every flag as the reason it surfaced. Tune this file, never collect.py — that separation is the whole point.",
   "_tuning_note": "Starting values, calibrated against a first source audit on 27 August 2026 and nothing else. Expect two or three cycles of adjustment before the signal is right. Every adjustment goes in docs/TUNING-LOG.md, because the tuning process is itself publishable material.",
 
   "window_days": 14,
