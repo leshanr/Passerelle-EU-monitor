@@ -261,6 +261,51 @@ no-change entries is a log that only gets written when something is wrong.
 
 ---
 
+## 2026-08-28 — run #006, the EUR-Lex feed that came back
+
+**How this run happened.** An off-cycle manual run, fired to verify the workflow
+after the Passerelle rename. It was meant to be check-only and was not, so it
+collected and committed `digests/2026-08-28`. Worth keeping: it caught something
+the scheduled run on 1 September would otherwise have caught for the first time
+in a live digest.
+
+**Counts.** 14 of 15 sources ok · 42 detected · 13 significant · 3 investigate.
+
+**What the system over-flagged.** All three investigate-tier flags were
+`eurlex-proposals`, with titles like *"Proposal for a COUNCIL DECISION
+establishing the position to be taken…"*. This is precisely the run-001 failure
+mode — long legal titles accumulating matches by length — returning through a
+door nobody had closed.
+
+**Cause.** When run #001 weighted the EUR-Lex feeds down to
+`score_multiplier: 0.6`, `eurlex-proposals` was timing out and returning nothing,
+so it was not in the digest and did not get the treatment its two siblings got.
+Run #004 fixed the timeout with a 90-second override. Run #005 saw it return 0
+items and logged it as "intermittent, watch it". This run is the first time it
+returned a full 100 items — unweighted, against a scale that had been compressed
+to 36/2 precisely because everything else was damped.
+
+**The general lesson.** A source that is broken when you tune is a source that
+does not get tuned. When a feed is repaired, re-check it against every decision
+taken while it was down, rather than only against the one that repaired it.
+
+**Fix.** `score_multiplier: 0.6` on `eurlex-proposals`, matching `eurlex-caselaw`
+and `eurlex-oj-l`. The justification is identical and was already written down:
+EUR-Lex is authoritative about what a rule says and silent about why anyone
+should care. It is how you verify a story, not how you find one.
+
+**Effect, measured on this run's items.** The three flagged proposals score
+50 → 30, 40 → 24 and 38 → 22.8, all below the investigate floor of 36. They stay
+in the significant tier, where a legislative proposal belongs. The top of the
+ranking becomes *"Jobs Guarantee turns promise into paycheques for young people
+in Wales"* (34) and an EUobserver piece (35) — which is the brief.
+
+**Also confirmed working.** `european-council` reports 71d STALE with 3 scheduled
+items skipped, not the −112d of run #001: the future-date fix holds. 29 undated
+items dropped, all from the case-law feed, as before.
+
+---
+
 ## Template for future entries
 
 ```
