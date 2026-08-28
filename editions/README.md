@@ -20,4 +20,9 @@ Each edition folder holds:
 | `selection.json` | What you chose out of what — so the ratio stays recoverable. |
 | `assets/` | Exported graphics. Ignored by git; the real files live in `../workspace/`. |
 
-`001/` was produced by the fixture demo run. Delete it when you build a real one.
+`000-worked-example/` was produced by the fixture demo run. **Everything in it is
+invented** — the Court of Justice rent-cap ruling, the UK–EU youth mobility
+agreement and the 12 percent Erasmus+ cut did not happen, and their links point
+at `example.eu`. It is kept because it is the clearest demonstration of the
+format, and it is numbered `000` so that the first real edition can take `001`
+and the archive never opens on fabricated rulings.
