@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-EU MONITOR — automated European politics and policy early-warning system.
+PASSERELLE — automated European politics and policy early-warning system.
 
 Pulls institutional EU (and UK) feeds, drops what has already been seen, and
 scores what is left on two independent axes:
@@ -501,7 +501,7 @@ def render(buckets: dict, health: list, rules: dict, window: int,
 
     # ---- the dashboard ----------------------------------------------------
     out += [
-        f"# EU MONITOR — {window} DAYS",
+        f"# PASSERELLE — {window} DAYS",
         "",
         "```",
         f"WINDOW        {now - dt.timedelta(days=window):%d %b %Y} → {now:%d %b %Y}",
@@ -663,7 +663,7 @@ def render(buckets: dict, health: list, rules: dict, window: int,
 # ---------------------------------------------------------------------------
 
 def main() -> int:
-    ap = argparse.ArgumentParser(description="EU Monitor — collect and flag.")
+    ap = argparse.ArgumentParser(description="Passerelle — collect and flag.")
     ap.add_argument("--days", type=int, default=None, help="lookback window in days")
     ap.add_argument("--check", action="store_true", help="source health only")
     ap.add_argument("--dry-run", action="store_true", help="print, save nothing")
