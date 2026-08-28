@@ -1,4 +1,4 @@
-name: EU Monitor
+name: Passerelle
 
 # Two schedules, one workflow.
 #
@@ -28,7 +28,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: eu-monitor
+  group: passerelle
   cancel-in-progress: false
 
 jobs:
@@ -61,7 +61,7 @@ jobs:
         if: steps.mode.outputs.check_only == 'true'
         run: |
           {
-            echo "## EU Monitor — source health"
+            echo "## Passerelle — source health"
             echo ""
             echo '```'
             python3 collect.py --check 2>&1 || true
@@ -86,7 +86,7 @@ jobs:
       - name: Commit the digest
         if: steps.mode.outputs.check_only == 'false'
         run: |
-          git config user.name "eu-monitor"
+          git config user.name "passerelle"
           git config user.email "actions@github.com"
           git add digests state
           if git diff --staged --quiet; then
