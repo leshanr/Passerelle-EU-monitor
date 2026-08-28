@@ -135,18 +135,24 @@ Parliament's site poorly enough to be useless here.
 
 ## Held back, not enabled
 
-Three credible non-institutional sources sit in `sources.json` with
-`"enabled": false` — Euractiv, EUobserver, and the Parliament's research
-service.
+Two sources sit in `sources.json` with `"enabled": false` for reasons other than
+being broken: **Euractiv** (blocked — HTTP 403 from CI) and the **Parliament's
+research service**.
 
-They are off on purpose. Turning them on changes what the system *is*: it would
-start monitoring other people's editorial judgement alongside the institutions'
-raw output, and the flag count would rise sharply. Enable one at a time and
-watch what it does to the counts before adding another.
+The research service is off on purpose. Turning it on changes what the system
+*is*: it would start monitoring other people's editorial judgement alongside the
+institutions' raw output, and the flag count would rise sharply.
 
-Given that the Parliament feeds are currently blocked, Euractiv is the most
-tempting of the three — it covers committee stages closely. Resist until the
-Parliament block is diagnosed, or the reason for the gap gets lost.
+**EUobserver and Politico Europe are now enabled**, at `score_multiplier: 0.8`.
+That was a deliberate reversal of the position this section used to state, forced
+by the Parliament block: with the Parliament gone there was no source left that
+reports a committee stage in a sentence a human wrote. The multiplier is the
+brake. Watch it — in run #005 all eight flags came from those two feeds. Partly
+an artefact (the institutional items were already in `state/seen.json`, and the
+institutions were in recess), but if a full run still returns nothing from the
+Commission or the Council, lower the multiplier before the next collection. A
+digest with no institutional item in it is a news roundup, and a news roundup is
+not what this publication promises.
 
 ---
 
