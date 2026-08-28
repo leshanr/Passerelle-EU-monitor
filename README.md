@@ -1,4 +1,4 @@
-# EU MONITOR
+# PASSERELLE
 
 **European politics. Actually worth knowing.**
 
@@ -36,7 +36,7 @@ EU SOURCES → AUTOMATED MONITOR → FLAGGED DEVELOPMENTS → HUMAN REVIEW
 What you come back to after two weeks:
 
 ```
-EU MONITOR — 14 DAYS
+PASSERELLE — 14 DAYS
 
 WINDOW        13 Aug 2026 → 27 Aug 2026
 SOURCES       14/15 returned a feed   (4 stale)
@@ -56,7 +56,7 @@ SOURCES       14/15 returned a feed   (4 stale)
 2. Upload these files, keeping the folder structure.
 3. **Settings → Actions → General → Workflow permissions → Read and write
    permissions.** Without this the workflow cannot commit the digest.
-4. **Actions → EU Monitor → Run workflow.** This is the first real test of the
+4. **Actions → Passerelle → Run workflow.** This is the first real test of the
    feeds.
 5. Read the run summary, and read the **source health** table at the bottom of
    it *before* you read anything else.
