@@ -31,7 +31,7 @@ and stopped. The failure was not the writing or the concept — it was that
 everything from submissions to editing to promotion sat with one person, and
 there was no mechanism that produced content when that person was busy.
 
-**EU Monitor is designed around that failure.** The monitoring system is the
+**Passerelle is designed around that failure.** The monitoring system is the
 mechanism: it produces the raw material whether or not anyone is paying
 attention, so a busy fortnight costs you an edition rather than the project.
 That is the single most important design decision here and it is worth saying
@@ -65,7 +65,7 @@ explicitly looking for things to do together.
 
 ### The pitch, in one paragraph
 
-> EU Monitor is a fortnightly briefing on European politics written for people
+> Passerelle is a fortnightly briefing on European politics written for people
 > our age — 5–8 developments, ten minutes, no Brussels jargon. It runs on an
 > automated monitoring system I built that watches the EU institutions
 > continuously. I am looking for societies to collaborate with: co-branded
