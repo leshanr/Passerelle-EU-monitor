@@ -1,10 +1,10 @@
 {
- "generated": "2026-08-28T18:48:23.078318+00:00",
+ "generated": "2026-08-28T19:49:48.463432+00:00",
  "window_days": 14,
  "stats": {
-  "detected": 42,
-  "significant": 13,
-  "investigate": 3,
+  "detected": 6,
+  "significant": 1,
+  "investigate": 0,
   "sources_ok": 14,
   "sources_total": 15,
   "sources_stale": 2,
@@ -14,272 +14,28 @@
  "flags": [
   {
    "n": 1,
-   "tier": "investigate",
-   "title": "Proposal for a COUNCIL DECISION establishing the position to be taken on behalf of the European Union within the Joint Committee established by the Agreement on the withdrawal of the United Kingdom of Great Britain and Northern Ireland from the European Union and the European Atomic Energy Community as regards a joint declaration on the application of Article 5 of the Windsor Framework",
-   "link": "https://eur-lex.europa.eu/./legal-content/AUTO/?uri=CELEX:52026PC0403",
+   "tier": "significant",
+   "title": "Proposal for a COUNCIL DECISION on the position to be adopted, on behalf of the European Union, within the EEA Joint Committee concerning an amendment to Annex IV (Energy) to the EEA Agreement (Network code on harmonised transmission tariff structures for gas)",
+   "link": "https://eur-lex.europa.eu/./legal-content/AUTO/?uri=CELEX:52026PC0392",
    "source": "EUR-Lex \u2014 Commission proposals and related documents",
    "date": "2026-08-28",
    "summary": "",
-   "beat": "uk-and-europe",
-   "beat_name": "The UK and Europe",
-   "score": 50,
-   "signals": [
-    "uk",
-    "unusual",
-    "new"
-   ],
-   "signal_names": [
-    "UK\u2013EU relevance",
-    "Unusual or unexpected",
-    "Genuinely new"
-   ]
-  },
-  {
-   "n": 2,
-   "tier": "investigate",
-   "title": "Proposal for a COUNCIL DECISION amending Council Decision 2021/1765 of 5 October 2021 on the position to be taken on behalf of the European Union, for the period 2021-2026, in the Specialised Committee on Fisheries established by the Trade and Cooperation Agreement between the European Union and the European Atomic Energy Community, of the one part, and the United Kingdom of Great Britain and Northern Ireland, of the other part",
-   "link": "https://eur-lex.europa.eu/./legal-content/AUTO/?uri=CELEX:52026PC0293",
-   "source": "EUR-Lex \u2014 Commission proposals and related documents",
-   "date": "2026-08-28",
-   "summary": "",
-   "beat": "uk-and-europe",
-   "beat_name": "The UK and Europe",
-   "score": 40,
-   "signals": [
-    "uk",
-    "new",
-    "economic"
-   ],
-   "signal_names": [
-    "UK\u2013EU relevance",
-    "Genuinely new",
-    "Economically significant"
-   ]
-  },
-  {
-   "n": 3,
-   "tier": "investigate",
-   "title": "Proposal for a COUNCIL DECISION amending Council Decision 2021/1875 of 22 October 2021 concerning the position to be adopted on behalf of the Union in the annual consultations with the United Kingdom to agree on total allowable catches",
-   "link": "https://eur-lex.europa.eu/./legal-content/AUTO/?uri=CELEX:52026PC0295",
-   "source": "EUR-Lex \u2014 Commission proposals and related documents",
-   "date": "2026-08-28",
-   "summary": "",
-   "beat": "uk-and-europe",
-   "beat_name": "The UK and Europe",
-   "score": 38,
+   "beat": "money-and-work",
+   "beat_name": "Money and work",
+   "score": 32,
    "signals": [
     "decided",
-    "uk",
-    "new"
+    "consequential",
+    "geopolitical",
+    "new",
+    "economic"
    ],
    "signal_names": [
     "Decision taken",
-    "UK\u2013EU relevance",
-    "Genuinely new"
-   ]
-  },
-  {
-   "n": 4,
-   "tier": "significant",
-   "title": "Right of Reply: [Interview] Oligarchs could hijack Reykjav\u00edk\u2019s EU referendum, Icelandic professor warns",
-   "link": "https://euobserver.com/234232/right-of-reply-interview-oligarchs-could-hijack-reykjaviks-eu-referendum-icelandic-professor-warns/",
-   "source": "EUobserver",
-   "date": "2026-08-28",
-   "summary": "In an article published on 26 August 2026, professor Thorvaldur Gylfason is quoted as contending that I am \u201cknown to have worked for the Putin regime in Moscow\u201d, that I am \u201cknown to have represented a Russian oligarch who was trying to escape EU-imposed sanctions following Russia's invasion of Ukraine\u201d and that I was \u201cbrought to Iceland\u201d by the No side. All these claims are false, and the facts are a matter of public record.",
-   "beat": "war-and-security",
-   "beat_name": "War and security",
-   "score": 35,
-   "signals": [
-    "geopolitical",
-    "unusual",
-    "contested"
-   ],
-   "signal_names": [
-    "Geopolitically important",
-    "Unusual or unexpected",
-    "Likely to generate debate"
-   ]
-  },
-  {
-   "n": 5,
-   "tier": "significant",
-   "title": "Jobs Guarantee turns promise into paycheques for young people in Wales",
-   "link": "https://www.gov.uk/government/news/jobs-guarantee-turns-promise-into-paycheques-for-young-people-in-wales",
-   "source": "gov.uk \u2014 news and communications",
-   "date": "2026-08-28",
-   "summary": "The first young people in Wales to be supported by a new UK Government programme for the long-term unemployed have started their jobs.",
-   "beat": "uk-and-europe",
-   "beat_name": "The UK and Europe",
-   "score": 34,
-   "signals": [
-    "youth",
-    "uk"
-   ],
-   "signal_names": [
-    "Relevant to young Europeans",
-    "UK\u2013EU relevance"
-   ]
-  },
-  {
-   "n": 6,
-   "tier": "significant",
-   "title": "Proposal for a REGULATION OF THE EUROPEAN PARLIAMENT AND OF THE COUNCIL on a framework of measures for strengthening the Union\u2019s semiconductor ecosystem, repealing Regulation (EU) 2023/1781 (Chips Act 2.0)",
-   "link": "https://eur-lex.europa.eu/./legal-content/AUTO/?uri=CELEX:52026PC0504",
-   "source": "EUR-Lex \u2014 Commission proposals and related documents",
-   "date": "2026-08-28",
-   "summary": "",
-   "beat": "tech-and-online-life",
-   "beat_name": "Tech and online life",
-   "score": 32,
-   "signals": [
-    "new",
-    "tech"
-   ],
-   "signal_names": [
-    "Genuinely new",
-    "Technologically significant"
-   ]
-  },
-  {
-   "n": 7,
-   "tier": "significant",
-   "title": "Secretary Of State for Northern Ireland announces reappointments to Intertrade UK",
-   "link": "https://www.gov.uk/government/news/secretary-of-state-for-northern-ireland-announces-reappointments-to-intertrade-uk",
-   "source": "gov.uk \u2014 news and communications",
-   "date": "2026-08-28",
-   "summary": "Intertrade UK is a non-statutory advisory body established by the UK government to advise on and promote trade within the United Kingdom",
-   "beat": "uk-and-europe",
-   "beat_name": "The UK and Europe",
-   "score": 31,
-   "signals": [
-    "uk",
-    "new",
-    "economic"
-   ],
-   "signal_names": [
-    "UK\u2013EU relevance",
-    "Genuinely new",
-    "Economically significant"
-   ]
-  },
-  {
-   "n": 8,
-   "tier": "significant",
-   "title": "Proposal for a DIRECTIVE OF THE EUROPEAN PARLIAMENT AND OF THE COUNCIL amending Directive 2003/87/EC and Decision (EU) 2015/1814 as regards driving competitiveness and cost-effective decarbonisation",
-   "link": "https://eur-lex.europa.eu/./legal-content/AUTO/?uri=CELEX:52026PC0616",
-   "source": "EUR-Lex \u2014 Commission proposals and related documents",
-   "date": "2026-08-28",
-   "summary": "",
-   "beat": "money-and-work",
-   "beat_name": "Money and work",
-   "score": 26,
-   "signals": [
-    "new",
-    "economic"
-   ],
-   "signal_names": [
-    "Genuinely new",
-    "Economically significant"
-   ]
-  },
-  {
-   "n": 9,
-   "tier": "significant",
-   "title": "Proposal for a COUNCIL IMPLEMENTING DECISION authorising support from the EU Cybersecurity Reserve for Moldova and repealing Implementing Decision (EU) 2025/1458",
-   "link": "https://eur-lex.europa.eu/./legal-content/AUTO/?uri=CELEX:52026PC0280",
-   "source": "EUR-Lex \u2014 Commission proposals and related documents",
-   "date": "2026-08-28",
-   "summary": "",
-   "beat": "power-and-democracy",
-   "beat_name": "Power and democracy",
-   "score": 25,
-   "signals": [
-    "geopolitical",
-    "new"
-   ],
-   "signal_names": [
-    "Geopolitically important",
-    "Genuinely new"
-   ]
-  },
-  {
-   "n": 10,
-   "tier": "significant",
-   "title": "Proposal for a REGULATION OF THE EUROPEAN PARLIAMENT AND OF THE COUNCIL amending Directive 2003/87/EC as regards revised benchmark values for the heat and fuel benchmarks for the period from 2026 to 2030",
-   "link": "https://eur-lex.europa.eu/./legal-content/AUTO/?uri=CELEX:52026PC0619",
-   "source": "EUR-Lex \u2014 Commission proposals and related documents",
-   "date": "2026-08-28",
-   "summary": "",
-   "beat": "power-and-democracy",
-   "beat_name": "Power and democracy",
-   "score": 25,
-   "signals": [
-    "consequential",
-    "new"
-   ],
-   "signal_names": [
     "Consequential",
-    "Genuinely new"
-   ]
-  },
-  {
-   "n": 11,
-   "tier": "significant",
-   "title": "Donbas defence taken over by elite officers with radical pasts (Ukraine Battlefield update, Day 1,646)",
-   "link": "https://euobserver.com/234274/donbas-defence-taken-over-by-elite-officers-with-radical-pasts-ukraine-battlefield-update-day-1646/",
-   "source": "EUobserver",
-   "date": "2026-08-28",
-   "summary": "The appointment of Biletskyi and Prokopenko to lead more than 100,000 troops could decide whether eastern cities like Sloviansk, Kramatorsk and Dobropillia hold\u2014or fall\u2014under intensifying Russian assaults and long\u2011range missile strikes.",
-   "beat": "war-and-security",
-   "beat_name": "War and security",
-   "score": 24,
-   "signals": [
-    "geopolitical",
-    "social"
-   ],
-   "signal_names": [
     "Geopolitically important",
-    "Socially relevant"
-   ]
-  },
-  {
-   "n": 12,
-   "tier": "significant",
-   "title": "Proposal for a COUNCIL DIRECTIVE amending Directives 2003/49/EC, 2009/133/EC, 2011/96/EU, (EU) 2016/1164, (EU)2017/1852, (EU) 2025/50 as regards the simplification of the Union framework on direct taxation and supporting growth and competitiveness of the EU",
-   "link": "https://eur-lex.europa.eu/./legal-content/AUTO/?uri=CELEX:52026PC0560",
-   "source": "EUR-Lex \u2014 Commission proposals and related documents",
-   "date": "2026-08-28",
-   "summary": "",
-   "beat": "money-and-work",
-   "beat_name": "Money and work",
-   "score": 22,
-   "signals": [
-    "new",
-    "economic"
-   ],
-   "signal_names": [
     "Genuinely new",
     "Economically significant"
-   ]
-  },
-  {
-   "n": 13,
-   "tier": "significant",
-   "title": "Proposal for a COUNCIL IMPLEMENTING DECISION authorising Ireland to apply reduced rates of excise duty for commercial use of gas oil by certain road transport operators, pursuant to Article 19 of Directive 2003/96/EC",
-   "link": "https://eur-lex.europa.eu/./legal-content/AUTO/?uri=CELEX:52026PC0354",
-   "source": "EUR-Lex \u2014 Commission proposals and related documents",
-   "date": "2026-08-28",
-   "summary": "",
-   "beat": "climate-and-energy",
-   "beat_name": "Climate and energy",
-   "score": 22,
-   "signals": [
-    "uk",
-    "new"
-   ],
-   "signal_names": [
-    "UK\u2013EU relevance",
-    "Genuinely new"
    ]
   }
  ]
