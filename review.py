@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-EU MONITOR — the human layer.
+PASSERELLE — the human layer.
 
 collect.py stops at "this looks potentially significant". This is the other
 half: you read the flags, you decide what is actually worth publishing, and
@@ -65,7 +65,7 @@ def cmd_list(args) -> int:
     wanted = set(x.strip() for x in args.signals.split(",")) if args.signals else None
 
     s = data["stats"]
-    print(f"\n  EU MONITOR — {data['window_days']} DAYS   (digest {path.stem})")
+    print(f"\n  PASSERELLE — {data['window_days']} DAYS   (digest {path.stem})")
     print(f"  {s['detected']} detected · {s['significant']} potentially significant "
           f"· {s['investigate']} worth investigating")
     if s.get("sources_stale"):
@@ -137,7 +137,7 @@ def cmd_new_edition(args) -> int:
 
     # ---- the Substack draft ------------------------------------------------
     b = [
-        f"# EU MONITOR #{num}",
+        f"# PASSERELLE #{num}",
         "",
         f"### The last two weeks in European politics, without the Brussels-induced headache.",
         "",
@@ -189,9 +189,9 @@ def cmd_new_edition(args) -> int:
         "",
         "---",
         "",
-        "*EU Monitor is written by Leshan and built on an automated monitoring",
+        "*Passerelle is written by Leshan and built on an automated monitoring",
         "pipeline that watches EU institutional sources continuously. The code is",
-        "open: github.com/USERNAME/eu-monitor*",
+        "open: github.com/leshanr/Passerelle-EU-monitor*",
         "",
         f"*This issue was selected from {data['stats']['detected']} developments the",
         f"system detected over {data['window_days']} days, of which",
@@ -351,7 +351,7 @@ def cmd_status(args) -> int:
 
 
 def main() -> int:
-    ap = argparse.ArgumentParser(description="EU Monitor — human editorial layer.")
+    ap = argparse.ArgumentParser(description="Passerelle — human editorial layer.")
     ap.add_argument("--list", action="store_true", help="show the numbered flag list")
     ap.add_argument("--signals", default="", help="filter --list to these signals")
     ap.add_argument("--new-edition", type=int, help="edition number to scaffold")
