@@ -230,6 +230,7 @@ def parse_feed(raw: bytes, source: dict) -> list[dict]:
             "source_id": source["id"],
             "tier": source.get("tier", 2),
             "score_multiplier": source.get("score_multiplier", 1.0),
+            "require_match": source.get("require_match") or [],
             "inherited_date": date is not None and use_channel_date,
         })
     return items
@@ -307,6 +308,35 @@ def _match(keywords: dict, title: str, body: str,
     hits.sort(key=lambda x: -x[0])
     kept = hits[:cap] if cap else hits
     return sum(w for w, _ in kept), [k for _, k in kept], len(hits)
+
+
+def passes_topic_gate(item: dict, rules: dict) -> bool:
+    """Sources carrying `require_match` only contribute items that mention one of
+    its terms.
+
+    Polling and statistics feeds are why this exists. YouGov publishes around a
+    hundred items a fortnight and perhaps two of them touch European politics;
+    without a gate the digest fills with brand trackers and gaming polls. A term
+    beginning with "@" names a shared list in rules.json - "@eu_politics"
+    resolves to rules["topic_gates"]["eu_politics"] - so several sources can
+    share one vocabulary that is tuned in one place.
+
+    This runs before scoring and is deliberately blunt: it decides whether an
+    item is on subject at all, not whether it matters. Everything that passes
+    still faces the noise filter and both scoring axes.
+    """
+    terms = item.get("require_match") or []
+    if not terms:
+        return True
+    gates = rules.get("topic_gates", {})
+    expanded: list[str] = []
+    for term in terms:
+        if term.startswith("@"):
+            expanded.extend(gates.get(term[1:], []))
+        else:
+            expanded.append(term)
+    hay = " " + item["title"].lower() + " " + item["summary"].lower() + " "
+    return any(keyword_pattern(k).search(hay) for k in expanded)
 
 
 def score_item(item: dict, rules: dict) -> dict | None:
@@ -636,6 +666,15 @@ def render(buckets: dict, health: list, rules: dict, window: int,
             "`\"date_fallback\": \"channel\"` in sources.json.*",
             "",
         ]
+    if stats.get("off_topic_dropped"):
+        out += [
+            f"*{stats['off_topic_dropped']} item(s) came from a source with a topic gate "
+            "and did not mention European politics, so they were dropped before scoring. "
+            "Polling and statistics feeds publish mostly on other subjects; the gate is "
+            "what keeps them from filling the digest. Widen or narrow it in the "
+            "`topic_gates` block of rules.json.*",
+            "",
+        ]
 
     # ---- what happens next ------------------------------------------------
     out += [
@@ -773,7 +812,11 @@ def main() -> int:
         unique.append(it)
 
     buckets = {"investigate": [], "significant": [], "detected": []}
+    off_topic_dropped = 0
     for it in unique:
+        if not passes_topic_gate(it, rules):
+            off_topic_dropped += 1
+            continue
         s = score_item(it, rules)
         if s is None:
             continue
@@ -817,6 +860,7 @@ def main() -> int:
         "sources_total": len(health),
         "sources_stale": sum(1 for h in health if h["stale"]),
         "undated_dropped": undated_dropped,
+        "off_topic_dropped": off_topic_dropped,
         "future_dropped": future_dropped,
     }
 
