@@ -8,8 +8,8 @@ whole design, and the code will not cross it.
 
 ## What it does
 
-Every run reads 16 official and journalistic feeds, scores what it finds against a fixed
-rulebook, and writes a dated digest sorted into three tiers. It publishes nothing.
+Every run reads 19 official, journalistic and polling feeds, scores what it finds against
+a fixed rulebook, and writes a dated digest sorted into three tiers. It publishes nothing.
 
 ```
 sources.json  ──▶  collect.py  ──▶  digests/YYYY-MM-DD.md   (the machine stops here)
@@ -52,9 +52,15 @@ the first. Copy anything you care about before re-running.
 
 ## Source health
 
-16 feeds enabled, all returning. Four more are in `sources.json` switched off and
+19 feeds enabled, all returning. Four more are in `sources.json` switched off and
 documented: the three European Parliament feeds return an empty response to GitHub's
 runners, and Euractiv returns 403 to them. Both are access blocks at the far end.
+
+Three of the 19 are **gated**. YouGov, Ipsos and Pew publish overwhelmingly on subjects
+that have nothing to do with Europe, so they carry `"require_match": ["@eu_politics"]` and
+their items are dropped before scoring unless they mention European politics. The
+vocabulary is the `topic_gates` block of `rules.json`, and every run reports how many the
+gate dropped — the filtering is never invisible.
 
 Every run prints a source-health table. **Read it before you read the flags** — a thin flag
 list and a broken feed look identical from the digest. Trust that table over any manual
