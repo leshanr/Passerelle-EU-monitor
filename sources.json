@@ -1,6 +1,6 @@
 {
   "_comment": "Each source carries: id, name, url, tier, verified, newest_seen. Tier 1 = primary institutional source (legislation, official press, court output). Tier 2 = supporting, national or journalistic. 'verified' means the endpoint was fetched by hand and returned a parseable feed. 'newest_seen' is the date of the newest item it held at that moment - because a feed can parse perfectly and still be dead. 'score_multiplier' down-weights sources that are useful but not authoritative. Never mark a source verified you have not actually fetched.",
-  "_audit": "2026-08-31 - portfolio rebuilt and every endpoint re-fetched by hand on this date. 20 sources, all enabled, all verified. FIXED: ec-presscorner was returning items a month old because the 'pagesize' parameter breaks the API's newest-first ordering; removing it restores a same-day feed. REMOVED: european-council (consilium meetings.ashx now 404s), council-acts (raw register, low editorial value next to council-eu), ep-think-tank (never verified). ADDED: commons-library, ukandeu, cer, euronews-europe. RE-ENABLED: ep-committees and ep-texts-adopted (committee stage is where wording changes most; adopted texts are the actual law), euractiv. HEALTH: 14 of 20 had items within a fortnight. The 6 quiet ones are all EU institutional feeds with genuinely slow cadences - they are kept because a monitor of EU politics without the Parliament, the Council and EUR-Lex is not one, and the digest's health table names them on every run. Verified live but not included, if you want alternates: bruegel.org/rss.xml and instituteforgovernment.org.uk/rss.xml.",
+  "_audit": "2026-08-31 - portfolio rebuilt, then corrected against a real collection run (Actions run #8) rather than hand fetches. 20 entries, 16 enabled and all 16 returning a healthy feed, newest item 0-6 days old. 4 entries deliberately disabled and documented: the three European Parliament feeds return an empty response to GitHub's runners, and Euractiv returns 403 to them - both are access blocks at the far end, not faults here. FIXED: ec-presscorner was returning month-old items because the 'pagesize' parameter breaks the API's newest-first ordering. REMOVED: european-council (meetings.ashx now 404s), council-acts (raw register, low editorial value next to council-eu), ep-think-tank (never verified). ADDED: commons-library, ukandeu, cer, euronews-europe. NOTE: hand-fetching a feed and letting the runner fetch it give different answers - council-eu and the EUR-Lex feeds looked stale by hand and are current from Actions. Trust the run's source-health table over any manual check. Verified alternates not included: bruegel.org/rss.xml, instituteforgovernment.org.uk/rss.xml.",
   "sources": [
     {
       "id": "ec-presscorner",
@@ -18,7 +18,8 @@
       "tier": 1,
       "verified": true,
       "newest_seen": "2026-06-13",
-      "note": "Parses cleanly, publishes rarely. Kept because it is the Parliament's own wire. Expect nothing from it in most windows."
+      "note": "DISABLED 31 Aug 2026. europarl.europa.eu returns an empty response (0 bytes) to GitHub's runners - not a parsing problem, an access one. Kept in the file, switched off, so the Parliament gap stays visible instead of failing every run. Re-enable and run a health check if you ever move collection off GitHub Actions.",
+      "enabled": false
     },
     {
       "id": "ep-committees",
@@ -27,7 +28,8 @@
       "tier": 1,
       "verified": true,
       "newest_seen": "2026-06-16",
-      "note": "Re-enabled 31 Aug 2026. Committee stage is where the wording of a law actually changes and where coverage is thinnest, so this is editorially the most valuable Parliament feed even though it is quiet."
+      "note": "DISABLED 31 Aug 2026. Same block as ep-press: empty response from GitHub's runners. Editorially this is the feed worth fighting for - committee stage is where a law's wording actually changes - so re-test it first if collection ever moves off Actions.",
+      "enabled": false
     },
     {
       "id": "ep-texts-adopted",
@@ -36,7 +38,8 @@
       "tier": 1,
       "verified": true,
       "newest_seen": "2026-06-18",
-      "note": "Re-enabled 31 Aug 2026. What Parliament actually voted through, as opposed to what it said about it. Quiet, but definitive when it fires."
+      "note": "DISABLED 31 Aug 2026. Same block as ep-press. EUR-Lex partly covers the same ground: adopted texts reach the Official Journal feed eventually.",
+      "enabled": false
     },
     {
       "id": "council-eu",
@@ -44,8 +47,8 @@
       "url": "https://www.consilium.europa.eu/en/rss/pressreleases.ashx",
       "tier": 1,
       "verified": true,
-      "newest_seen": "2026-06-15",
-      "note": "Real RSS, but it carries its timestamp in an Atom-namespaced <a10:updated> tag rather than <pubDate> - collect.py handles this since the 26 Aug parser fix. Quiet feed; the Council publishes far more than this endpoint shows."
+      "newest_seen": "2026-08-28",
+      "note": "Live and current: run #8 saw 20 items, newest 2 days old. It carries its timestamp in an Atom-namespaced <a10:updated> tag rather than <pubDate>, which collect.py has handled since the 26 Aug parser fix."
     },
     {
       "id": "eurlex-proposals",
@@ -53,7 +56,7 @@
       "url": "https://eur-lex.europa.eu/EN/display-feed.rss?rssId=161",
       "tier": 1,
       "verified": true,
-      "newest_seen": "2026-08-17",
+      "newest_seen": "2026-08-31",
       "timeout": 90,
       "date_fallback": "channel",
       "score_multiplier": 0.6,
@@ -65,9 +68,10 @@
       "url": "https://eur-lex.europa.eu/EN/display-feed.rss?rssId=163",
       "tier": 1,
       "verified": true,
-      "newest_seen": "2026-06-12",
+      "newest_seen": "2026-08-24",
       "score_multiplier": 0.6,
-      "note": "The only route to Court of Justice output in this set. The Court's own site publishes no usable RSS - checked again 31 Aug 2026 - so if this feed dies, the Rights and Courts beat loses its primary source entirely."
+      "note": "The only route to Court of Justice output in this set - the Court's own site publishes no usable RSS (checked 31 Aug 2026). Roughly a third of its items carry no readable item-level date, so date_fallback is set to 'channel'.",
+      "date_fallback": "channel"
     },
     {
       "id": "eurlex-oj-l",
@@ -75,7 +79,7 @@
       "url": "https://eur-lex.europa.eu/EN/display-feed.rss?rssId=222",
       "tier": 1,
       "verified": true,
-      "newest_seen": "2026-07-20",
+      "newest_seen": "2026-08-28",
       "date_fallback": "channel",
       "score_multiplier": 0.6,
       "note": "Law as published. Batch feed, so it arrives in lumps rather than steadily. Same CELEX title problem as the proposals feed."
@@ -95,7 +99,7 @@
       "url": "https://www.gov.uk/search/news-and-communications.atom",
       "tier": 1,
       "verified": true,
-      "newest_seen": "2026-08-28",
+      "newest_seen": "2026-08-30",
       "note": "Live, very high volume, all of Whitehall. The workhorse of the UK side. The noise list in rules.json does the real filtering; add a keywords parameter to narrow at source if it ever overwhelms a run."
     },
     {
@@ -131,7 +135,7 @@
       "url": "https://www.gov.uk/government/organisations/department-for-business-and-trade.atom",
       "tier": 2,
       "verified": true,
-      "newest_seen": "2026-08-21",
+      "newest_seen": "2026-08-28",
       "note": "The best divergence source in the set - UKCA/CE marking, trade remedies, market access. Consider promoting to tier 1."
     },
     {
@@ -170,7 +174,7 @@
       "url": "https://www.politico.eu/feed/",
       "tier": 2,
       "verified": true,
-      "newest_seen": "2026-08-27",
+      "newest_seen": "2026-08-30",
       "score_multiplier": 0.8,
       "note": "Fast and well sourced on Brussels process. Same rule as EUobserver: it tells you something is happening, the document tells you what."
     },
@@ -182,7 +186,8 @@
       "verified": true,
       "newest_seen": "2026-08-27",
       "score_multiplier": 0.8,
-      "note": "Re-enabled 31 Aug 2026. Policy-desk coverage across every file, often ahead of the press release. High volume."
+      "note": "DISABLED 31 Aug 2026. Returns HTTP 403 to GitHub's runners, though it serves a browser fine - the runner IP range is blocked. Nothing to fix at this end.",
+      "enabled": false
     },
     {
       "id": "euronews-europe",
