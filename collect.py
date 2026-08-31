@@ -577,7 +577,7 @@ def render(buckets: dict, health: list, rules: dict, window: int,
     out += ["## ③ Also detected", "",
             "*Below the significance threshold. Skim the headlines, do not write "
             "them up. If something here should have been promoted, that is a "
-            "rules.json problem — log it in `docs/TUNING-LOG.md`.*", ""]
+            "rules.json problem — log it in the tuning log in your Instructions pack.*", ""]
     for it in det:
         link = it["link"]
         title = f"[{it['title']}]({link})" if link else it["title"]
