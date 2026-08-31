@@ -1,0 +1,306 @@
+{
+ "generated": "2026-08-31T00:25:06.739516+00:00",
+ "window_days": 14,
+ "stats": {
+  "detected": 48,
+  "significant": 14,
+  "investigate": 1,
+  "sources_ok": 16,
+  "sources_total": 20,
+  "sources_stale": 0,
+  "undated_dropped": 29,
+  "future_dropped": 0
+ },
+ "flags": [
+  {
+   "n": 1,
+   "tier": "investigate",
+   "title": "Economic update: Unexpected resilience as conflict continues",
+   "link": "https://commonslibrary.parliament.uk/research-briefings/cbp-11077/",
+   "source": "House of Commons Library - research briefings",
+   "date": "2026-08-27",
+   "summary": "GDP has continued to grow slowly despite the conflict in the Middle East, but inflation rose in July as its effects filtered through to household energy prices.",
+   "beat": "money-and-work",
+   "beat_name": "Money and work",
+   "score": 36,
+   "signals": [
+    "unusual",
+    "geopolitical",
+    "economic"
+   ],
+   "signal_names": [
+    "Unusual or unexpected",
+    "Geopolitically important",
+    "Economically significant"
+   ]
+  },
+  {
+   "n": 2,
+   "tier": "significant",
+   "title": "Iceland's rejection of accession talks deals major blow to EU enlargement",
+   "link": "http://www.euronews.com/my-europe/2026/08/30/icelands-rejection-of-accession-talks-deals-major-blow-to-eu-enlargement",
+   "source": "Euronews - My Europe",
+   "date": "2026-08-30",
+   "summary": "The \"No\" vote in the referendum to reopen accession talks could be seen as a political message to Brussels: the burdens of EU membership outweigh the benefits \u2013 at least in the public's view.",
+   "beat": "power-and-democracy",
+   "beat_name": "Power and democracy",
+   "score": 33,
+   "signals": [
+    "unusual",
+    "geopolitical",
+    "decided"
+   ],
+   "signal_names": [
+    "Unusual or unexpected",
+    "Geopolitically important",
+    "Decision taken"
+   ]
+  },
+  {
+   "n": 3,
+   "tier": "significant",
+   "title": "Enforcement of employment law in Great Britain",
+   "link": "https://commonslibrary.parliament.uk/research-briefings/cbp-11076/",
+   "source": "House of Commons Library - research briefings",
+   "date": "2026-08-27",
+   "summary": "The Fair Work Agency has been set up by the Employment Rights Act 2025 to lead state enforcement of employment rights.",
+   "beat": "uk-and-europe",
+   "beat_name": "The UK and Europe",
+   "score": 30,
+   "signals": [
+    "decided",
+    "uk"
+   ],
+   "signal_names": [
+    "Decision taken",
+    "UK\u2013EU relevance"
+   ]
+  },
+  {
+   "n": 4,
+   "tier": "significant",
+   "title": "Iran in 2026: Six months after the US/Israeli strikes",
+   "link": "https://commonslibrary.parliament.uk/research-briefings/cbp-11075/",
+   "source": "House of Commons Library - research briefings",
+   "date": "2026-08-27",
+   "summary": "There are no talks between the US and Iran on ending the conflict. The US is imposing more economic sanctions. Iran\u2019s high use of the death penalty persists.",
+   "beat": "war-and-security",
+   "beat_name": "War and security",
+   "score": 30,
+   "signals": [
+    "consequential",
+    "social",
+    "geopolitical"
+   ],
+   "signal_names": [
+    "Consequential",
+    "Socially relevant",
+    "Geopolitically important"
+   ]
+  },
+  {
+   "n": 5,
+   "tier": "significant",
+   "title": "Where German troops train with live ammunition: Euronews on NATO\u2019s eastern flank",
+   "link": "http://www.euronews.com/my-europe/2026/08/28/german-troops-on-natos-eastern-flank-war-has-never-been-this-close",
+   "source": "Euronews - My Europe",
+   "date": "2026-08-28",
+   "summary": "Eurofighters, Leopards, drones and helicopters \u2013 Euronews reports from military exercises in Lithuania. On NATO\u2019s eastern flank, germansoldiers are preparing for a real-life emergency. We accompany a tank crew from the Lithuanian Brigade and electronic warfare units right on the border with Belarus.",
+   "beat": "war-and-security",
+   "beat_name": "War and security",
+   "score": 29,
+   "signals": [
+    "unusual",
+    "geopolitical"
+   ],
+   "signal_names": [
+    "Unusual or unexpected",
+    "Geopolitically important"
+   ]
+  },
+  {
+   "n": 6,
+   "tier": "significant",
+   "title": "Russia preparing \u2018massive strikes against Ukraine\u2019s energy facilities\u2019",
+   "link": "https://www.politico.eu/article/russia-preparing-massive-strikes-against-ukraines-energy-facilities/?utm_source=RSS_Feed&utm_medium=RSS&utm_campaign=RSS_Syndication",
+   "source": "Politico Europe",
+   "date": "2026-08-30",
+   "summary": "The Russian announcement comes amid intensfying drone strikes against Ukraine.",
+   "beat": "war-and-security",
+   "beat_name": "War and security",
+   "score": 28,
+   "signals": [
+    "geopolitical",
+    "social"
+   ],
+   "signal_names": [
+    "Geopolitically important",
+    "Socially relevant"
+   ]
+  },
+  {
+   "n": 7,
+   "tier": "significant",
+   "title": "Russia plans new ground attack on Kyiv, Ukraine warns",
+   "link": "https://www.politico.eu/article/russia-plans-new-ground-attack-on-kyiv-ukraine-warns/?utm_source=RSS_Feed&utm_medium=RSS&utm_campaign=RSS_Syndication",
+   "source": "Politico Europe",
+   "date": "2026-08-29",
+   "summary": "Volodymyr Zelenskyy's office reveals new intelligence about Kremlin plans for an offensive against the capital.",
+   "beat": "war-and-security",
+   "beat_name": "War and security",
+   "score": 27,
+   "signals": [
+    "geopolitical",
+    "contested"
+   ],
+   "signal_names": [
+    "Geopolitically important",
+    "Likely to generate debate"
+   ]
+  },
+  {
+   "n": 8,
+   "tier": "significant",
+   "title": "The UK-US medicines deal and the hidden costs of Brexit",
+   "link": "https://ukandeu.ac.uk/the-uk-us-medicines-deal-and-the-hidden-costs-of-brexit/",
+   "source": "UK in a Changing Europe",
+   "date": "2026-08-19",
+   "summary": "Vilija V\u0117lyvyt\u0117 argues that the UK-US medicines deal which will see the NHS pay more for new medicines is an unexpected cost of... The post The UK-US medicines deal and the hidden costs of Brexit appeared first on UK in a changing Europe .",
+   "beat": "uk-and-europe",
+   "beat_name": "The UK and Europe",
+   "score": 27,
+   "signals": [
+    "unusual",
+    "uk"
+   ],
+   "signal_names": [
+    "Unusual or unexpected",
+    "UK\u2013EU relevance"
+   ]
+  },
+  {
+   "n": 9,
+   "tier": "significant",
+   "title": "Switzerland intends to build military drone battalion by 2028, defence ministry says",
+   "link": "http://www.euronews.com/my-europe/2026/08/27/switzerland-intends-to-build-military-drone-battalion-by-2028-defence-ministry-says",
+   "source": "Euronews - My Europe",
+   "date": "2026-08-27",
+   "summary": "Switzerland's long-standing position has been one of well-armed neutrality and the European country has mandatory conscription for men.",
+   "beat": "war-and-security",
+   "beat_name": "War and security",
+   "score": 26,
+   "signals": [
+    "consequential",
+    "youth"
+   ],
+   "signal_names": [
+    "Consequential",
+    "Relevant to young Europeans"
+   ]
+  },
+  {
+   "n": 10,
+   "tier": "significant",
+   "title": "Russia threatens mass strikes on Ukraine energy sites as Kyiv depot death toll hits 38",
+   "link": "http://www.euronews.com/my-europe/2026/08/30/russia-threatens-mass-strikes-on-ukraine-energy-sites-as-kyiv-depot-death-toll-hits-38",
+   "source": "Euronews - My Europe",
+   "date": "2026-08-30",
+   "summary": "As Moscow warns of a fresh bombing campaign and Kyiv absorbs one of the deadliest strikes to hit its own soil since the invasion began, four years of fighting show no sign of nearing a diplomatic end.",
+   "beat": "war-and-security",
+   "beat_name": "War and security",
+   "score": 25,
+   "signals": [
+    "geopolitical",
+    "social",
+    "contested"
+   ],
+   "signal_names": [
+    "Geopolitically important",
+    "Socially relevant",
+    "Likely to generate debate"
+   ]
+  },
+  {
+   "n": 11,
+   "tier": "significant",
+   "title": "Iceland says 'No': Four takeaways from the EU accession referendum",
+   "link": "http://www.euronews.com/my-europe/2026/08/30/iceland-says-no-four-takeaways-from-the-eu-accession-referendum",
+   "source": "Euronews - My Europe",
+   "date": "2026-08-30",
+   "summary": "Iceland has voted 52.8% to 47.2% against resuming accession negotiations with the European Union, effectively closing the door on membership. Here are the four takeaways from the referendum.",
+   "beat": "power-and-democracy",
+   "beat_name": "Power and democracy",
+   "score": 23,
+   "signals": [
+    "geopolitical",
+    "decided"
+   ],
+   "signal_names": [
+    "Geopolitically important",
+    "Decision taken"
+   ]
+  },
+  {
+   "n": 12,
+   "tier": "significant",
+   "title": "Spain wins EU backing for temporary fuel tax cuts as Middle East crisis keeps prices high",
+   "link": "http://www.euronews.com/my-europe/2026/08/28/spain-wins-eu-backing-for-temporary-fuel-tax-cuts-as-middle-east-crisis-keeps-prices-high",
+   "source": "Euronews - My Europe",
+   "date": "2026-08-28",
+   "summary": "Spain has joined the EU's fuel tax relief club, but also secured exceptional permission to breach the bloc's normal tax floor under the bloc's energy taxation rules.",
+   "beat": "war-and-security",
+   "beat_name": "War and security",
+   "score": 23,
+   "signals": [
+    "geopolitical",
+    "unusual",
+    "economic"
+   ],
+   "signal_names": [
+    "Geopolitically important",
+    "Unusual or unexpected",
+    "Economically significant"
+   ]
+  },
+  {
+   "n": 13,
+   "tier": "significant",
+   "title": "Once again, the EU grapples with thorny questions about Russian assets",
+   "link": "http://www.euronews.com/my-europe/2026/08/28/once-again-the-eu-grapples-with-thorny-questions-about-russian-assets",
+   "source": "Euronews - My Europe",
+   "date": "2026-08-28",
+   "summary": "Russia's immobilised assets are back on the table, a year after the EU tried and failed to use them to support Ukraine. Could a new effort to unlock them succeed?",
+   "beat": "war-and-security",
+   "beat_name": "War and security",
+   "score": 22,
+   "signals": [
+    "geopolitical",
+    "unusual"
+   ],
+   "signal_names": [
+    "Geopolitically important",
+    "Unusual or unexpected"
+   ]
+  },
+  {
+   "n": 14,
+   "tier": "significant",
+   "title": "Russian drone strikes hit Ukraine as warehouses burn",
+   "link": "http://www.euronews.com/my-europe/2026/08/28/russian-drone-strikes-hit-ukraine-as-warehouses-burn",
+   "source": "Euronews - My Europe",
+   "date": "2026-08-28",
+   "summary": "Warehouses, homes and critical infrastructure were damaged across Ukraine, while officials in Kherson warned residents to leave ahead of a winter onslaught.",
+   "beat": "war-and-security",
+   "beat_name": "War and security",
+   "score": 22,
+   "signals": [
+    "geopolitical",
+    "social"
+   ],
+   "signal_names": [
+    "Geopolitically important",
+    "Socially relevant"
+   ]
+  }
+ ]
+}
