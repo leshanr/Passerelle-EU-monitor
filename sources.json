@@ -1,6 +1,6 @@
 {
   "_comment": "Each source carries: id, name, url, tier, verified, newest_seen. Tier 1 = primary institutional source (legislation, official press, court output). Tier 2 = supporting, national or journalistic. 'verified' means the endpoint was fetched by hand and returned a parseable feed. 'newest_seen' is the date of the newest item it held at that moment - because a feed can parse perfectly and still be dead. 'score_multiplier' down-weights sources that are useful but not authoritative. Never mark a source verified you have not actually fetched.",
-  "_audit": "2026-08-31 - portfolio rebuilt, then corrected against a real collection run (Actions run #8) rather than hand fetches. 20 entries, 16 enabled and all 16 returning a healthy feed, newest item 0-6 days old. 4 entries deliberately disabled and documented: the three European Parliament feeds return an empty response to GitHub's runners, and Euractiv returns 403 to them - both are access blocks at the far end, not faults here. FIXED: ec-presscorner was returning month-old items because the 'pagesize' parameter breaks the API's newest-first ordering. REMOVED: european-council (meetings.ashx now 404s), council-acts (raw register, low editorial value next to council-eu), ep-think-tank (never verified). ADDED: commons-library, ukandeu, cer, euronews-europe. NOTE: hand-fetching a feed and letting the runner fetch it give different answers - council-eu and the EUR-Lex feeds looked stale by hand and are current from Actions. Trust the run's source-health table over any manual check. Verified alternates not included: bruegel.org/rss.xml, instituteforgovernment.org.uk/rss.xml.",
+  "_audit": "2026-08-31 - portfolio rebuilt, then corrected against a real collection run (Actions run #8) rather than hand fetches. 20 entries, 16 enabled and all 16 returning a healthy feed, newest item 0-6 days old. 4 entries deliberately disabled and documented: the three European Parliament feeds return an empty response to GitHub's runners, and Euractiv returns 403 to them - both are access blocks at the far end, not faults here. FIXED: ec-presscorner was returning month-old items because the 'pagesize' parameter breaks the API's newest-first ordering. REMOVED: european-council (meetings.ashx now 404s), council-acts (raw register, low editorial value next to council-eu), ep-think-tank (never verified). ADDED: commons-library, ukandeu, cer, euronews-europe. NOTE: hand-fetching a feed and letting the runner fetch it give different answers - council-eu and the EUR-Lex feeds looked stale by hand and are current from Actions. Trust the run's source-health table over any manual check. Verified alternates not included: bruegel.org/rss.xml, instituteforgovernment.org.uk/rss.xml. 2026-08-31 (later the same day): added three gated polling sources - yougov-uk, ipsos-uk, pew-research. They carry \"require_match\": [\"@eu_politics\"], so items from them are dropped before scoring unless they mention European politics; the vocabulary lives in the topic_gates block of rules.json and the digest reports how many were dropped. Without the gate a single polling feed would fill the digest with brand trackers and consumer research.",
   "sources": [
     {
       "id": "ec-presscorner",
@@ -198,6 +198,45 @@
       "newest_seen": "2026-08-30",
       "score_multiplier": 0.7,
       "note": "Added 31 Aug 2026. The European-politics vertical specifically, not the general news feed. Broadest and most general of the media sources, hence the lowest multiplier - useful mainly for spotting what has broken through to a mainstream audience."
+    },
+    {
+      "id": "yougov-uk",
+      "name": "YouGov UK",
+      "url": "https://yougov.com/en-gb/rss",
+      "tier": 2,
+      "verified": true,
+      "newest_seen": "2026-08-28",
+      "score_multiplier": 0.8,
+      "require_match": [
+        "@eu_politics"
+      ],
+      "note": "Added 31 Aug 2026. GATED. YouGov publishes around a hundred items a fortnight and almost none of them are about Europe - the newest item when this was added was about Grand Theft Auto VI. require_match drops everything that does not mention EU politics before it reaches scoring. Polling is evidence about opinion, not a development: use it to support a story, not as one."
+    },
+    {
+      "id": "ipsos-uk",
+      "name": "Ipsos UK",
+      "url": "https://www.ipsos.com/en-uk/rss.xml",
+      "tier": 2,
+      "verified": true,
+      "newest_seen": "2026-08-26",
+      "score_multiplier": 0.8,
+      "require_match": [
+        "@eu_politics"
+      ],
+      "note": "Added 31 Aug 2026. GATED, same reasoning as yougov-uk. Ipsos ran the 2016 Perils of Perception work on EU misperceptions, which is the evidence base this publication was argued from."
+    },
+    {
+      "id": "pew-research",
+      "name": "Pew Research Center",
+      "url": "https://www.pewresearch.org/feed/",
+      "tier": 2,
+      "verified": true,
+      "newest_seen": "2026-08-31",
+      "score_multiplier": 0.8,
+      "require_match": [
+        "@eu_politics"
+      ],
+      "note": "Added 31 Aug 2026. GATED. Mostly US domestic research, but its Global Attitudes surveys cover European opinion and are among the few genuinely cross-national sources. High volume, so the gate matters more here than anywhere."
     }
   ]
 }
