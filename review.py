@@ -268,7 +268,7 @@ def cmd_new_edition(args) -> int:
         "- [x] Read the flag list",
         f"- [x] Selected {len(items)} developments",
         "- [ ] Checked the source health table (a thin list may be a broken feed)",
-        "- [ ] Logged anything the system missed in `docs/TUNING-LOG.md`",
+        "- [ ] Logged anything the system missed in the tuning log",
         "",
         "## Day 11–12 — research",
     ]
@@ -293,13 +293,13 @@ def cmd_new_edition(args) -> int:
         "- [ ] Substack published",
         "- [ ] Instagram carousel 1 posted",
         "- [ ] Story with link sticker",
-        "- [ ] Sent to university society contacts (`docs/AUDIENCE-AND-DISTRIBUTION.md`)",
+        "- [ ] Sent to university society contacts",
         "- [ ] LinkedIn repost with the lede",
         "- [ ] Remaining carousels scheduled across the next fortnight",
         "",
         "## After",
         "- [ ] Note what performed and what did not",
-        "- [ ] Any flag that turned out to be nothing → `docs/TUNING-LOG.md`",
+        "- [ ] Any flag that turned out to be nothing → the tuning log",
         "",
     ]
     (ed / "checklist.md").write_text("\n".join(chk))
