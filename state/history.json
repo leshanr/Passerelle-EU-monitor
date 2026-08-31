@@ -59,6 +59,16 @@
    "sources_ok": 16,
    "sources_total": 20,
    "sources_stale": 0
+  },
+  {
+   "date": "2026-08-31",
+   "window": 14,
+   "detected": 66,
+   "significant": 26,
+   "investigate": 2,
+   "sources_ok": 19,
+   "sources_total": 19,
+   "sources_stale": 0
   }
  ]
 }
