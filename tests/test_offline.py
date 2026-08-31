@@ -342,6 +342,44 @@ check("digest warns about stale sources", "sources are stale" in out)
 check("digest reports failed sources", "FAILED" in out)
 check("digest names the human step", "your call" in out)
 
+
+# ---------------------------------------------------------------------------
+# topic gate — polling sources only contribute EU items
+# ---------------------------------------------------------------------------
+
+GATE_RULES = {"topic_gates": {"eu_politics": ["european union", "brexit", "brussels"]}}
+
+
+def gate_item(title, summary="", require=None):
+    return {"title": title, "summary": summary, "require_match": require or []}
+
+
+check("ungated source passes everything through",
+      collect.passes_topic_gate(gate_item("Anything at all"), GATE_RULES))
+check("gated source drops an off-topic item",
+      not collect.passes_topic_gate(
+          gate_item("Which crisps do Britons prefer?", require=["@eu_politics"]),
+          GATE_RULES))
+check("gated source keeps an on-topic item",
+      collect.passes_topic_gate(
+          gate_item("Britons back rejoining the European Union", require=["@eu_politics"]),
+          GATE_RULES))
+check("the gate reads the summary as well as the title",
+      collect.passes_topic_gate(
+          gate_item("New polling released", "Attitudes to Brexit five years on",
+                    require=["@eu_politics"]),
+          GATE_RULES))
+check("a literal term works without the @ list indirection",
+      collect.passes_topic_gate(gate_item("Schengen and you", require=["schengen"]),
+                                GATE_RULES))
+check("an unknown @list gates everything out rather than letting it through",
+      not collect.passes_topic_gate(
+          gate_item("Britons back rejoining the European Union", require=["@nonexistent"]),
+          GATE_RULES))
+check("the gate matches on word boundaries, not substrings",
+      not collect.passes_topic_gate(
+          gate_item("Emu farming rises in Devon", require=["eu"]), GATE_RULES))
+
 print("─" * 60)
 print(f"{len(PASS)} passed, {len(FAIL)} failed\n")
 if FAIL:
