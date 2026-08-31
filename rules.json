@@ -2,6 +2,25 @@
   "_comment": "The editorial intelligence of Passerelle. Two independent axes. BEATS decide what a development is about and therefore where it sits in the digest. SIGNALS decide why it might matter and are printed next to every flag as the reason it surfaced. Tune this file, never collect.py — that separation is the whole point.",
   "_tuning_note": "Starting values, calibrated against a first source audit on 27 August 2026 and nothing else. Expect two or three cycles of adjustment before the signal is right. Every adjustment goes in docs/TUNING-LOG.md, because the tuning process is itself publishable material.",
 
+  "_topic_gate_note": "A source in sources.json may carry \"require_match\": [\"@eu_politics\"]. Items from that source are dropped before scoring unless they mention one of the terms below. This exists for polling and statistics feeds: YouGov, Ipsos and Pew publish overwhelmingly on subjects that have nothing to do with Europe, and without a gate a single one of them would fill the digest with brand trackers. Widen this list if useful polls are being missed; narrow it if unrelated ones are getting through. The gate decides whether an item is on subject at all - it does not decide whether it matters, which is still the job of the two scoring axes below.",
+
+  "topic_gates": {
+    "eu_politics": [
+      "eu", "e.u.", "european union", "brussels", "strasbourg",
+      "european commission", "european parliament", "european council",
+      "council of the eu", "court of justice", "european court",
+      "european central bank", "ecb", "eurogroup", "eurostat", "eurobarometer",
+      "mep", "meps", "commissioner", "member state", "member states",
+      "eurozone", "euro area", "single market", "customs union", "schengen",
+      "erasmus", "cap reform", "common agricultural policy",
+      "brexit", "rejoin", "rejoining", "leave the eu", "eu membership",
+      "eu-uk", "uk-eu", "withdrawal agreement", "northern ireland protocol",
+      "windsor framework", "youth mobility", "freedom of movement",
+      "european integration", "enlargement", "accession", "eu accession",
+      "european elections", "european politics", "european policy"
+    ]
+  },
+
   "window_days": 14,
   "stale_after_days": 21,
   "tier1_bonus": 2,
