@@ -1,0 +1,123 @@
+{
+ "generated": "2026-09-01T07:06:25.797443+00:00",
+ "window_days": 14,
+ "stats": {
+  "detected": 18,
+  "significant": 5,
+  "investigate": 3,
+  "sources_ok": 19,
+  "sources_total": 19,
+  "sources_stale": 0,
+  "undated_dropped": 0,
+  "off_topic_dropped": 1,
+  "future_dropped": 0
+ },
+ "flags": [
+  {
+   "n": 1,
+   "tier": "investigate",
+   "title": "UK leads way in disrupting shadowy Russian sanctions evasion network",
+   "link": "https://www.gov.uk/government/news/uk-leads-way-in-disrupting-shadowy-russian-sanctions-evasion-network",
+   "source": "gov.uk - news and communications",
+   "date": "2026-08-31",
+   "summary": "Chancellor calls on allies to step up their pressure on Russia and sets out new action to stop Putin evading sanctions to fund his illegal war.",
+   "beat": "war-and-security",
+   "beat_name": "War and security",
+   "score": 39,
+   "signals": [
+    "uk",
+    "geopolitical",
+    "new"
+   ],
+   "signal_names": [
+    "UK\u2013EU relevance",
+    "Geopolitically important",
+    "Genuinely new"
+   ]
+  },
+  {
+   "n": 2,
+   "tier": "investigate",
+   "title": "Labour\u2019s new housing model comes from California\u2019s backyards",
+   "link": "https://www.politico.eu/article/labour-andy-burnham-uk-new-housing-model-californias-backyards/?utm_source=RSS_Feed&utm_medium=RSS&utm_campaign=RSS_Syndication",
+   "source": "Politico Europe",
+   "date": "2026-09-01",
+   "summary": "A quarter of all homes approved in California in 2025 were so-called granny flats, according to analysis.",
+   "beat": "money-and-work",
+   "beat_name": "Money and work",
+   "score": 39,
+   "signals": [
+    "youth",
+    "decided",
+    "social"
+   ],
+   "signal_names": [
+    "Relevant to young Europeans",
+    "Decision taken",
+    "Socially relevant"
+   ]
+  },
+  {
+   "n": 3,
+   "tier": "investigate",
+   "title": "Upfront help cuts placement costs for healthcare students",
+   "link": "https://www.gov.uk/government/news/upfront-help-cuts-placement-costs-for-healthcare-students",
+   "source": "gov.uk - news and communications",
+   "date": "2026-09-01",
+   "summary": "From 2026/27, eligible healthcare students can get travel and accommodation costs upfront, easing financial pressure and supporting rural placements.",
+   "beat": "borders-and-moving",
+   "beat_name": "Borders and moving around",
+   "score": 36,
+   "signals": [
+    "youth",
+    "consequential"
+   ],
+   "signal_names": [
+    "Relevant to young Europeans",
+    "Consequential"
+   ]
+  },
+  {
+   "n": 4,
+   "tier": "significant",
+   "title": "Drones, Patriots and cash for Ukraine in the spotlight as EU ministers gather in Ireland",
+   "link": "http://www.euronews.com/my-europe/2026/09/01/drones-patriots-and-cash-for-ukraine-in-the-spotlight-as-eu-ministers-gather-in-ireland",
+   "source": "Euronews - My Europe",
+   "date": "2026-09-01",
+   "summary": "Good morning. It\u2019s Mared Gwyn delivering your Tuesday newsletter from Brussels. We start today by crossing over to quaint County Wicklow on Ireland\u2019s east coast \u2013 an unusual backdrop for talks on the security and defence threats spilling beyond Europe\u2019s eastern flank.",
+   "beat": "war-and-security",
+   "beat_name": "War and security",
+   "score": 27,
+   "signals": [
+    "uk",
+    "geopolitical"
+   ],
+   "signal_names": [
+    "UK\u2013EU relevance",
+    "Geopolitically important"
+   ]
+  },
+  {
+   "n": 5,
+   "tier": "significant",
+   "title": "What does Iceland\u2019s \u201cNo\u201d vote mean for the EU\u2019s enlargement policy?",
+   "link": "http://www.euronews.com/my-europe/2026/09/01/what-does-icelands-no-vote-mean-for-the-eus-enlargement-policy",
+   "source": "Euronews - My Europe",
+   "date": "2026-09-01",
+   "summary": "Iceland won\u2019t reopen EU membership negotiations after 58.2 percent voted against in Saturday\u2019s referendum. Does this challenge whether the EU can still attract stable, wealthy democracies for reasons beyond finances?",
+   "beat": "power-and-democracy",
+   "beat_name": "Power and democracy",
+   "score": 27,
+   "signals": [
+    "decided",
+    "geopolitical",
+    "contested"
+   ],
+   "signal_names": [
+    "Decision taken",
+    "Geopolitically important",
+    "Likely to generate debate"
+   ]
+  }
+ ]
+}
