@@ -1,0 +1,345 @@
+{
+ "generated": "2026-09-02T00:00:11.211069+00:00",
+ "window_days": 14,
+ "stats": {
+  "detected": 43,
+  "significant": 15,
+  "investigate": 2,
+  "sources_ok": 19,
+  "sources_total": 19,
+  "sources_stale": 0,
+  "undated_dropped": 0,
+  "off_topic_dropped": 19,
+  "future_dropped": 0
+ },
+ "flags": [
+  {
+   "n": 1,
+   "tier": "investigate",
+   "title": "Housing market: Economic indicators",
+   "link": "https://commonslibrary.parliament.uk/research-briefings/sn02820/",
+   "source": "House of Commons Library - research briefings",
+   "date": "2026-09-01",
+   "summary": "Find the latest data on house prices, mortgage approvals, and house building in the UK.",
+   "beat": "money-and-work",
+   "beat_name": "Money and work",
+   "score": 52,
+   "signals": [
+    "youth",
+    "social",
+    "uk",
+    "economic",
+    "tech"
+   ],
+   "signal_names": [
+    "Relevant to young Europeans",
+    "Socially relevant",
+    "UK\u2013EU relevance",
+    "Economically significant",
+    "Technologically significant"
+   ]
+  },
+  {
+   "n": 2,
+   "tier": "investigate",
+   "title": "Russia\u2019s actions do not change Ukraine\u2019s sovereignty, nor rewrite her borders: UK statement at the UN General Assembly",
+   "link": "https://www.gov.uk/government/speeches/russias-actions-do-not-change-ukraines-sovereignty-nor-rewrite-her-borders-uk-statement-at-the-un-general-assembly",
+   "source": "gov.uk - news and communications",
+   "date": "2026-09-01",
+   "summary": "Statement by Ambassador Sarah MacIntosh, UK Permanent Representative to the UN, at the UN General Assembly meeting on Ukraine.",
+   "beat": "war-and-security",
+   "beat_name": "War and security",
+   "score": 41,
+   "signals": [
+    "geopolitical",
+    "uk"
+   ],
+   "signal_names": [
+    "Geopolitically important",
+    "UK\u2013EU relevance"
+   ]
+  },
+  {
+   "n": 3,
+   "tier": "significant",
+   "title": "The contribution of the defence industry to UK regions and countries",
+   "link": "https://commonslibrary.parliament.uk/research-briefings/cbp-10335/",
+   "source": "House of Commons Library - research briefings",
+   "date": "2026-09-01",
+   "summary": "The defence industry is estimated to contribute around \u00a310 billion to \u00a315 billion a year to the UK economy, mostly in South East and South West England.",
+   "beat": "war-and-security",
+   "beat_name": "War and security",
+   "score": 35,
+   "signals": [
+    "uk",
+    "consequential",
+    "economic"
+   ],
+   "signal_names": [
+    "UK\u2013EU relevance",
+    "Consequential",
+    "Economically significant"
+   ]
+  },
+  {
+   "n": 4,
+   "tier": "significant",
+   "title": "Recommendation for a COUNCIL DECISION authorising the opening of negotiations on an agreement between the European Union and the United Kingdom under Article XXVIII of the General Agreement on Tariffs and Trade 1994 regarding the modification of its WTO import tariff concessions on steel and steel products",
+   "link": "https://eur-lex.europa.eu/./legal-content/AUTO/?uri=CELEX:52026PC0458",
+   "source": "EUR-Lex - Commission proposals",
+   "date": "2026-09-02",
+   "summary": "",
+   "beat": "money-and-work",
+   "beat_name": "Money and work",
+   "score": 32,
+   "signals": [
+    "consequential",
+    "uk",
+    "geopolitical",
+    "economic"
+   ],
+   "signal_names": [
+    "Consequential",
+    "UK\u2013EU relevance",
+    "Geopolitically important",
+    "Economically significant"
+   ]
+  },
+  {
+   "n": 5,
+   "tier": "significant",
+   "title": "Germany blames Russia for drone incursion, announces retaliatory measures",
+   "link": "https://www.politico.eu/article/germany-blames-russia-leipzig-drone-attack-retaliatory-measures/?utm_source=RSS_Feed&utm_medium=RSS&utm_campaign=RSS_Syndication",
+   "source": "Politico Europe",
+   "date": "2026-09-01",
+   "summary": "The forceful response marks a hardening of the German government\u2019s approach to Moscow.",
+   "beat": "war-and-security",
+   "beat_name": "War and security",
+   "score": 32,
+   "signals": [
+    "geopolitical",
+    "new"
+   ],
+   "signal_names": [
+    "Geopolitically important",
+    "Genuinely new"
+   ]
+  },
+  {
+   "n": 6,
+   "tier": "significant",
+   "title": "EU officials confirm ban on Brazilian meat and dairy amid health concerns",
+   "link": "https://euobserver.com/234750/eu-officials-confirm-ban-on-brazilian-meat-and-dairy-amid-health-concerns/",
+   "source": "EUobserver",
+   "date": "2026-09-01",
+   "summary": "The EU-Mercosur trade deal faces an important early test of its provisions on farming produce, with the EU insisting that the pact requires South American states to align with the bloc on phytosanitary standards.",
+   "beat": "money-and-work",
+   "beat_name": "Money and work",
+   "score": 31,
+   "signals": [
+    "consequential",
+    "contested",
+    "social",
+    "economic"
+   ],
+   "signal_names": [
+    "Consequential",
+    "Likely to generate debate",
+    "Socially relevant",
+    "Economically significant"
+   ]
+  },
+  {
+   "n": 7,
+   "tier": "significant",
+   "title": "Guidance: The UK's accession to CPTPP for small and medium-sized enterprises (SMEs)",
+   "link": "https://www.gov.uk/government/publications/the-uks-accession-to-cptpp-for-small-and-medium-sized-enterprises-smes",
+   "source": "gov.uk - Department for Business and Trade",
+   "date": "2026-09-01",
+   "summary": "Information on the UK\u2019s accession to the Comprehensive and Progressive Agreement for Trans-Pacific Partnership (CPTPP) and how CPTPP can benefit and support SMEs.",
+   "beat": "power-and-democracy",
+   "beat_name": "Power and democracy",
+   "score": 30,
+   "signals": [
+    "uk",
+    "geopolitical"
+   ],
+   "signal_names": [
+    "UK\u2013EU relevance",
+    "Geopolitically important"
+   ]
+  },
+  {
+   "n": 8,
+   "tier": "significant",
+   "title": "Russia\u2019s answer to Starlink satellites seen falling towards earth (Ukraine Battlefield update, Day 1,650)",
+   "link": "https://euobserver.com/234689/russias-answer-to-starlink-satellites-seen-falling-towards-earth-ukraine-battlefield-update-day-1650/",
+   "source": "EUobserver",
+   "date": "2026-09-01",
+   "summary": "Kyiv endures relentless drone and missile attacks that kill civilians and empty supermarket shelves. Meanwhile, Russia\u2019s struggling space-internet project risks limiting its own ability to dominate the skies over Ukraine.",
+   "beat": "war-and-security",
+   "beat_name": "War and security",
+   "score": 30,
+   "signals": [
+    "geopolitical",
+    "social",
+    "tech"
+   ],
+   "signal_names": [
+    "Geopolitically important",
+    "Socially relevant",
+    "Technologically significant"
+   ]
+  },
+  {
+   "n": 9,
+   "tier": "significant",
+   "title": "Judgment of the General Court (Second Chamber) of 8 July 2026.#RH v European Commission.#Instrument for Pre-Accession Assistance \u2013 OLAF investigation \u2013 Commission decision imposing an administrative penalty \u2013 Exclusion from procurement and grant award procedures under the Financial Regulation and the financial regulation applicable to the 11th EDF or from being selected for the implementation of funds governed by those regulations \u2013 Registration in the early detection and exclusion system database \u2013 Grave professional misconduct \u2013 Non-contractual liability.#Case T-540/24.",
+   "link": "https://eur-lex.europa.eu/./legal-content/AUTO/?uri=CELEX:62024TJ0540_INF",
+   "source": "EUR-Lex - case law",
+   "date": "2026-09-02",
+   "summary": "",
+   "beat": "rights-and-courts",
+   "beat_name": "Rights and courts",
+   "score": 29,
+   "signals": [
+    "decided",
+    "consequential",
+    "geopolitical"
+   ],
+   "signal_names": [
+    "Decision taken",
+    "Consequential",
+    "Geopolitically important"
+   ]
+  },
+  {
+   "n": 10,
+   "tier": "significant",
+   "title": "Brussels says \u20ac90 billion loan for Ukraine is enough for now amid growing doubts",
+   "link": "http://www.euronews.com/my-europe/2026/09/01/brussels-says-90-billion-loan-for-ukraine-is-enough-for-now-amid-growing-doubts",
+   "source": "Euronews - My Europe",
+   "date": "2026-09-01",
+   "summary": "The longevity of the EU's \u20ac90 billion support loan for Ukraine is in serious doubt as Russia escalates the war and drives up material costs. Brussels says the financial plan remains sufficient \"for the moment\".",
+   "beat": "war-and-security",
+   "beat_name": "War and security",
+   "score": 29,
+   "signals": [
+    "consequential",
+    "geopolitical",
+    "economic"
+   ],
+   "signal_names": [
+    "Consequential",
+    "Geopolitically important",
+    "Economically significant"
+   ]
+  },
+  {
+   "n": 11,
+   "tier": "significant",
+   "title": "Judgment of the General Court (Third Chamber) of 15 July 2026.#Biri\u0173 Krovini\u0173 Terminalas UAB v Council of the European Union.#Action for annulment \u2013 Restrictive measures against Belarus \u2013 Prohibition on the purchase, import or transfer of potash products from Belarus \u2013 Prevention of the transit of potash from Belarus via the territory of Lithuania \u2013 Application seeking assessment of the legality of a provision that does not provide for restrictive measures against natural or legal persons within the meaning of the second paragraph of Article 275 TFEU \u2013 Application for a direction to be issued \u2013 Partial lack of jurisdiction \u2013 Breach of procedural requirements \u2013 Time limit for bringing proceedings \u2013 Partial inadmissibility \u2013 Action for failure to act \u2013 No call to act \u2013 Inadmissibility.#Case T-261/24.",
+   "link": "https://eur-lex.europa.eu/./legal-content/AUTO/?uri=CELEX:62024TJ0261_INF",
+   "source": "EUR-Lex - case law",
+   "date": "2026-09-02",
+   "summary": "",
+   "beat": "rights-and-courts",
+   "beat_name": "Rights and courts",
+   "score": 28,
+   "signals": [
+    "decided",
+    "consequential",
+    "geopolitical"
+   ],
+   "signal_names": [
+    "Decision taken",
+    "Consequential",
+    "Geopolitically important"
+   ]
+  },
+  {
+   "n": 12,
+   "tier": "significant",
+   "title": "Judgment of the General Court (First Chamber) of 15 July 2026.#\u00dasovsko Agro s. r. o. v European Commission.#State aid \u2013 Agricultural sector \u2013 Aid schemes for large enterprises in the primary agricultural sector in the Czech Republic \u2013 Decision declaring the aid incompatible with the internal market \u2013 Obligation to state reasons \u2013 Right to be heard \u2013 Error of assessment \u2013 Article 107(3)(c) TFEU \u2013 European Union Guidelines for State aid in the agricultural and forestry sectors and in rural areas 2014 to 2020 \u2013 Presence of an incentive effect \u2013 Proportionality \u2013 Ex post consideration of a counterfactual scenario.#Case T-310/24.",
+   "link": "https://eur-lex.europa.eu/./legal-content/AUTO/?uri=CELEX:62024TJ0310_INF",
+   "source": "EUR-Lex - case law",
+   "date": "2026-09-02",
+   "summary": "",
+   "beat": "rights-and-courts",
+   "beat_name": "Rights and courts",
+   "score": 26,
+   "signals": [
+    "decided",
+    "consequential",
+    "economic"
+   ],
+   "signal_names": [
+    "Decision taken",
+    "Consequential",
+    "Economically significant"
+   ]
+  },
+  {
+   "n": 13,
+   "tier": "significant",
+   "title": "Political party spending limits: independent assessment (29 August 2026)",
+   "link": "https://www.gov.uk/government/publications/political-party-spending-limits-independent-assessment-29-august-2026",
+   "source": "gov.uk - news and communications",
+   "date": "2026-09-01",
+   "summary": "Correspondence from the Secretary of State for Housing, Communities and Local Government, and the First Secretary of State, to the Electoral Commission regarding an independent assessment of political party spending limits.",
+   "beat": "money-and-work",
+   "beat_name": "Money and work",
+   "score": 24,
+   "signals": [
+    "youth",
+    "social"
+   ],
+   "signal_names": [
+    "Relevant to young Europeans",
+    "Socially relevant"
+   ]
+  },
+  {
+   "n": 14,
+   "tier": "significant",
+   "title": "EU to gather \u2018brightest minds\u2019 to boost defence as Russia threat grows",
+   "link": "http://www.euronews.com/my-europe/2026/09/01/eu-to-gather-brightest-minds-to-boost-defence-as-russia-threat-grows",
+   "source": "Euronews - My Europe",
+   "date": "2026-09-01",
+   "summary": "The EU is setting up a high-level group of political and military leaders from member states, Ukraine and the UK to speed up efforts to close Europe's defence capability gaps amid rising Russian threats.",
+   "beat": "war-and-security",
+   "beat_name": "War and security",
+   "score": 22,
+   "signals": [
+    "geopolitical",
+    "uk"
+   ],
+   "signal_names": [
+    "Geopolitically important",
+    "UK\u2013EU relevance"
+   ]
+  },
+  {
+   "n": 15,
+   "tier": "significant",
+   "title": "Orb\u00e1n-backed Brussels think tank MCC Brussels to close after funding cut",
+   "link": "http://www.euronews.com/my-europe/2026/09/01/orban-backed-brussels-think-tank-mcc-brussels-to-close-after-funding-cut",
+   "source": "Euronews - My Europe",
+   "date": "2026-09-01",
+   "summary": "MCC Brussels, the Eurosceptic think tank established by Viktor Orb\u00e1n\u2019s government, is shutting down after losing its Hungarian state funding. Its director, Frank Furedi, resigned in protest, describing the decision to wind down the organisation as \u201cunprofessional and childish.\u201d",
+   "beat": "power-and-democracy",
+   "beat_name": "Power and democracy",
+   "score": 22,
+   "signals": [
+    "unusual",
+    "economic",
+    "contested"
+   ],
+   "signal_names": [
+    "Unusual or unexpected",
+    "Economically significant",
+    "Likely to generate debate"
+   ]
+  }
+ ]
+}
