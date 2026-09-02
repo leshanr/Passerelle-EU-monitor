@@ -432,6 +432,21 @@ for label, payload in [
         survived, got = False, exc
     check(f"the wp-json adapter survives {label}", survived, str(got))
 
+
+# ── same-day re-runs ──────────────────────────────────────────────────────────────────
+# A second collection on the same date re-admits whatever that day's digest
+# already flagged, and it finds those items by hashing the link the sidecar
+# carries. That only works while item_key is derived from the link, so it is
+# pinned here: change item_key and this fails before a run can lose a digest.
+check("a sidecar flag hashes to the same key as the feed item it came from",
+      collect.item_key({"link": "https://example.org/a", "title": "Feed title"})
+      == collect.item_key({"link": "https://example.org/a", "title": "Sidecar title"}))
+check("a linkless item falls back to its title, and two titles do not collide",
+      collect.item_key({"link": "", "title": "Only a title"})
+      == collect.item_key({"link": "", "title": "Only a title"})
+      and collect.item_key({"link": "", "title": "A"})
+      != collect.item_key({"link": "", "title": "B"}))
+
 print("─" * 60)
 print(f"{len(PASS)} passed, {len(FAIL)} failed\n")
 if FAIL:
