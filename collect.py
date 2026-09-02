@@ -142,6 +142,55 @@ def clean_title(title: str, source: dict) -> str:
     return title.strip(" -–—:")
 
 
+def _rendered(value) -> str:
+    """WordPress wraps most text fields as {"rendered": "..."}."""
+    if isinstance(value, dict):
+        return str(value.get("rendered") or "")
+    return str(value or "")
+
+
+def parse_wp_json(raw: bytes, source: dict) -> list[dict]:
+    """Read a WordPress REST API posts endpoint as if it were a feed.
+
+    CEPS, and it will not be the last, has switched its RSS output off at the
+    server while leaving the WordPress JSON API open and current. Rather than
+    lose the source, sources.json can set `format: "wp-json"` and the endpoint
+    is read here instead. The dicts returned are exactly the shape parse_feed
+    returns, so nothing downstream needs to know the difference.
+    """
+    try:
+        posts = json.loads(raw.decode("utf-8-sig", errors="replace"))
+    except (ValueError, UnicodeDecodeError):
+        return []
+    if not isinstance(posts, list):
+        return []
+
+    items: list[dict] = []
+    for post in posts:
+        if not isinstance(post, dict):
+            continue
+        title = clean_title(strip_html(_rendered(post.get("title"))), source)
+        link = str(post.get("link") or "").strip()
+        if not title or not link:
+            continue
+        # date_gmt is UTC; the bare date field is whatever the site set as its
+        # local timezone, so ask for date_gmt in the URL and prefer it here.
+        date = parse_date(str(post.get("date_gmt") or post.get("date") or ""))
+        items.append({
+            "title": title,
+            "link": link,
+            "summary": strip_html(_rendered(post.get("excerpt")))[:700],
+            "date": date,
+            "source": source["name"],
+            "source_id": source["id"],
+            "tier": source.get("tier", 2),
+            "score_multiplier": source.get("score_multiplier", 1.0),
+            "require_match": source.get("require_match") or [],
+            "inherited_date": False,
+        })
+    return items
+
+
 def parse_feed(raw: bytes, source: dict) -> list[dict]:
     """One parser for RSS 2.0 and Atom.
 
@@ -154,6 +203,9 @@ def parse_feed(raw: bytes, source: dict) -> list[dict]:
       the items. Sources can opt into `date_fallback: "channel"` so those items
       inherit the channel date instead of being silently discarded.
     """
+    if (source.get("format") or "").lower() == "wp-json":
+        return parse_wp_json(raw, source)
+
     # A UTF-8 byte-order mark is legal at the head of an XML document and four
     # of the Council's feeds send one. Stripping it has to happen before any
     # check that looks at the first character — the "does this start with <"
