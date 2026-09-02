@@ -1,6 +1,6 @@
 {
-  "_comment": "Each source carries: id, name, url, tier, verified, newest_seen. Tier 1 = primary institutional source (legislation, official press, court output). Tier 2 = supporting, national or journalistic. 'verified' means the endpoint was fetched by hand and returned a parseable feed. 'newest_seen' is the date of the newest item it held at that moment - because a feed can parse perfectly and still be dead. 'score_multiplier' down-weights sources that are useful but not authoritative. Never mark a source verified you have not actually fetched.",
-  "_audit": "2026-08-31 - portfolio rebuilt, then corrected against a real collection run (Actions run #8) rather than hand fetches. 20 entries, 16 enabled and all 16 returning a healthy feed, newest item 0-6 days old. 4 entries deliberately disabled and documented: the three European Parliament feeds return an empty response to GitHub's runners, and Euractiv returns 403 to them - both are access blocks at the far end, not faults here. FIXED: ec-presscorner was returning month-old items because the 'pagesize' parameter breaks the API's newest-first ordering. REMOVED: european-council (meetings.ashx now 404s), council-acts (raw register, low editorial value next to council-eu), ep-think-tank (never verified). ADDED: commons-library, ukandeu, cer, euronews-europe. NOTE: hand-fetching a feed and letting the runner fetch it give different answers - council-eu and the EUR-Lex feeds looked stale by hand and are current from Actions. Trust the run's source-health table over any manual check. Verified alternates not included: bruegel.org/rss.xml, instituteforgovernment.org.uk/rss.xml. 2026-08-31 (later the same day): added three gated polling sources - yougov-uk, ipsos-uk, pew-research. They carry \"require_match\": [\"@eu_politics\"], so items from them are dropped before scoring unless they mention European politics; the vocabulary lives in the topic_gates block of rules.json and the digest reports how many were dropped. Without the gate a single polling feed would fill the digest with brand trackers and consumer research.",
+  "_comment": "Each source carries: id, name, url, tier, verified, newest_seen. Tier 1 = primary institutional source (legislation, official press, court output). Tier 2 = supporting, national or journalistic. 'verified' means the endpoint was fetched by hand and returned a parseable feed. 'newest_seen' is the date of the newest item it held at that moment - because a feed can parse perfectly and still be dead. 'score_multiplier' down-weights sources that are useful but not authoritative. 'require_match' gates a source so only items matching the named topic list are ever scored - '@name' resolves to a shared list in rules.json's topic_gates. 'format' defaults to RSS/Atom; set it to 'wp-json' for a WordPress JSON API endpoint. 'score_multiplier' also marks paywalled sources down: they are tip-offs, never the cited source. Never mark a source verified you have not actually fetched.",
+  "_audit": "2026-09-02 - portfolio expanded to 30 entries, 26 enabled. Added: Financial Times EU section, Bruegel, ECFR, CEPS (via the new wp-json adapter), Der Spiegel International, RTE News, DW Europe. Every one was fetched by hand on 2026-09-02 and its health is stated in its note. Three national news feeds and the three polling sources carry require_match, so they only ever surface EU-related items. Three things were asked for and could not be added, for reasons at the far end rather than here: the European Policy Centre serves its single-page app for every candidate feed path and publishes no feed at all; the EEAS, and so the EU Delegation to the United Kingdom, publishes no RSS anywhere on its site; and the Commission's Midday Express has no feed of its own - its items already arrive through ec-presscorner, whose type parameter is ignored by the API. Four entries remain deliberately disabled and documented: the three European Parliament feeds return an empty response to GitHub's runners, and Euractiv returns 403 to them. Those are access blocks at the far end, not faults here. Previous audit 2026-08-31 (20 entries, corrected against Actions run #8). The run health table is the authority, not a hand fetch.",
   "sources": [
     {
       "id": "ec-presscorner",
@@ -198,6 +198,100 @@
       "newest_seen": "2026-08-30",
       "score_multiplier": 0.7,
       "note": "Added 31 Aug 2026. The European-politics vertical specifically, not the general news feed. Broadest and most general of the media sources, hence the lowest multiplier - useful mainly for spotting what has broken through to a mainstream audience."
+    },
+    {
+      "id": "ft-eu",
+      "name": "Financial Times — European Union",
+      "url": "https://www.ft.com/european-union?format=rss",
+      "tier": 2,
+      "verified": "2026-09-02",
+      "newest_seen": "2026-09-01",
+      "note": "FT's European Union section feed. Verified by hand 2026-09-02: 25 items, newest same-day. PAYWALLED - headlines and standfirsts come through in full, the articles do not. Treat it as a tip-off feed only. Never cite the FT as the source in a Passerelle piece; go and find the primary document it is reporting on. The section is already EU-scoped, so no topic gate is applied.",
+      "enabled": true,
+      "timeout": 20,
+      "score_multiplier": 0.85
+    },
+    {
+      "id": "bruegel",
+      "name": "Bruegel",
+      "url": "https://www.bruegel.org/rss.xml",
+      "tier": 2,
+      "verified": "2026-09-02",
+      "newest_seen": "2026-08-19",
+      "note": "Brussels economic think tank. Verified by hand 2026-09-02: valid RSS, 10 items, newest 14 days old. Bruegel publishes in bursts, so a two to three week gap is normal here and is not a fault - do not disable it on the strength of one quiet fortnight. Open access. No topic gate: Bruegel only writes about EU economic policy.",
+      "enabled": true,
+      "timeout": 20,
+      "score_multiplier": 0.9
+    },
+    {
+      "id": "ecfr",
+      "name": "European Council on Foreign Relations",
+      "url": "https://ecfr.eu/feed/",
+      "tier": 2,
+      "verified": "2026-09-02",
+      "newest_seen": "2026-08-31",
+      "note": "European foreign and security policy think tank. Verified by hand 2026-09-02: valid RSS, 6 items, newest 2 days old. Open access. No topic gate: European policy is ECFR's whole remit.",
+      "enabled": true,
+      "timeout": 20,
+      "score_multiplier": 0.9
+    },
+    {
+      "id": "ceps",
+      "name": "Centre for European Policy Studies",
+      "url": "https://www.ceps.eu/wp-json/wp/v2/posts?per_page=30&_fields=title,link,date,date_gmt,excerpt",
+      "tier": 2,
+      "verified": "2026-09-02",
+      "newest_seen": "2026-09-01",
+      "format": "wp-json",
+      "note": "CEPS has switched its RSS off at the server - every /feed path returns a WordPress error - but its WordPress JSON API is open and current. Read through the wp-json adapter in collect.py rather than the RSS parser, which is what format: wp-json selects. Verified by hand 2026-09-02: 200 OK, newest post same-day. Open access. No topic gate: CEPS only writes about EU policy.",
+      "enabled": true,
+      "timeout": 20,
+      "score_multiplier": 0.9
+    },
+    {
+      "id": "spiegel-intl",
+      "name": "Der Spiegel — International",
+      "url": "https://www.spiegel.de/international/index.rss",
+      "tier": 2,
+      "verified": "2026-09-02",
+      "newest_seen": "2026-08-31",
+      "note": "German national paper, English-language international desk. Verified by hand 2026-09-02: valid RSS, 20 items, newest 1 day old. Gated to EU topics, because the desk covers the whole world. PARTLY PAYWALLED - use as a tip-off, cite the primary document.",
+      "enabled": true,
+      "timeout": 20,
+      "score_multiplier": 0.8,
+      "require_match": [
+        "@eu_politics"
+      ]
+    },
+    {
+      "id": "rte-news",
+      "name": "RTÉ News",
+      "url": "https://www.rte.ie/rss/news.xml",
+      "tier": 2,
+      "verified": "2026-09-02",
+      "newest_seen": "2026-09-01",
+      "note": "Ireland's public broadcaster. Verified by hand 2026-09-02: valid RSS, 20 items, newest same-day. General Irish news, so the EU topic gate does the heavy lifting. Free to read. Ireland is the member state with the sharpest read on UK-EU questions, which is why it is the Irish feed and not another. Note the path: /rss/news.xml works, /rss/world.xml and /feeds/rss/ are both 404.",
+      "enabled": true,
+      "timeout": 20,
+      "score_multiplier": 0.9,
+      "require_match": [
+        "@eu_politics"
+      ]
+    },
+    {
+      "id": "dw-europe",
+      "name": "Deutsche Welle — Europe",
+      "url": "https://rss.dw.com/rdf/rss-en-eu",
+      "tier": 2,
+      "verified": "2026-09-02",
+      "newest_seen": "2026-09-01",
+      "note": "Germany's public international broadcaster, Europe desk, in English. Verified by hand 2026-09-02: valid RSS, 20 items, newest same-day. Free to read, which is why it sits alongside Der Spiegel rather than instead of it - when both cover a story, cite DW. Gated to EU topics.",
+      "enabled": true,
+      "timeout": 20,
+      "score_multiplier": 0.9,
+      "require_match": [
+        "@eu_politics"
+      ]
     },
     {
       "id": "yougov-uk",
