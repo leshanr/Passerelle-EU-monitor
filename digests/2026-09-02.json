@@ -1,15 +1,15 @@
 {
- "generated": "2026-09-02T00:29:44.252357+00:00",
+ "generated": "2026-09-02T00:51:38.819991+00:00",
  "window_days": 14,
  "stats": {
-  "detected": 25,
-  "significant": 8,
-  "investigate": 3,
+  "detected": 27,
+  "significant": 26,
+  "investigate": 7,
   "sources_ok": 25,
-  "sources_total": 26,
+  "sources_total": 25,
   "sources_stale": 0,
   "undated_dropped": 0,
-  "off_topic_dropped": 20,
+  "off_topic_dropped": 26,
   "future_dropped": 0
  },
  "flags": [
@@ -34,7 +34,7 @@
    "signal_names": [
     "Relevant to young Europeans",
     "Socially relevant",
-    "UK–EU relevance",
+    "UK\u2013EU relevance",
     "Economically significant",
     "Technologically significant"
    ]
@@ -42,11 +42,11 @@
   {
    "n": 2,
    "tier": "investigate",
-   "title": "Once again, the EU utters fine words on the Middle East… but where’s the beef?",
+   "title": "Once again, the EU utters fine words on the Middle East\u2026 but where\u2019s the beef?",
    "link": "https://www.ceps.eu/once-again-the-eu-utters-fine-words-on-the-middle-east-but-wheres-the-beef/",
    "source": "Centre for European Policy Studies",
    "date": "2026-08-27",
-   "summary": "As Israel moves ahead with its controversial &#8216;E1’ settlement plans, threatening to split the West Bank in two and burying any hopes for a two-state solution, violent settlers run amok in the West Bank, and Gaza continues to languish in dire poverty and fear of yet more Israeli strikes. The last few days have seen [&hellip;]",
+   "summary": "As Israel moves ahead with its controversial &#8216;E1\u2019 settlement plans, threatening to split the West Bank in two and burying any hopes for a two-state solution, violent settlers run amok in the West Bank, and Gaza continues to languish in dire poverty and fear of yet more Israeli strikes. The last few days have seen [&hellip;]",
    "beat": "war-and-security",
    "beat_name": "War and security",
    "score": 45,
@@ -68,7 +68,7 @@
   {
    "n": 3,
    "tier": "investigate",
-   "title": "Russia’s actions do not change Ukraine’s sovereignty, nor rewrite her borders: UK statement at the UN General Assembly",
+   "title": "Russia\u2019s actions do not change Ukraine\u2019s sovereignty, nor rewrite her borders: UK statement at the UN General Assembly",
    "link": "https://www.gov.uk/government/speeches/russias-actions-do-not-change-ukraines-sovereignty-nor-rewrite-her-borders-uk-statement-at-the-un-general-assembly",
    "source": "gov.uk - news and communications",
    "date": "2026-09-01",
@@ -82,17 +82,59 @@
    ],
    "signal_names": [
     "Geopolitically important",
-    "UK–EU relevance"
+    "UK\u2013EU relevance"
    ]
   },
   {
    "n": 4,
    "tier": "investigate",
-   "title": "The Icelandic vote was for integration without membership. The reason why is Iceland’s very distinctive understanding of sovereignty",
+   "title": "Germany blames Russia for airport drone incident, hits back with sanctions",
+   "link": "https://www.france24.com/en/germany-blames-russia-for-airport-drone-incident-hits-back-with-sanctions",
+   "source": "France 24 \u2014 Europe",
+   "date": "2026-09-01",
+   "summary": "Germany on Tuesday blamed Russia for an attempted \"hybrid attack\" involving an explosive-laden drone at a strategic airport last month and announced diplomatic counter-measures. The European Union expressed \"full solidarity\" with Germany, NATO assured that it would defend its members and countries including Britain, Estonia and Poland offered strong backing. Germany will close Russia's consulate in the former capital Bonn later this month, and cancel the contract for the Russian House, a cultural centre in Berlin, said Foreign Minister Johann Wadephul. FRANCE 24's Carys Garland reports.",
+   "beat": "war-and-security",
+   "beat_name": "War and security",
+   "score": 41,
+   "signals": [
+    "geopolitical",
+    "uk"
+   ],
+   "signal_names": [
+    "Geopolitically important",
+    "UK\u2013EU relevance"
+   ]
+  },
+  {
+   "n": 5,
+   "tier": "investigate",
+   "title": "Iceland rejects restarting EU accession talks in referendum",
+   "link": "https://www.france24.com/en/europe/20260830-iceland-rejects-restarting-eu-accession-talks-in-referendum",
+   "source": "France 24 \u2014 Europe",
+   "date": "2026-08-30",
+   "summary": "Icelanders voted to reject reopening EU membership talks, official results showed Sunday, dealing a blow to the government's push to join the bloc and handing a win to those who argued the country's prized fishing waters were too important to risk. The results will disappoint Brussels, which had hoped to welcome the Nordic country as a new member.",
+   "beat": "power-and-democracy",
+   "beat_name": "Power and democracy",
+   "score": 40,
+   "signals": [
+    "unusual",
+    "geopolitical",
+    "decided"
+   ],
+   "signal_names": [
+    "Unusual or unexpected",
+    "Geopolitically important",
+    "Decision taken"
+   ]
+  },
+  {
+   "n": 6,
+   "tier": "investigate",
+   "title": "The Icelandic vote was for integration without membership. The reason why is Iceland\u2019s very distinctive understanding of sovereignty",
    "link": "https://www.ceps.eu/the-icelandic-vote-was-for-integration-without-membership-the-reason-why-is-icelands-very-distinctive-understanding-of-sovereignty/",
    "source": "Centre for European Policy Studies",
    "date": "2026-09-01",
-   "summary": "The Icelandic people have decided to reject the reopening of EU accession talks. With 52.8% of votes against and 47.2% in favour, the margin was narrow enough to make clear that the country is divided almost equally in two over the issue. However, the referendum hasn’t been a direct vote on future EU membership. A [&hellip;]",
+   "summary": "The Icelandic people have decided to reject the reopening of EU accession talks. With 52.8% of votes against and 47.2% in favour, the margin was narrow enough to make clear that the country is divided almost equally in two over the issue. However, the referendum hasn\u2019t been a direct vote on future EU membership. A [&hellip;]",
    "beat": "power-and-democracy",
    "beat_name": "Power and democracy",
    "score": 40,
@@ -110,13 +152,13 @@
    ]
   },
   {
-   "n": 5,
+   "n": 7,
    "tier": "investigate",
-   "title": "Iceland voted ‘no’ – what it means is that the EU failed to make its case",
+   "title": "Iceland voted \u2018no\u2019 \u2013 what it means is that the EU failed to make its case",
    "link": "https://www.ceps.eu/iceland-voted-no-what-it-means-is-that-once-again-the-eu-failed-to-make-its-case/",
    "source": "Centre for European Policy Studies",
    "date": "2026-08-31",
-   "summary": "In their referendum this past weekend, Icelanders rejected resuming EU accession talks but only by a narrow margin: 52.8 % against, 47.2 % in favour. This suggests that concerns over fishing, long linked to Icelanders’ sense of national identity, ultimately prevailed at the ballot box, triumphing over existential security threats and the broader geopolitical case for Europe. [&hellip;]",
+   "summary": "In their referendum this past weekend, Icelanders rejected resuming EU accession talks but only by a narrow margin: 52.8 % against, 47.2 % in favour. This suggests that concerns over fishing, long linked to Icelanders\u2019 sense of national identity, ultimately prevailed at the ballot box, triumphing over existential security threats and the broader geopolitical case for Europe. [&hellip;]",
    "beat": "power-and-democracy",
    "beat_name": "Power and democracy",
    "score": 39,
@@ -134,13 +176,13 @@
    ]
   },
   {
-   "n": 6,
+   "n": 8,
    "tier": "significant",
    "title": "The contribution of the defence industry to UK regions and countries",
    "link": "https://commonslibrary.parliament.uk/research-briefings/cbp-10335/",
    "source": "House of Commons Library - research briefings",
    "date": "2026-09-01",
-   "summary": "The defence industry is estimated to contribute around £10 billion to £15 billion a year to the UK economy, mostly in South East and South West England.",
+   "summary": "The defence industry is estimated to contribute around \u00a310 billion to \u00a315 billion a year to the UK economy, mostly in South East and South West England.",
    "beat": "war-and-security",
    "beat_name": "War and security",
    "score": 35,
@@ -150,19 +192,19 @@
     "economic"
    ],
    "signal_names": [
-    "UK–EU relevance",
+    "UK\u2013EU relevance",
     "Consequential",
     "Economically significant"
    ]
   },
   {
-   "n": 7,
+   "n": 9,
    "tier": "significant",
-   "title": "Talk is cheap: Europe’s defence promise meets the EU budget",
+   "title": "Talk is cheap: Europe\u2019s defence promise meets the EU budget",
    "link": "https://ecfr.eu/article/talk-is-cheap-europes-defence-promise-meets-the-eu-budget/",
    "source": "European Council on Foreign Relations",
    "date": "2026-08-27",
-   "summary": "At July’s NATO summit in Ankara, European leaders accepted that they must carry more of their own defence. Turning that promise into money means winning a fight over the EU’s next seven-year budget, against coalitions that have defended farm and cohesion spending for decades",
+   "summary": "At July\u2019s NATO summit in Ankara, European leaders accepted that they must carry more of their own defence. Turning that promise into money means winning a fight over the EU\u2019s next seven-year budget, against coalitions that have defended farm and cohesion spending for decades",
    "beat": "money-and-work",
    "beat_name": "Money and work",
    "score": 33,
@@ -176,7 +218,7 @@
    ]
   },
   {
-   "n": 8,
+   "n": 10,
    "tier": "significant",
    "title": "Recommendation for a COUNCIL DECISION authorising the opening of negotiations on an agreement between the European Union and the United Kingdom under Article XXVIII of the General Agreement on Tariffs and Trade 1994 regarding the modification of its WTO import tariff concessions on steel and steel products",
    "link": "https://eur-lex.europa.eu/./legal-content/AUTO/?uri=CELEX:52026PC0458",
@@ -194,19 +236,19 @@
    ],
    "signal_names": [
     "Consequential",
-    "UK–EU relevance",
+    "UK\u2013EU relevance",
     "Geopolitically important",
     "Economically significant"
    ]
   },
   {
-   "n": 9,
+   "n": 11,
    "tier": "significant",
    "title": "Germany blames Russia for drone incursion, announces retaliatory measures",
    "link": "https://www.politico.eu/article/germany-blames-russia-leipzig-drone-attack-retaliatory-measures/?utm_source=RSS_Feed&utm_medium=RSS&utm_campaign=RSS_Syndication",
    "source": "Politico Europe",
    "date": "2026-09-01",
-   "summary": "The forceful response marks a hardening of the German government’s approach to Moscow.",
+   "summary": "The forceful response marks a hardening of the German government\u2019s approach to Moscow.",
    "beat": "war-and-security",
    "beat_name": "War and security",
    "score": 32,
@@ -220,7 +262,7 @@
    ]
   },
   {
-   "n": 10,
+   "n": 12,
    "tier": "significant",
    "title": "EU officials confirm ban on Brazilian meat and dairy amid health concerns",
    "link": "https://euobserver.com/234750/eu-officials-confirm-ban-on-brazilian-meat-and-dairy-amid-health-concerns/",
@@ -244,13 +286,13 @@
    ]
   },
   {
-   "n": 11,
+   "n": 13,
    "tier": "significant",
    "title": "Guidance: The UK's accession to CPTPP for small and medium-sized enterprises (SMEs)",
    "link": "https://www.gov.uk/government/publications/the-uks-accession-to-cptpp-for-small-and-medium-sized-enterprises-smes",
    "source": "gov.uk - Department for Business and Trade",
    "date": "2026-09-01",
-   "summary": "Information on the UK’s accession to the Comprehensive and Progressive Agreement for Trans-Pacific Partnership (CPTPP) and how CPTPP can benefit and support SMEs.",
+   "summary": "Information on the UK\u2019s accession to the Comprehensive and Progressive Agreement for Trans-Pacific Partnership (CPTPP) and how CPTPP can benefit and support SMEs.",
    "beat": "power-and-democracy",
    "beat_name": "Power and democracy",
    "score": 30,
@@ -259,18 +301,18 @@
     "geopolitical"
    ],
    "signal_names": [
-    "UK–EU relevance",
+    "UK\u2013EU relevance",
     "Geopolitically important"
    ]
   },
   {
-   "n": 12,
+   "n": 14,
    "tier": "significant",
-   "title": "Russia’s answer to Starlink satellites seen falling towards earth (Ukraine Battlefield update, Day 1,650)",
+   "title": "Russia\u2019s answer to Starlink satellites seen falling towards earth (Ukraine Battlefield update, Day 1,650)",
    "link": "https://euobserver.com/234689/russias-answer-to-starlink-satellites-seen-falling-towards-earth-ukraine-battlefield-update-day-1650/",
    "source": "EUobserver",
    "date": "2026-09-01",
-   "summary": "Kyiv endures relentless drone and missile attacks that kill civilians and empty supermarket shelves. Meanwhile, Russia’s struggling space-internet project risks limiting its own ability to dominate the skies over Ukraine.",
+   "summary": "Kyiv endures relentless drone and missile attacks that kill civilians and empty supermarket shelves. Meanwhile, Russia\u2019s struggling space-internet project risks limiting its own ability to dominate the skies over Ukraine.",
    "beat": "war-and-security",
    "beat_name": "War and security",
    "score": 30,
@@ -286,11 +328,11 @@
    ]
   },
   {
-   "n": 13,
+   "n": 15,
    "tier": "significant",
-   "title": "‘Conflict of attrition’ in Iran could keep inflation high, ECB policymaker warns",
+   "title": "\u2018Conflict of attrition\u2019 in Iran could keep inflation high, ECB policymaker warns",
    "link": "https://www.ft.com/content/e7015d4a-fe58-4b9d-a414-6815b0d7e634?syn-25a6b1a6=1",
-   "source": "Financial Times — European Union",
+   "source": "Financial Times \u2014 European Union",
    "date": "2026-09-01",
    "summary": "Finnish governor Olli Rehn strikes hawkish tone ahead of expected interest rate rise in the Eurozone",
    "beat": "money-and-work",
@@ -308,9 +350,9 @@
    ]
   },
   {
-   "n": 14,
+   "n": 16,
    "tier": "significant",
-   "title": "Judgment of the General Court (Second Chamber) of 8 July 2026.#RH v European Commission.#Instrument for Pre-Accession Assistance – OLAF investigation – Commission decision imposing an administrative penalty – Exclusion from procurement and grant award procedures under the Financial Regulation and the financial regulation applicable to the 11th EDF or from being selected for the implementation of funds governed by those regulations – Registration in the early detection and exclusion system database – Grave professional misconduct – Non-contractual liability.#Case T-540/24.",
+   "title": "Judgment of the General Court (Second Chamber) of 8 July 2026.#RH v European Commission.#Instrument for Pre-Accession Assistance \u2013 OLAF investigation \u2013 Commission decision imposing an administrative penalty \u2013 Exclusion from procurement and grant award procedures under the Financial Regulation and the financial regulation applicable to the 11th EDF or from being selected for the implementation of funds governed by those regulations \u2013 Registration in the early detection and exclusion system database \u2013 Grave professional misconduct \u2013 Non-contractual liability.#Case T-540/24.",
    "link": "https://eur-lex.europa.eu/./legal-content/AUTO/?uri=CELEX:62024TJ0540_INF",
    "source": "EUR-Lex - case law",
    "date": "2026-09-02",
@@ -330,13 +372,13 @@
    ]
   },
   {
-   "n": 15,
+   "n": 17,
    "tier": "significant",
-   "title": "Brussels says €90 billion loan for Ukraine is enough for now amid growing doubts",
+   "title": "Brussels says \u20ac90 billion loan for Ukraine is enough for now amid growing doubts",
    "link": "http://www.euronews.com/my-europe/2026/09/01/brussels-says-90-billion-loan-for-ukraine-is-enough-for-now-amid-growing-doubts",
    "source": "Euronews - My Europe",
    "date": "2026-09-01",
-   "summary": "The longevity of the EU's €90 billion support loan for Ukraine is in serious doubt as Russia escalates the war and drives up material costs. Brussels says the financial plan remains sufficient \"for the moment\".",
+   "summary": "The longevity of the EU's \u20ac90 billion support loan for Ukraine is in serious doubt as Russia escalates the war and drives up material costs. Brussels says the financial plan remains sufficient \"for the moment\".",
    "beat": "war-and-security",
    "beat_name": "War and security",
    "score": 29,
@@ -352,11 +394,11 @@
    ]
   },
   {
-   "n": 16,
+   "n": 18,
    "tier": "significant",
-   "title": "Spain’s Sánchez accuses Russia and Israel of inflaming migrant crisis",
+   "title": "Spain\u2019s S\u00e1nchez accuses Russia and Israel of inflaming migrant crisis",
    "link": "https://www.ft.com/content/306358c2-3597-40dd-b2cd-534073c35fde?syn-25a6b1a6=1",
-   "source": "Financial Times — European Union",
+   "source": "Financial Times \u2014 European Union",
    "date": "2026-08-31",
    "summary": "PM blames foreign social media actors for spreading misinformation as he comes under pressure over Ceuta influx",
    "beat": "war-and-security",
@@ -372,9 +414,9 @@
    ]
   },
   {
-   "n": 17,
+   "n": 19,
    "tier": "significant",
-   "title": "Judgment of the General Court (Third Chamber) of 15 July 2026.#Birių Krovinių Terminalas UAB v Council of the European Union.#Action for annulment – Restrictive measures against Belarus – Prohibition on the purchase, import or transfer of potash products from Belarus – Prevention of the transit of potash from Belarus via the territory of Lithuania – Application seeking assessment of the legality of a provision that does not provide for restrictive measures against natural or legal persons within the meaning of the second paragraph of Article 275 TFEU – Application for a direction to be issued – Partial lack of jurisdiction – Breach of procedural requirements – Time limit for bringing proceedings – Partial inadmissibility – Action for failure to act – No call to act – Inadmissibility.#Case T-261/24.",
+   "title": "Judgment of the General Court (Third Chamber) of 15 July 2026.#Biri\u0173 Krovini\u0173 Terminalas UAB v Council of the European Union.#Action for annulment \u2013 Restrictive measures against Belarus \u2013 Prohibition on the purchase, import or transfer of potash products from Belarus \u2013 Prevention of the transit of potash from Belarus via the territory of Lithuania \u2013 Application seeking assessment of the legality of a provision that does not provide for restrictive measures against natural or legal persons within the meaning of the second paragraph of Article 275 TFEU \u2013 Application for a direction to be issued \u2013 Partial lack of jurisdiction \u2013 Breach of procedural requirements \u2013 Time limit for bringing proceedings \u2013 Partial inadmissibility \u2013 Action for failure to act \u2013 No call to act \u2013 Inadmissibility.#Case T-261/24.",
    "link": "https://eur-lex.europa.eu/./legal-content/AUTO/?uri=CELEX:62024TJ0261_INF",
    "source": "EUR-Lex - case law",
    "date": "2026-09-02",
@@ -394,9 +436,9 @@
    ]
   },
   {
-   "n": 18,
+   "n": 20,
    "tier": "significant",
-   "title": "Judgment of the General Court (First Chamber) of 15 July 2026.#Úsovsko Agro s. r. o. v European Commission.#State aid – Agricultural sector – Aid schemes for large enterprises in the primary agricultural sector in the Czech Republic – Decision declaring the aid incompatible with the internal market – Obligation to state reasons – Right to be heard – Error of assessment – Article 107(3)(c) TFEU – European Union Guidelines for State aid in the agricultural and forestry sectors and in rural areas 2014 to 2020 – Presence of an incentive effect – Proportionality – Ex post consideration of a counterfactual scenario.#Case T-310/24.",
+   "title": "Judgment of the General Court (First Chamber) of 15 July 2026.#\u00dasovsko Agro s. r. o. v European Commission.#State aid \u2013 Agricultural sector \u2013 Aid schemes for large enterprises in the primary agricultural sector in the Czech Republic \u2013 Decision declaring the aid incompatible with the internal market \u2013 Obligation to state reasons \u2013 Right to be heard \u2013 Error of assessment \u2013 Article 107(3)(c) TFEU \u2013 European Union Guidelines for State aid in the agricultural and forestry sectors and in rural areas 2014 to 2020 \u2013 Presence of an incentive effect \u2013 Proportionality \u2013 Ex post consideration of a counterfactual scenario.#Case T-310/24.",
    "link": "https://eur-lex.europa.eu/./legal-content/AUTO/?uri=CELEX:62024TJ0310_INF",
    "source": "EUR-Lex - case law",
    "date": "2026-09-02",
@@ -416,13 +458,13 @@
    ]
   },
   {
-   "n": 19,
+   "n": 21,
    "tier": "significant",
    "title": "Iceland rejects talks on EU entry",
    "link": "https://www.ft.com/content/53b5abd8-2919-4dc6-8dd6-81fc054e8b6f?syn-25a6b1a6=1",
-   "source": "Financial Times — European Union",
+   "source": "Financial Times \u2014 European Union",
    "date": "2026-08-30",
-   "summary": "‘No’ vote prevails in knife-edge referendum prompted by Donald Trump’s threats to annex Greenland",
+   "summary": "\u2018No\u2019 vote prevails in knife-edge referendum prompted by Donald Trump\u2019s threats to annex Greenland",
    "beat": "power-and-democracy",
    "beat_name": "Power and democracy",
    "score": 26,
@@ -438,7 +480,7 @@
    ]
   },
   {
-   "n": 20,
+   "n": 22,
    "tier": "significant",
    "title": "Political party spending limits: independent assessment (29 August 2026)",
    "link": "https://www.gov.uk/government/publications/political-party-spending-limits-independent-assessment-29-august-2026",
@@ -458,13 +500,13 @@
    ]
   },
   {
-   "n": 21,
+   "n": 23,
    "tier": "significant",
-   "title": "In the bear’s paw: How Europeans can loosen Russia’s grip on Belarus",
+   "title": "In the bear\u2019s paw: How Europeans can loosen Russia\u2019s grip on Belarus",
    "link": "https://ecfr.eu/publication/in-the-bears-paw-how-europeans-can-loosen-russias-grip-on-belarus/",
    "source": "European Council on Foreign Relations",
    "date": "2026-08-20",
-   "summary": "Russia’s growing military intervention in Belarus poses a frontline security challenge for Europe. The EU needs to develop a more pragmatic strategy based on protecting its eastern border and shaping Minsk’s autonomy away from Moscow.",
+   "summary": "Russia\u2019s growing military intervention in Belarus poses a frontline security challenge for Europe. The EU needs to develop a more pragmatic strategy based on protecting its eastern border and shaping Minsk\u2019s autonomy away from Moscow.",
    "beat": "war-and-security",
    "beat_name": "War and security",
    "score": 23,
@@ -478,9 +520,29 @@
    ]
   },
   {
-   "n": 22,
+   "n": 24,
    "tier": "significant",
-   "title": "EU to gather ‘brightest minds’ to boost defence as Russia threat grows",
+   "title": "As Icelanders say no to resuming EU talks, what issues weighed in the election?",
+   "link": "https://www.france24.com/en/as-icelanders-say-no-to-resuming-eu-talks-what-issues-weighed-in-the-election",
+   "source": "France 24 \u2014 Europe",
+   "date": "2026-08-31",
+   "summary": "Iceland's voters rejected restarting negotiations to join the European Union in a referendum that pitted concerns about geopolitical stability against keeping national control of Iceland\u2019s prized fisheries. Talks with the EU to join the bloc had begun after the 2008 financial crisis but had been ended by a Eurosceptic government. But why did Icelanders say no? FRANCE 24's Armen Georgian tells us more.",
+   "beat": "power-and-democracy",
+   "beat_name": "Power and democracy",
+   "score": 22,
+   "signals": [
+    "unusual",
+    "contested"
+   ],
+   "signal_names": [
+    "Unusual or unexpected",
+    "Likely to generate debate"
+   ]
+  },
+  {
+   "n": 25,
+   "tier": "significant",
+   "title": "EU to gather \u2018brightest minds\u2019 to boost defence as Russia threat grows",
    "link": "http://www.euronews.com/my-europe/2026/09/01/eu-to-gather-brightest-minds-to-boost-defence-as-russia-threat-grows",
    "source": "Euronews - My Europe",
    "date": "2026-09-01",
@@ -494,17 +556,17 @@
    ],
    "signal_names": [
     "Geopolitically important",
-    "UK–EU relevance"
+    "UK\u2013EU relevance"
    ]
   },
   {
-   "n": 23,
+   "n": 26,
    "tier": "significant",
-   "title": "Orbán-backed Brussels think tank MCC Brussels to close after funding cut",
+   "title": "Orb\u00e1n-backed Brussels think tank MCC Brussels to close after funding cut",
    "link": "http://www.euronews.com/my-europe/2026/09/01/orban-backed-brussels-think-tank-mcc-brussels-to-close-after-funding-cut",
    "source": "Euronews - My Europe",
    "date": "2026-09-01",
-   "summary": "MCC Brussels, the Eurosceptic think tank established by Viktor Orbán’s government, is shutting down after losing its Hungarian state funding. Its director, Frank Furedi, resigned in protest, describing the decision to wind down the organisation as “unprofessional and childish.”",
+   "summary": "MCC Brussels, the Eurosceptic think tank established by Viktor Orb\u00e1n\u2019s government, is shutting down after losing its Hungarian state funding. Its director, Frank Furedi, resigned in protest, describing the decision to wind down the organisation as \u201cunprofessional and childish.\u201d",
    "beat": "power-and-democracy",
    "beat_name": "Power and democracy",
    "score": 22,
