@@ -380,6 +380,58 @@ check("the gate matches on word boundaries, not substrings",
       not collect.passes_topic_gate(
           gate_item("Emu farming rises in Devon", require=["eu"]), GATE_RULES))
 
+
+# ── wp-json adapter ───────────────────────────────────────────────────────────────────
+# CEPS serves no RSS at all, so it is read through the WordPress JSON API
+# instead. These check the adapter hands back the same item shape parse_feed
+# does, and that a broken or hostile response yields an empty list rather than
+# an exception that would take the whole run down with it.
+SRC_WP = {"id": "fixture-wp", "name": "Fixture think tank", "tier": 2,
+          "format": "wp-json", "score_multiplier": 0.9}
+
+FEED_KEYS = {"title", "link", "summary", "date", "source", "source_id",
+             "tier", "score_multiplier", "require_match", "inherited_date"}
+
+WP_PAYLOAD = json.dumps([
+    {"date": "2026-09-01T14:41:42", "date_gmt": "2026-09-01T13:41:42",
+     "link": "https://example.org/iceland/",
+     "title": {"rendered": "The Icelandic vote was for integration without membership"},
+     "excerpt": {"rendered": "<p>Iceland has rejected reopening EU accession talks.</p>"}},
+    {"date": "2026-08-31T16:03:51", "date_gmt": "2026-08-31T15:03:51",
+     "link": "https://example.org/no/",
+     "title": {"rendered": "Iceland voted no"},
+     "excerpt": {"rendered": "<p>Body.</p>"}},
+]).encode()
+
+wp = collect.parse_wp_json(WP_PAYLOAD, SRC_WP)
+check("the wp-json adapter reads every post", len(wp) == 2, f"got {len(wp)}")
+check("wp-json titles are unwrapped from the rendered field",
+      bool(wp) and wp[0]["title"].startswith("The Icelandic vote"))
+check("wp-json summaries have their HTML stripped",
+      bool(wp) and "<p>" not in wp[0]["summary"]
+      and "Iceland has rejected" in wp[0]["summary"])
+check("wp-json dates are timezone aware and taken from date_gmt, not local time",
+      bool(wp) and wp[0]["date"] is not None
+      and wp[0]["date"].tzinfo is not None and wp[0]["date"].hour == 13)
+check("wp-json items carry exactly the fields a feed item carries",
+      bool(wp) and set(wp[0]) == FEED_KEYS)
+check("parse_feed routes format wp-json to the adapter",
+      collect.parse_feed(WP_PAYLOAD, SRC_WP) == wp)
+
+for label, payload in [
+        ("junk that is not JSON", b"not json"),
+        ("a REST error object", b'{"code": "rest_no_route"}'),
+        ("an empty array", b"[]"),
+        ("nulls and scalars in the array", b'[null, 3, "x"]'),
+        ("a post with no link", b'[{"title": {"rendered": "T"}, "link": ""}]'),
+        ("a post with no title", b'[{"title": {"rendered": ""}, "link": "https://x"}]')]:
+    try:
+        got = collect.parse_wp_json(payload, SRC_WP)
+        survived = got == []
+    except Exception as exc:  # noqa: BLE001
+        survived, got = False, exc
+    check(f"the wp-json adapter survives {label}", survived, str(got))
+
 print("─" * 60)
 print(f"{len(PASS)} passed, {len(FAIL)} failed\n")
 if FAIL:
