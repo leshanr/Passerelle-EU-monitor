@@ -831,6 +831,28 @@ def main() -> int:
     state = {"seen": []} if args.no_state else load_json(STATE_PATH, {"seen": []})
     seen = set(state.get("seen", []))
 
+    # A second run on the same day used to replace that day's digest with only
+    # what the first run had not already marked seen, which quietly destroyed
+    # the larger of the two. It has cost a digest three times. Anything today's
+    # digest already flagged is re-admitted here, so this run re-collects it and
+    # the file it writes is a superset rather than a replacement. item_key is
+    # derived from the link, which the sidecar carries, so a flag read back out
+    # hashes to the same key as the feed item it came from. An item that has
+    # since fallen out of its feed cannot come back: a same-day re-run widens
+    # the day, it does not guarantee restoration.
+    same_day = DIGEST_DIR / f"{now:%Y-%m-%d}.json"
+    if not args.no_state and same_day.exists():
+        readmit = {
+            item_key({"link": f.get("link") or "", "title": f.get("title") or ""})
+            for f in load_json(same_day, {}).get("flags", [])
+            if f.get("link") or f.get("title")
+        }
+        if readmit:
+            seen -= readmit
+            print(f"same-day re-run: re-admitting {len(readmit)} item(s) already "
+                  f"in today's digest so it is widened, not replaced",
+                  file=sys.stderr)
+
     fresh: list[dict] = []
     undated_dropped = 0
     future_dropped = 0
